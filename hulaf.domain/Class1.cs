@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace hulaf
+namespace hulaf.domain
 {
     public class Class1
     {
