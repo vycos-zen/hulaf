@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Location;
 using HULAF.Domain.PersonCharacteristic;
 
-namespace Person
+namespace HULAF.Domain.Person
 {
 
 		public class MissingPerson

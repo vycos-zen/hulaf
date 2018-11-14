@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using HULAF.Domain.PersonCharacteristic;
 
-namespace Person
+namespace HULAF.Domain.Person
 {
 
 		public class SeekerPerson
