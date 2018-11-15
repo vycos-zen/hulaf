@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/HULAF.WebApi/bin/Debug/netcoreapp2.1/HULAF.WebApi.dll",
+            "program": "${workspaceFolder}/HULAF.BackEnd/HULAF.WebApi/bin/Debug/netcoreapp2.1/HULAF.WebApi.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/HULAF.WebApi",
+            "cwd": "${workspaceFolder}/HULAF.BackEnd/HULAF.WebApi",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
             "launchBrowser": {

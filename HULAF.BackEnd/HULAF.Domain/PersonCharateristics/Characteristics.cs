@@ -7,120 +7,21 @@ namespace HULAF.Domain.PersonCharacteristic
 {
     public class Characteristics
     {
+        public Guid Id { get; set; }
 
-        public Guid Id
-        {
-            get
-            {
-                return m_Id;
-            }
-            set
-            {
-                m_Id = value;
-            }
-        }
-        private Guid m_Id;
+        public int ApproxHeight { get; set; }
 
+        public int ApproxWeight { get; set; }
 
-        public int ApproxHeight
-        {
-            get
-            {
-                return m_ApproxHeight;
-            }
-            set
-            {
-                m_ApproxHeight = value;
-            }
-        }
-        private int m_ApproxHeight;
+        public HairColor HairColor { get; set; }
 
+        public EyeColor EyeColor { get; set; }
 
-        public int ApproxWeight
-        {
-            get
-            {
-                return m_ApproxWeight;
-            }
-            set
-            {
-                m_ApproxWeight = value;
-            }
-        }
-        private int m_ApproxWeight;
+        public int ApproxAgeMin { get; set; }
 
+        public int ApproxAgeMax { get; set; }
 
-        public HairColor HairColor
-        {
-            get
-            {
-                return m_HairColor;
-            }
-            set
-            {
-                m_HairColor = value;
-            }
-        }
-        private HairColor m_HairColor;
-
-
-        public EyeColor EyeColor
-        {
-            get
-            {
-                return m_EyeColor;
-            }
-            set
-            {
-                m_EyeColor = value;
-            }
-        }
-        private EyeColor m_EyeColor;
-
-
-        public int ApproxAgeMin
-        {
-            get
-            {
-                return m_ApproxAgeMin;
-            }
-            set
-            {
-                m_ApproxAgeMin = value;
-            }
-        }
-        private int m_ApproxAgeMin;
-
-
-        public int ApproxAgeMax
-        {
-            get
-            {
-                return m_ApproxAgeMax;
-            }
-            set
-            {
-                m_ApproxAgeMax = value;
-            }
-        }
-        private int m_ApproxAgeMax;
-
-
-        public List<string> KnownNames
-        {
-            get
-            {
-                return m_KnownNames;
-            }
-            set
-            {
-                m_KnownNames = value;
-            }
-        }
-        private List<string> m_KnownNames;
-
-
+        public List<string> KnownNames { get; set; }
     }
-
-}  // end of namespace Person
+}
 

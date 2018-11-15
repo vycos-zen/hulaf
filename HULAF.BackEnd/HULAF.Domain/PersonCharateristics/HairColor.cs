@@ -1,12 +1,14 @@
 using System;
 
-namespace HULAF.Domain.PersonCharacteristic{
+namespace HULAF.Domain.PersonCharacteristic
+{
 
-    public enum HairColor{
-Black,
-Brown,
-Blonde,
-Grey,
+    public enum HairColor
+    {
+        Black,
+        Brown,
+        Blonde,
+        Grey,
 
     }
 }
