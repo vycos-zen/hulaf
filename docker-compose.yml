@@ -1,0 +1,15 @@
+version: '3.4'
+services: 
+  webapi:
+    build: './HULAF.BackEnd'
+    expose:
+      - "80"
+    ports: 
+      - "5000:80"
+  fe:
+    build: './HULAF.FrontEnd'
+    expose:
+      - "4200" 
+    ports: 
+      - "4200:4200"
+    

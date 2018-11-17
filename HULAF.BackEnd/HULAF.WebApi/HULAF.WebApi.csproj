@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <UserSecretsId>aspnet-HULAF.WebApi-CDB76B90-C918-4254-B2DC-E475E6520828</UserSecretsId>
+    <UserSecretsId>e2f0e958-bff5-4593-8557-28bc359cd555</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,7 +11,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureADB2C.UI" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
   </ItemGroup>
 

@@ -6,20 +6,25 @@ namespace HULAF.DataAccess.Context
 {
     public class HULAFContext : DbContext
     {
+        private readonly string connnectionString;
         public DbSet<MissingPerson> MissingPerson { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("User ID=hulafdbagentpoc;Password=hulafpoc123;Host=localhost;Port=5432;Database=hulaf;Pooling=true;");
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseNpgsql(connnectionString);
+            }
+        }
+
+        public HULAFContext(string connnectionString) : base()
+        {
+            this.connnectionString = connnectionString;
+        }
+
+        public HULAFContext(DbContextOptions<HULAFContext> options) : base(options)
+        {
+            
         }
     }
 }
-
-//local poc db login
-// CREATE USER hulafdbagentpoc WITH
-//  PASSWORD 'hulafpoc123'
-
-//  SELECT pg_terminate_backend(pg_stat_activity.pid)
-// FROM pg_stat_activity
-// WHERE pg_stat_activity.datname = 'hulaf'
-//   AND pid <> pg_backend_pid();

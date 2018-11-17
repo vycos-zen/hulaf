@@ -10,22 +10,31 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HULAF.WebApi.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class HulafController : ControllerBase
     {
-        [HttpGet]
-        public Task<string> Get()
-        {
-            using (var db = new HULAFContext())
-            {
-                db.Add(new MissingPerson() { LastSeenLocation = new SeenLocation() { City = "Budapest" } });
-                db.SaveChanges();
+        private readonly HULAFContext context;
 
-                var returnValue = db.MissingPerson.Where(x => x.LastSeenLocation != null).FirstOrDefault().LastSeenLocation.City;
+
+        [HttpGet]
+        public Task<List<MissingPerson>> Get()
+        {
+            using (context)
+            {
+                context.Add(new MissingPerson() { LastSeenLocation = new SeenLocation() { City = "Budapest" } });
+                context.SaveChanges();
+
+                var returnValue = context.MissingPerson.ToList();
 
                 return Task.FromResult(returnValue);
             }
         }
+
+    public HulafController(HULAFContext context)
+    {
+     this.context = context;   
+    }
     }
 }

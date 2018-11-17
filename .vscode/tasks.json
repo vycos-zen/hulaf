@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/HULAF.WebApi/HULAF.WebApi.csproj"
+                "${workspaceFolder}/HULAF.BackEnd/HULAF.WebApi/HULAF.WebApi.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

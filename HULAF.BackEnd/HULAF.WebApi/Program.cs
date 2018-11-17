@@ -19,6 +19,10 @@ namespace HULAF.WebApi
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+            .ConfigureAppConfiguration((hostingContext, config) =>
+            {
+                config.AddUserSecrets<Startup>();
+            })
+            .UseStartup<Startup>();
     }
 }
