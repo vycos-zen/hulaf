@@ -1,33 +1,18 @@
 version: '3.4'
 services:
-  nginx:
-    image: nginx:latest
-    container_name: nginx
-    volumes: 
-      - ./nginx.conf:/etc/nginx/nginx.conf
+  hulaf:
+    build: './HULAF.FrontEnd'
     ports: 
       - 80:80
       - 443:443
-    # environment: 
-      # - ENV=dev
-      # - APPLICATION_URL=http://hulaf
-  webapi:
+      - 8080:8080
+      - 5000:8080
+    environment: 
+      - ENV=dev
+  hulafapi:
     build: './HULAF.BackEnd'
     expose:
       - "5000"
-    ports: 
-      - "5000:5000"
-    # networks: 
-    #   - hulaf-inet
     environment: 
-      - ENV=development
-  fe:
-    build: './HULAF.FrontEnd'
-    expose:
-      - "4200" 
-    ports: 
-      - "4200:4200"
-    # networks: 
-    #   - hulaf-inet
-# networks: 
-#    hulaf-inet:
+      - ASPNETCORE_ENVIRONMENT=dev
+      - ASPNETCORE_URLS=http://127.0.0.1:5000
