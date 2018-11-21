@@ -40,7 +40,7 @@ namespace HULAF.WebApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                hulafContextConnectionString = Configuration["HulafDatabase:ConnectionString"];
+                hulafContextConnectionString = Configuration["HulafDatabaseLocal:ConnectionString"];
             }
             else
             {
