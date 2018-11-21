@@ -6,13 +6,14 @@ services:
       - 80:80
       - 443:443
       - 8080:8080
-      - 5000:8080
+    expose: 
+      - "5000"
     environment: 
       - ENV=dev
   hulafapi:
     build: './HULAF.BackEnd'
-    expose:
-      - "5000"
+    ports:
+      - 5000:5000
     environment: 
       - ASPNETCORE_ENVIRONMENT=dev
       - ASPNETCORE_URLS=http://127.0.0.1:5000
