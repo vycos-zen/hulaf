@@ -2,18 +2,18 @@ version: '3.4'
 services:
   hulaf:
     build: './HULAF.FrontEnd'
+    image: 'hulaf'
     ports: 
-      - 80:80
-      - 443:443
+      # - 80:80
+      # - 443:443
       - 8080:8080
-    expose: 
-      - "5000"
     environment: 
       - ENV=dev
   hulafapi:
     build: './HULAF.BackEnd'
-    ports:
-      - 5000:5000
+    image: 'hulafapi'
+    # ports:
+    #   - 5000:5000
     environment: 
       - ASPNETCORE_ENVIRONMENT=dev
-      - ASPNETCORE_URLS=http://127.0.0.1:5000
+      - ASPNETCORE_URLS=http://hulafapi:5000
