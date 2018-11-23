@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.3</TargetFramework>
+  </PropertyGroup>
+
+    <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2"/>
+    <PackageReference Include="System.Net.Http" Version="4.3.4"/>
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0"/>
+    <PackageReference Include="NSwag.CodeGeneration.CSharp" Version="12.0.0"/>
+    <PackageReference Include="NSwag.CodeGeneration.TypeScript" Version="12.0.0"/>
+    <PackageReference Include="NSwag.CodeGeneration" Version="12.0.0"/>
+    <PackageReference Include="NSwag.Core.Yaml" Version="12.0.0"/>
+    <PackageReference Include="NSwag.Core" Version="12.0.0"/>
+  </ItemGroup>
+
+
+</Project>

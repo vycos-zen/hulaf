@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: '3.0.0'
 info:
   title: HULAF Contract
   description: Common contract between the API and the application
@@ -16,11 +16,14 @@ paths:
           content:
             application/json:
               schema: 
-                $ref: './Person/MissingPersonDto.yaml#/MissingPersonDto'
+                $ref: '#/definitions/MissingPersonDto'
 
 
-
-components:
-  schemas:
-    MissingPersonDto:
-      $ref: './Person/MissingPersonDto.yaml#/MissingPersonDto'
+definitions:
+  MissingPersonDto:
+    type: object
+    properties:
+      id:
+        type: string
+      name: 
+        type: string
