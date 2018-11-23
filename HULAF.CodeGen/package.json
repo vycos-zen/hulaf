@@ -1,0 +1,13 @@
+{
+    "name": "hulaf-codegen",
+    "version": "0.0.0",
+    "scripts": {
+        "nswag": "node_modules/.bin/nswag",
+        "generate-hulaf-client": "node_modules/.bin/nswag swagger2tsclient /input:hulaf-contract.yaml /output:generated.ts",
+        "generate-hulaf-controller": "node_modules/.bin/nswag swagger2cscontroller /input:hulaf-contract.yaml /output:generated.cs"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "nswag": "^12.0.0"
+    }
+}
