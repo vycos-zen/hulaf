@@ -2,8 +2,7 @@
     "runtime": "NetCore21",
     "swaggerGenerator": {
         "fromSwagger": {
-            "url": "hulaf-dto-cs.yaml",
-            "output": null
+            "url": "./person-controller.yaml"
         }
     },
     "codeGenerators": {
@@ -11,7 +10,7 @@
             "controllerStyle": "Partial",
             "useCancellationToken": false,
             "aspNetNamespace": "System.Web.Http",
-            "className": "{controller}",
+            "className": "Person{controller}",
             "operationGenerationMode": "MultipleClientsFromOperationId",
             "generateOptionalParameters": false,
             "generateJsonMethods": true,
@@ -39,13 +38,12 @@
             "handleReferences": false,
             "generateImmutableArrayProperties": false,
             "generateImmutableDictionaryProperties": false,
-            "input": "hulaf-dto-cs.yaml",
-            "output": "dto.cs"
+            "output": "../../generated/persons-controller.cs"
         },
         "swaggerToTypeScriptClient": {
-            "className": "{controller}Client",
-            "moduleName": "",
-            "namespace": "",
+            "className": "Person{controller}Client",
+            "moduleName": "PersonModule",
+            "namespace": "HULAF.Domain.Person",
             "typeScriptVersion": 1.8,
             "template": "Fetch",
             "promiseType": "Promise",
@@ -54,7 +52,7 @@
             "dateTimeType": "Date",
             "nullValue": "Undefined",
             "generateClientClasses": true,
-            "generateClientInterfaces": false,
+            "generateClientInterfaces": true,
             "generateOptionalParameters": false,
             "wrapDtoExceptions": false,
             "wrapResponses": false,
@@ -76,7 +74,7 @@
             "useGetBaseUrlMethod": false,
             "baseUrlTokenName": "http://localhost",
             "queryNullValue": "",
-            "output": "./generated.ts"
+            "output": "../../generated/persons-client.ts"
         }
     }
 }

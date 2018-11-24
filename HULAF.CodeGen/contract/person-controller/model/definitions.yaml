@@ -1,0 +1,4 @@
+MissingPersonDto:
+  $ref: ./definitions/missing-person.yaml
+SeekerPersonDto:  
+  $ref: ./definitions/seeker-person.yaml

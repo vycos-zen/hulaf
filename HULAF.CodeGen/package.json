@@ -2,16 +2,19 @@
     "name": "hulaf-codegen",
     "version": "0.0.0",
     "scripts": {
-        "generate-hulaf-client": "nswag swagger2tsclient /input:hulaf-contract.yaml /output:generated.ts",
-        "generate-hulaf-controller": "nswag swagger2cscontroller /input:hulaf-contract.yaml /output:generated.cs",
-        "generate-hulaf-dto-cs": "nswag run hulaf.json /input:hulaf-dto-cs.yaml /output:dto.cs",
-        "generate-hulaf-dto-ts": "nswag swagger2tsclient /input:hulaf-dto-cs.yaml /output:dto.ts /namespace:HULAF",
-
-        "generate-hulaf": "nswag run nswag.json swagger2cscontroller /input:./hulaf-dto-cs.yaml /output:./dto.cs"
-
+        "gen-hulaf-client": "nswag swagger2tsclient /input:hulaf-contract.yaml /output:generated.ts",
+        "gen-hulaf-controller": "nswag swagger2cscontroller /input:hulaf-contract.yaml /output:generated.cs",
+        "gen-hulaf-dto-cs": "nswag run hulaf.json /input:hulaf-dto-cs.yaml /output:dto.cs",
+        "gen-hulaf-dto-ts": "nswag swagger2tsclient /input:hulaf-dto-cs.yaml /output:dto.ts /namespace:HULAF",
+        "ls": "ls",
+        "build-persons-controller": "cd contract/person-controller/model/ && multi-file-swagger -o yaml ./controller.yaml > ../person-controller.yaml",
+        "gen-persons-controller": "nswag run ./contract/person-controller/person-controller.json",
+        "generate-hulaf-controllers": "npm-run-all build-persons-controller gen-persons-controller"
     },
-    "dependencies": {},
-    "devDependencies": {
+    "dependencies": {
+        "multi-file-swagger": "^2.2.0",
+        "npm-run-all": "^4.1.5",
         "nswag": "^12.0.0"
-    }
+    },
+    "devDependencies": {}
 }

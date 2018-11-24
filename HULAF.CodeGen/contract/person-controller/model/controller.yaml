@@ -1,0 +1,12 @@
+openapi: '3.0.0'
+
+info:
+  title: HULAF Persons controller
+  description: Retrieves persons from database
+  version: 0.0.0
+
+paths:
+  $ref: ./paths.yaml
+  
+definitions:
+  $ref: ./definitions.yaml

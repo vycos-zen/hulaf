@@ -1,0 +1,10 @@
+get:
+  summary: A person seeks a missing person
+  description: 
+  responses:
+    '200':
+      description:
+      content:
+        application/json:
+          schema: 
+            $ref: '#/definitions/SeekerPersonDto'

@@ -1,0 +1,4 @@
+/missingperson:
+  $ref: ./paths/missing-person.yaml
+/seekerperson:
+  $ref: ./paths/seeker-person.yaml
