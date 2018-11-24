@@ -1,0 +1,48 @@
+openapi: '3.0.0'
+info:
+  title: HULAF Contract
+  description: Common contract between the API and the application
+  version: 0.0.0
+
+paths:
+  /missingperson:
+    get:
+      summary: Returns a missing person
+      description: 
+      responses:
+        '200':
+          description:
+          content:
+            application/json:
+              schema: 
+                $ref: '#/definitions/MissingPersonDto'
+
+  /seekerperson:
+    get:
+      summary: Returns a missing person
+      description: 
+      responses:
+        '200':
+          description:
+          content:
+            application/json:
+              schema: 
+                $ref: '#/definitions/SeekerPersonDto'
+
+definitions:
+  MissingPersonDto:
+    type: object
+    properties:
+      id:
+        type: string
+      name: 
+        type: string
+
+        definitions:
+  SeekerPersonDto:
+    type: object
+    properties:
+      id:
+        type: string
+      name: 
+        type: string

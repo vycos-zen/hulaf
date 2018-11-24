@@ -35,6 +35,9 @@
             "generateDefaultValues": true,
             "generateDataAnnotations": true,
             "excludedTypeNames": [],
+            "additionalNamespaceUsages": [
+                "System.Web.Http"
+            ],
             "handleReferences": false,
             "generateImmutableArrayProperties": false,
             "generateImmutableDictionaryProperties": false,

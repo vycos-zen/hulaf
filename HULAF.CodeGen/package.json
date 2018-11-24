@@ -9,7 +9,7 @@
         "ls": "ls",
         "build-persons-controller": "cd contract/person-controller/model/ && multi-file-swagger -o yaml ./controller.yaml > ../person-controller.yaml",
         "gen-persons-controller": "nswag run ./contract/person-controller/person-controller.json",
-        "generate-hulaf-controllers": "npm-run-all build-persons-controller gen-persons-controller"
+        "gen-hulaf-controllers": "npm-run-all build-persons-controller gen-persons-controller"
     },
     "dependencies": {
         "multi-file-swagger": "^2.2.0",

@@ -4,29 +4,27 @@
 // </auto-generated>
 //----------------------
 
-using System.Web.Http;
-
-namespace HULAF.WebApi.Controllers
+namespace HULAF
 {
     #pragma warning disable // Disable all warnings
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "12.0.0.0 (NJsonSchema v9.12.2.0 (Newtonsoft.Json v11.0.0.0))")]
-    public interface IPersonController
+    public interface IController
     {
         /// <summary>Returns a missing person</summary>
         System.Threading.Tasks.Task<Response> MissingpersonAsync();
     
-        /// <summary>A person seeks a missing person</summary>
+        /// <summary>Returns a missing person</summary>
         System.Threading.Tasks.Task<Response2> SeekerpersonAsync();
     
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "12.0.0.0 (NJsonSchema v9.12.2.0 (Newtonsoft.Json v11.0.0.0))")]
-    public partial class PersonController : System.Web.Http.ApiController
+    public partial class Controller : System.Web.Http.ApiController
     {
-        private IPersonController _implementation;
+        private IController _implementation;
     
-        public PersonController(IPersonController implementation)
+        public Controller(IController implementation)
         {
             _implementation = implementation;
         }
@@ -38,7 +36,7 @@ namespace HULAF.WebApi.Controllers
             return _implementation.MissingpersonAsync();
         }
     
-        /// <summary>A person seeks a missing person</summary>
+        /// <summary>Returns a missing person</summary>
         [System.Web.Http.HttpGet, System.Web.Http.Route("seekerperson")]
         public System.Threading.Tasks.Task<Response2> Seekerperson()
         {
