@@ -25,12 +25,12 @@ namespace HULAF.CodeGenLib
             //    settings.CodeGeneratorSettings.s
 
                 var generator = new SwaggerToCSharpControllerGeneratorSettings{
-                    AspNetNamespace = "HULAF.WebApi"
+                    AspNetNamespace = "HULAF.WebApi",
+                    
                 };
-
                 generator.CodeGeneratorSettings.TemplateDirectory = "./";
 
-                generator.
+                // generator.
 
                 return generator.GenerateControllerName("ApiController");
             }

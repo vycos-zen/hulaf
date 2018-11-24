@@ -2,9 +2,13 @@
     "name": "hulaf-codegen",
     "version": "0.0.0",
     "scripts": {
-        "nswag": "node_modules/.bin/nswag",
-        "generate-hulaf-client": "node_modules/.bin/nswag swagger2tsclient /input:hulaf-contract.yaml /output:generated.ts",
-        "generate-hulaf-controller": "node_modules/.bin/nswag swagger2cscontroller /input:hulaf-contract.yaml /output:generated.cs"
+        "generate-hulaf-client": "nswag swagger2tsclient /input:hulaf-contract.yaml /output:generated.ts",
+        "generate-hulaf-controller": "nswag swagger2cscontroller /input:hulaf-contract.yaml /output:generated.cs",
+        "generate-hulaf-dto-cs": "nswag run hulaf.json /input:hulaf-dto-cs.yaml /output:dto.cs",
+        "generate-hulaf-dto-ts": "nswag swagger2tsclient /input:hulaf-dto-cs.yaml /output:dto.ts /namespace:HULAF",
+
+        "generate-hulaf": "nswag run nswag.json swagger2cscontroller /input:./hulaf-dto-cs.yaml /output:./dto.cs"
+
     },
     "dependencies": {},
     "devDependencies": {

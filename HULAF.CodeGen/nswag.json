@@ -1,6 +1,11 @@
 {
     "runtime": "NetCore21",
-    "swaggerGenerator": {},
+    "swaggerGenerator": {
+        "fromSwagger": {
+            "url": "hulaf-dto-cs.yaml",
+            "output": null
+        }
+    },
     "codeGenerators": {
         "swaggerToCSharpController": {
             "controllerStyle": "Partial",
@@ -34,7 +39,8 @@
             "handleReferences": false,
             "generateImmutableArrayProperties": false,
             "generateImmutableDictionaryProperties": false,
-            "output": "./generated.cs"
+            "input": "hulaf-dto-cs.yaml",
+            "output": "dto.cs"
         },
         "swaggerToTypeScriptClient": {
             "className": "{controller}Client",
