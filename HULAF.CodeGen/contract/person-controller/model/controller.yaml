@@ -6,7 +6,7 @@ info:
   version: 0.0.0
 
 paths:
-  $ref: ./paths.yaml
+  $ref: './paths.yaml'
   
-definitions:
-  $ref: ./definitions.yaml
+components:
+  $ref: './components/schemas.yaml'

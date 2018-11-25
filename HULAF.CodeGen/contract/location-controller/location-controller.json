@@ -2,7 +2,7 @@
     "runtime": "NetCore21",
     "swaggerGenerator": {
         "fromSwagger": {
-            "url": "./person-controller.yaml"
+            "url": "./location-controller.yaml"
         }
     },
     "codeGenerators": {
@@ -11,7 +11,7 @@
             "useCancellationToken": false,
             "aspNetNamespace": "Microsoft.AspNetCore.Mvc",
             "ControllerBaseClass": "ControllerBase",
-            "className": "Person{controller}",
+            "className": "Location{controller}",
             "operationGenerationMode": "SingleClientFromOperationId",
             "generateOptionalParameters": false,
             "generateJsonMethods": true,
@@ -45,12 +45,12 @@
             "generateClientClasses": true,
             "generateClientInterfaces": true,
             "generateDtoTypes": true,
-            "output": "../../../HULAF.BackEnd/HULAF.WebApi/Controllers/PersonsController.cs"
+            "output": "../../../HULAF.BackEnd/HULAF.WebApi/Controllers/LocationController.cs"
         },
         "swaggerToTypeScriptClient": {
-            "className": "Person{controller}Client",
-            "moduleName": "PersonModule",
-            "namespace": "HULAF.Domain.Person",
+            "className": "Location{controller}Client",
+            "moduleName": "LocationModule",
+            "namespace": "HULAF.Domain.Location",
             "typeScriptVersion": 1.8,
             "template": "Fetch",
             "promiseType": "Promise",
@@ -81,7 +81,7 @@
             "useGetBaseUrlMethod": false,
             "baseUrlTokenName": "http://localhost",
             "queryNullValue": "",
-            "output": "../../generated/persons-client.ts"
+            "output": "../../generated/location-client.ts"
         }
     }
 }

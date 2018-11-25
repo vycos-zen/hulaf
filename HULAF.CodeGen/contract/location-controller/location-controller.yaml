@@ -1,0 +1,26 @@
+openapi: 3.0.0
+info:
+  title: HULAF Location controller
+  description: Retrieves a location from database
+  version: 0.0.0
+components:
+  schemas:
+    CityDto:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+        Name:
+          type: string
+        Country:
+          $ref: '#/components/schemas/CountryDto'
+    CountryDto:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+        Name:
+          type: string
+

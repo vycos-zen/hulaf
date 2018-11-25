@@ -1,0 +1,7 @@
+type: object
+properties:
+  Guid: 
+    type: string
+    format: uuid
+  Name: 
+    type: string

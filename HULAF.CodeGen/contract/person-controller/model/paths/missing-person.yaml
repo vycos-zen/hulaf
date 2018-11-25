@@ -1,23 +1,21 @@
 get:
   tags:
-    - 'person'
-    - 'missing'
+    - person
+    - missing
   description: Returns a missing person
   summary: Gets a missing person by guid.
   operationId: getMissingPerson
   responses:
     '200':
       description: Returns a missing person
-      summary: Gets a missing person by guid
       content:
         application/json:
           schema: 
-            $ref: '#/definitions/MissingPersonDto'
-
-parameters:
-  - name: personGuid
-    in: path
-    description: Guid of person
-    schema:
-      type: string
-      style: simple
+            $ref: '#/components/schemas/MissingPersonDto'
+  parameters:
+    - name: personGuid
+      in: path
+      description: Guid of person
+      required: true
+      schema:
+        type: string

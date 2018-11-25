@@ -1,6 +1,6 @@
 /missingperson/{personGuid}:
-  $ref: ./paths/missing-person.yaml
+  $ref: './paths/missing-person.yaml'
 /missingpersonlist:
-  $ref: ./paths/missing-person-list.yaml
+  $ref: './paths/missing-person-list.yaml'
 /seekerperson:
-  $ref: ./paths/seeker-person.yaml
+  $ref: './paths/seeker-person.yaml'

@@ -12,19 +12,20 @@ namespace HULAF.Domain.Person {
 export interface IPersonClient {
     /**
      * Gets a missing person by guid.
-     * @param personGuid (optional) Guid of person
+     * @param personGuid Guid of person
      * @return Returns a missing person
      */
-    getMissingPerson(personGuid: string): Promise<Anonymous>;
+    getMissingPerson(personGuid: string): Promise<MissingPersonDto>;
     /**
      * Lists missing persons
      * @return Missing person list.
      */
-    getMissingPersonList(): Promise<Anonymous[]>;
+    getMissingPersonList(): Promise<MissingPersonDto[]>;
     /**
      * A person seeks a missing person
+     * @return Get a person by guid
      */
-    seekerperson(): Promise<Anonymous2>;
+    seekerperson(): Promise<SeekerPersonDto>;
 }
 
 export class PersonClient implements IPersonClient {
@@ -39,15 +40,14 @@ export class PersonClient implements IPersonClient {
 
     /**
      * Gets a missing person by guid.
-     * @param personGuid (optional) Guid of person
+     * @param personGuid Guid of person
      * @return Returns a missing person
      */
-    getMissingPerson(personGuid: string): Promise<Anonymous> {
+    getMissingPerson(personGuid: string): Promise<MissingPersonDto> {
         let url_ = this.baseUrl + "/missingperson/{personGuid}";
-        if (personGuid !== null && personGuid !== undefined)
+        if (personGuid === undefined || personGuid === null)
+            throw new Error("The parameter 'personGuid' must be defined.");
         url_ = url_.replace("{personGuid}", encodeURIComponent("" + personGuid)); 
-        else
-            url_ = url_.replace("/{personGuid}", "");
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <RequestInit>{
@@ -62,14 +62,14 @@ export class PersonClient implements IPersonClient {
         });
     }
 
-    protected processGetMissingPerson(response: Response): Promise<Anonymous> {
+    protected processGetMissingPerson(response: Response): Promise<MissingPersonDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = resultData200 ? Anonymous.fromJS(resultData200) : new Anonymous();
+            result200 = resultData200 ? MissingPersonDto.fromJS(resultData200) : new MissingPersonDto();
             return result200;
             });
         } else if (status !== 200 && status !== 204) {
@@ -77,14 +77,14 @@ export class PersonClient implements IPersonClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<Anonymous>(<any>null);
+        return Promise.resolve<MissingPersonDto>(<any>null);
     }
 
     /**
      * Lists missing persons
      * @return Missing person list.
      */
-    getMissingPersonList(): Promise<Anonymous[]> {
+    getMissingPersonList(): Promise<MissingPersonDto[]> {
         let url_ = this.baseUrl + "/missingpersonlist";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -100,7 +100,7 @@ export class PersonClient implements IPersonClient {
         });
     }
 
-    protected processGetMissingPersonList(response: Response): Promise<Anonymous[]> {
+    protected processGetMissingPersonList(response: Response): Promise<MissingPersonDto[]> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -110,7 +110,7 @@ export class PersonClient implements IPersonClient {
             if (resultData200 && resultData200.constructor === Array) {
                 result200 = [];
                 for (let item of resultData200)
-                    result200.push(Anonymous.fromJS(item));
+                    result200.push(MissingPersonDto.fromJS(item));
             }
             return result200;
             });
@@ -119,13 +119,14 @@ export class PersonClient implements IPersonClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<Anonymous[]>(<any>null);
+        return Promise.resolve<MissingPersonDto[]>(<any>null);
     }
 
     /**
      * A person seeks a missing person
+     * @return Get a person by guid
      */
-    seekerperson(): Promise<Anonymous2> {
+    seekerperson(): Promise<SeekerPersonDto> {
         let url_ = this.baseUrl + "/seekerperson";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -141,14 +142,14 @@ export class PersonClient implements IPersonClient {
         });
     }
 
-    protected processSeekerperson(response: Response): Promise<Anonymous2> {
+    protected processSeekerperson(response: Response): Promise<SeekerPersonDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
             return response.text().then((_responseText) => {
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = resultData200 ? Anonymous2.fromJS(resultData200) : new Anonymous2();
+            result200 = resultData200 ? SeekerPersonDto.fromJS(resultData200) : new SeekerPersonDto();
             return result200;
             });
         } else if (status !== 200 && status !== 204) {
@@ -156,15 +157,15 @@ export class PersonClient implements IPersonClient {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
             });
         }
-        return Promise.resolve<Anonymous2>(<any>null);
+        return Promise.resolve<SeekerPersonDto>(<any>null);
     }
 }
 
-export class Anonymous implements IAnonymous {
+export class MissingPersonDto implements IMissingPersonDto {
     guid?: string;
     name?: string;
 
-    constructor(data?: IAnonymous) {
+    constructor(data?: IMissingPersonDto) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -180,9 +181,9 @@ export class Anonymous implements IAnonymous {
         }
     }
 
-    static fromJS(data: any): Anonymous {
+    static fromJS(data: any): MissingPersonDto {
         data = typeof data === 'object' ? data : {};
-        let result = new Anonymous();
+        let result = new MissingPersonDto();
         result.init(data);
         return result;
     }
@@ -195,16 +196,16 @@ export class Anonymous implements IAnonymous {
     }
 }
 
-export interface IAnonymous {
+export interface IMissingPersonDto {
     guid?: string;
     name?: string;
 }
 
-export class Anonymous2 implements IAnonymous2 {
+export class SeekerPersonDto implements ISeekerPersonDto {
     guid?: string;
     name?: string;
 
-    constructor(data?: IAnonymous2) {
+    constructor(data?: ISeekerPersonDto) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
@@ -220,9 +221,9 @@ export class Anonymous2 implements IAnonymous2 {
         }
     }
 
-    static fromJS(data: any): Anonymous2 {
+    static fromJS(data: any): SeekerPersonDto {
         data = typeof data === 'object' ? data : {};
-        let result = new Anonymous2();
+        let result = new SeekerPersonDto();
         result.init(data);
         return result;
     }
@@ -235,7 +236,7 @@ export class Anonymous2 implements IAnonymous2 {
     }
 }
 
-export interface IAnonymous2 {
+export interface ISeekerPersonDto {
     guid?: string;
     name?: string;
 }

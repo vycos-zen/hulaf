@@ -1,0 +1,9 @@
+type: object
+properties:
+  Guid: 
+    type: string
+    format: uuid
+  Name: 
+    type: string
+  Country:
+    $ref: '#/components/schemas/CountryDto'

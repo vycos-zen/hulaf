@@ -1,7 +1,7 @@
 get:
   tags:
-  - 'person'
-  - 'missing'
+  - person
+  - missing
   description: Returns a missing person list
   summary: Lists missing persons
   operationId: getMissingPersonList
@@ -13,4 +13,4 @@ get:
           schema: 
             type: array
             items:
-              $ref: '#/definitions/MissingPersonDto'
+              $ref: '#/components/schemas/MissingPersonDto'

@@ -1,0 +1,5 @@
+schemas:
+  MissingPersonDto:
+    $ref: './schemas/missing-person-dto.yaml'
+  SeekerPersonDto:  
+    $ref: './schemas/seeker-person-dto.yaml'

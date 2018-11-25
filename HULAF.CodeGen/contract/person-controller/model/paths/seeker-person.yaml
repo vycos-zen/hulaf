@@ -1,10 +1,10 @@
 get:
+  description: Returns a person looking for a missing person
   summary: A person seeks a missing person
-  description: 
   responses:
     '200':
-      description:
+      description: Get a person by guid
       content:
         application/json:
           schema: 
-            $ref: '#/definitions/SeekerPersonDto'
+            $ref: '#/components/schemas/SeekerPersonDto'

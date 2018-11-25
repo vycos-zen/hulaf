@@ -15,18 +15,17 @@ paths:
       responses:
         '200':
           description: Returns a missing person
-          summary: Gets a missing person by guid
           content:
             application/json:
               schema:
-                $ref: '#/definitions/MissingPersonDto'
-    parameters:
-      - name: personGuid
-        in: path
-        description: Guid of person
-        schema:
-          type: string
-          style: simple
+                $ref: '#/components/schemas/MissingPersonDto'
+      parameters:
+        - name: personGuid
+          in: path
+          description: Guid of person
+          required: true
+          schema:
+            type: string
   /missingpersonlist:
     get:
       tags:
@@ -43,31 +42,32 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/definitions/MissingPersonDto'
+                  $ref: '#/components/schemas/MissingPersonDto'
   /seekerperson:
     get:
+      description: Returns a person looking for a missing person
       summary: A person seeks a missing person
-      description: null
       responses:
         '200':
-          description: null
+          description: Get a person by guid
           content:
             application/json:
               schema:
-                $ref: '#/definitions/SeekerPersonDto'
-definitions:
-  MissingPersonDto:
-    type: object
-    properties:
-      guid:
-        type: string
-      name:
-        type: string
-  SeekerPersonDto:
-    type: object
-    properties:
-      guid:
-        type: string
-      name:
-        type: string
+                $ref: '#/components/schemas/SeekerPersonDto'
+components:
+  schemas:
+    MissingPersonDto:
+      type: object
+      properties:
+        guid:
+          type: string
+        name:
+          type: string
+    SeekerPersonDto:
+      type: object
+      properties:
+        guid:
+          type: string
+        name:
+          type: string
 
