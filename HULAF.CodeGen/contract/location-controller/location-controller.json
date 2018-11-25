@@ -51,6 +51,7 @@
             "className": "Location{controller}Client",
             "moduleName": "LocationModule",
             "namespace": "HULAF.Domain.Location",
+            "serviceHost": "/api",
             "typeScriptVersion": 1.8,
             "template": "Fetch",
             "promiseType": "Promise",
@@ -81,7 +82,7 @@
             "useGetBaseUrlMethod": false,
             "baseUrlTokenName": "http://localhost",
             "queryNullValue": "",
-            "output": "../../generated/location-client.ts"
+            "output": "../../../HULAF.FrontEnd/src/app/core/http/location-service/location-service.ts"
         }
     }
 }

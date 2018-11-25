@@ -5,8 +5,8 @@ info:
   description: Retrieves a location from database
   version: 0.0.0
 
-# paths:
-#   $ref: './paths.yaml'
+paths:
+  $ref: './paths.yaml'
   
 components:
   $ref: './components/schemas.yaml'

@@ -30,6 +30,7 @@ namespace HULAF.WebApi.Controllers
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "12.0.0.0 (NJsonSchema v9.12.2.0 (Newtonsoft.Json v11.0.0.0))")]
+    [Microsoft.AspNetCore.Mvc.RoutePrefix("api")]
     public partial class PersonController : ControllerBase
     {
         private IPersonController _implementation;

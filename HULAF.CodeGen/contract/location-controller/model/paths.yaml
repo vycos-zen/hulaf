@@ -1,0 +1,2 @@
+/countrylist:
+  $ref: './paths/country-list.yaml'

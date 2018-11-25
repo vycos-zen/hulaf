@@ -51,7 +51,8 @@
             "className": "Person{controller}Client",
             "moduleName": "PersonModule",
             "namespace": "HULAF.Domain.Person",
-            "typeScriptVersion": 1.8,
+            "serviceHost": "/api",
+            "typeScriptVersion": 3.1,
             "template": "Fetch",
             "promiseType": "Promise",
             "httpClass": "Http",
@@ -81,7 +82,7 @@
             "useGetBaseUrlMethod": false,
             "baseUrlTokenName": "http://localhost",
             "queryNullValue": "",
-            "output": "../../generated/persons-client.ts"
+            "output": "../../../HULAF.FrontEnd/src/app/core/http/person-service/person-service.ts"
         }
     }
 }
