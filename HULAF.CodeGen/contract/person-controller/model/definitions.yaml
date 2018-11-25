@@ -1,4 +1,4 @@
 MissingPersonDto:
-  $ref: ./definitions/missing-person.yaml
+  $ref: ./definitions/missing-person-dto.yaml
 SeekerPersonDto:  
-  $ref: ./definitions/seeker-person.yaml
+  $ref: ./definitions/seeker-person-dto.yaml

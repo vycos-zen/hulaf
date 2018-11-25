@@ -2,14 +2,12 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "build",
-                "${workspaceFolder}/HULAF.BackEnd/HULAF.WebApi/HULAF.WebApi.csproj"
-            ],
-            "problemMatcher": "$msCompile"
-        }
-    ]
+            "label": "build-hulaf-controllers",
+            "type": "npm",
+            "script": "build-hulaf-controllers",
+            "path": "HULAF.CodeGen/",
+            "problemMatcher": []
+        },
+    ],
+    "npm.autoDetect": "on"
 }

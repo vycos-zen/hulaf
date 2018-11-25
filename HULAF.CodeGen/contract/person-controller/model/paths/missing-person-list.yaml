@@ -1,0 +1,16 @@
+get:
+  tags:
+  - 'person'
+  - 'missing'
+  description: Returns a missing person list
+  summary: Lists missing persons
+  operationId: getMissingPersonList
+  responses:
+    '200':
+      description: Missing person list.
+      content: 
+        '*/*':
+          schema: 
+            type: array
+            items:
+              $ref: '#/definitions/MissingPersonDto'

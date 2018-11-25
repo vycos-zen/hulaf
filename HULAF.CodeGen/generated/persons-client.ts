@@ -11,9 +11,16 @@ namespace HULAF.Domain.Person {
 
 export interface IPersonClient {
     /**
-     * Returns a missing person
+     * Gets a missing person by guid.
+     * @param personGuid (optional) Guid of person
+     * @return Returns a missing person
      */
-    missingperson(): Promise<Anonymous>;
+    getMissingPerson(personGuid: string): Promise<Anonymous>;
+    /**
+     * Lists missing persons
+     * @return Missing person list.
+     */
+    getMissingPersonList(): Promise<Anonymous[]>;
     /**
      * A person seeks a missing person
      */
@@ -31,10 +38,16 @@ export class PersonClient implements IPersonClient {
     }
 
     /**
-     * Returns a missing person
+     * Gets a missing person by guid.
+     * @param personGuid (optional) Guid of person
+     * @return Returns a missing person
      */
-    missingperson(): Promise<Anonymous> {
-        let url_ = this.baseUrl + "/missingperson";
+    getMissingPerson(personGuid: string): Promise<Anonymous> {
+        let url_ = this.baseUrl + "/missingperson/{personGuid}";
+        if (personGuid !== null && personGuid !== undefined)
+        url_ = url_.replace("{personGuid}", encodeURIComponent("" + personGuid)); 
+        else
+            url_ = url_.replace("/{personGuid}", "");
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = <RequestInit>{
@@ -45,11 +58,11 @@ export class PersonClient implements IPersonClient {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processMissingperson(_response);
+            return this.processGetMissingPerson(_response);
         });
     }
 
-    protected processMissingperson(response: Response): Promise<Anonymous> {
+    protected processGetMissingPerson(response: Response): Promise<Anonymous> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -65,6 +78,48 @@ export class PersonClient implements IPersonClient {
             });
         }
         return Promise.resolve<Anonymous>(<any>null);
+    }
+
+    /**
+     * Lists missing persons
+     * @return Missing person list.
+     */
+    getMissingPersonList(): Promise<Anonymous[]> {
+        let url_ = this.baseUrl + "/missingpersonlist";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ = <RequestInit>{
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processGetMissingPersonList(_response);
+        });
+    }
+
+    protected processGetMissingPersonList(response: Response): Promise<Anonymous[]> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (resultData200 && resultData200.constructor === Array) {
+                result200 = [];
+                for (let item of resultData200)
+                    result200.push(Anonymous.fromJS(item));
+            }
+            return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<Anonymous[]>(<any>null);
     }
 
     /**
@@ -106,7 +161,7 @@ export class PersonClient implements IPersonClient {
 }
 
 export class Anonymous implements IAnonymous {
-    id?: string;
+    guid?: string;
     name?: string;
 
     constructor(data?: IAnonymous) {
@@ -120,7 +175,7 @@ export class Anonymous implements IAnonymous {
 
     init(data?: any) {
         if (data) {
-            this.id = data["id"];
+            this.guid = data["guid"];
             this.name = data["name"];
         }
     }
@@ -134,19 +189,19 @@ export class Anonymous implements IAnonymous {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
+        data["guid"] = this.guid;
         data["name"] = this.name;
         return data; 
     }
 }
 
 export interface IAnonymous {
-    id?: string;
+    guid?: string;
     name?: string;
 }
 
 export class Anonymous2 implements IAnonymous2 {
-    id?: string;
+    guid?: string;
     name?: string;
 
     constructor(data?: IAnonymous2) {
@@ -160,7 +215,7 @@ export class Anonymous2 implements IAnonymous2 {
 
     init(data?: any) {
         if (data) {
-            this.id = data["id"];
+            this.guid = data["guid"];
             this.name = data["name"];
         }
     }
@@ -174,14 +229,14 @@ export class Anonymous2 implements IAnonymous2 {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["id"] = this.id;
+        data["guid"] = this.guid;
         data["name"] = this.name;
         return data; 
     }
 }
 
 export interface IAnonymous2 {
-    id?: string;
+    guid?: string;
     name?: string;
 }
 

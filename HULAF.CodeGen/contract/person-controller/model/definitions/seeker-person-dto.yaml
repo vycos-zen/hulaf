@@ -1,6 +1,6 @@
 type: object
 properties:
-  id:
+  guid:
     type: string
   name: 
     type: string

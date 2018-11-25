@@ -4,17 +4,46 @@ info:
   description: Retrieves persons from database
   version: 0.0.0
 paths:
-  /missingperson:
+  '/missingperson/{personGuid}':
     get:
-      summary: Returns a missing person
-      description: null
+      tags:
+        - person
+        - missing
+      description: Returns a missing person
+      summary: Gets a missing person by guid.
+      operationId: getMissingPerson
       responses:
         '200':
-          description: null
+          description: Returns a missing person
+          summary: Gets a missing person by guid
           content:
             application/json:
               schema:
                 $ref: '#/definitions/MissingPersonDto'
+    parameters:
+      - name: personGuid
+        in: path
+        description: Guid of person
+        schema:
+          type: string
+          style: simple
+  /missingpersonlist:
+    get:
+      tags:
+        - person
+        - missing
+      description: Returns a missing person list
+      summary: Lists missing persons
+      operationId: getMissingPersonList
+      responses:
+        '200':
+          description: Missing person list.
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/definitions/MissingPersonDto'
   /seekerperson:
     get:
       summary: A person seeks a missing person
@@ -30,14 +59,14 @@ definitions:
   MissingPersonDto:
     type: object
     properties:
-      id:
+      guid:
         type: string
       name:
         type: string
   SeekerPersonDto:
     type: object
     properties:
-      id:
+      guid:
         type: string
       name:
         type: string

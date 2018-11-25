@@ -4,7 +4,8 @@
 // </auto-generated>
 //----------------------
 
-using System.Web.Http;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace HULAF.WebApi.Controllers
 {
@@ -13,8 +14,14 @@ namespace HULAF.WebApi.Controllers
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "12.0.0.0 (NJsonSchema v9.12.2.0 (Newtonsoft.Json v11.0.0.0))")]
     public interface IPersonController
     {
-        /// <summary>Returns a missing person</summary>
-        System.Threading.Tasks.Task<Response> MissingpersonAsync();
+        /// <summary>Gets a missing person by guid.</summary>
+        /// <param name="personGuid">Guid of person</param>
+        /// <returns>Returns a missing person</returns>
+        System.Threading.Tasks.Task<Response> GetMissingPersonAsync(string personGuid = null);
+    
+        /// <summary>Lists missing persons</summary>
+        /// <returns>Missing person list.</returns>
+        System.Threading.Tasks.Task<System.Collections.Generic.IList<Response>> GetMissingPersonListAsync();
     
         /// <summary>A person seeks a missing person</summary>
         System.Threading.Tasks.Task<Response2> SeekerpersonAsync();
@@ -22,7 +29,7 @@ namespace HULAF.WebApi.Controllers
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "12.0.0.0 (NJsonSchema v9.12.2.0 (Newtonsoft.Json v11.0.0.0))")]
-    public partial class PersonController : System.Web.Http.ApiController
+    public partial class PersonController : Microsoft.AspNetCore.Mvc.ApiController
     {
         private IPersonController _implementation;
     
@@ -31,15 +38,25 @@ namespace HULAF.WebApi.Controllers
             _implementation = implementation;
         }
     
-        /// <summary>Returns a missing person</summary>
-        [System.Web.Http.HttpGet, System.Web.Http.Route("missingperson")]
-        public System.Threading.Tasks.Task<Response> Missingperson()
+        /// <summary>Gets a missing person by guid.</summary>
+        /// <param name="personGuid">Guid of person</param>
+        /// <returns>Returns a missing person</returns>
+        [Microsoft.AspNetCore.Mvc.HttpGet, Microsoft.AspNetCore.Mvc.Route("missingperson/{personGuid}")]
+        public System.Threading.Tasks.Task<Response> GetMissingPerson(string personGuid = null)
         {
-            return _implementation.MissingpersonAsync();
+            return _implementation.GetMissingPersonAsync(personGuid);
+        }
+    
+        /// <summary>Lists missing persons</summary>
+        /// <returns>Missing person list.</returns>
+        [Microsoft.AspNetCore.Mvc.HttpGet, Microsoft.AspNetCore.Mvc.Route("missingpersonlist")]
+        public System.Threading.Tasks.Task<System.Collections.Generic.IList<Response>> GetMissingPersonList()
+        {
+            return _implementation.GetMissingPersonListAsync();
         }
     
         /// <summary>A person seeks a missing person</summary>
-        [System.Web.Http.HttpGet, System.Web.Http.Route("seekerperson")]
+        [Microsoft.AspNetCore.Mvc.HttpGet, Microsoft.AspNetCore.Mvc.Route("seekerperson")]
         public System.Threading.Tasks.Task<Response2> Seekerperson()
         {
             return _implementation.SeekerpersonAsync();
@@ -52,20 +69,20 @@ namespace HULAF.WebApi.Controllers
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.12.2.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class Response 
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        [Newtonsoft.Json.JsonProperty("guid", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Guid { get; set; }
     
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
     
         public string ToJson() 
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
         }
         
         public static Response FromJson(string data)
         {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<Response>(data);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<Response>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
         }
     
     }
@@ -73,20 +90,20 @@ namespace HULAF.WebApi.Controllers
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.12.2.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class Response2 
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
+        [Newtonsoft.Json.JsonProperty("guid", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Guid { get; set; }
     
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
     
         public string ToJson() 
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
         }
         
         public static Response2 FromJson(string data)
         {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<Response2>(data);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<Response2>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
         }
     
     }
