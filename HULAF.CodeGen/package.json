@@ -2,8 +2,6 @@
     "name": "hulaf-codegen",
     "version": "0.0.0",
     "scripts": {
-        "gen-hulaf-test-controller": "nswag swagger2cscontroller /input:hulaf-contract.yaml /output:generated.cs",
-        
         "concat-persons-controller": "cd contract/person-controller/model/ && multi-file-swagger -o yaml ./controller.yaml > ../person-controller.yaml",
         "generate-persons-controller": "nswag run ./contract/person-controller/person-controller.json",
         "build-persons-controller": "npm-run-all concat-persons-controller generate-persons-controller",
@@ -11,7 +9,6 @@
         "concat-location-controller": "cd contract/location-controller/model/ && multi-file-swagger -o yaml ./controller.yaml > ../location-controller.yaml",
         "generate-location-controller": "nswag run ./contract/location-controller/location-controller.json",
         "build-location-controller": "npm-run-all concat-location-controller generate-location-controller",
-
 
         "build-hulaf-controllers": "npm-run-all build-persons-controller build-location-controller"
     },

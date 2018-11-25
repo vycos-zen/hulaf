@@ -20,7 +20,7 @@ export interface ILocationClient {
 export class LocationClient implements ILocationClient {
     private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
     private baseUrl: string;
-    protected jsonParseReviver: (key: string, value: any) => any = undefined;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
     constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
         this.http = http ? http : <any>window;
