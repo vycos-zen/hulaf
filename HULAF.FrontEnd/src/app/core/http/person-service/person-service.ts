@@ -164,6 +164,7 @@ export class PersonClient implements IPersonClient {
 export class MissingPersonDto implements IMissingPersonDto {
     guid?: string;
     name?: string;
+    characteristics?: any;
 
     constructor(data?: IMissingPersonDto) {
         if (data) {
@@ -178,6 +179,7 @@ export class MissingPersonDto implements IMissingPersonDto {
         if (data) {
             this.guid = data["guid"];
             this.name = data["name"];
+            this.characteristics = data["characteristics"];
         }
     }
 
@@ -192,6 +194,7 @@ export class MissingPersonDto implements IMissingPersonDto {
         data = typeof data === 'object' ? data : {};
         data["guid"] = this.guid;
         data["name"] = this.name;
+        data["characteristics"] = this.characteristics;
         return data; 
     }
 }
@@ -199,6 +202,7 @@ export class MissingPersonDto implements IMissingPersonDto {
 export interface IMissingPersonDto {
     guid?: string;
     name?: string;
+    characteristics?: any;
 }
 
 export class SeekerPersonDto implements ISeekerPersonDto {
@@ -239,6 +243,91 @@ export class SeekerPersonDto implements ISeekerPersonDto {
 export interface ISeekerPersonDto {
     guid?: string;
     name?: string;
+}
+
+export class CharateristicsDto implements ICharateristicsDto {
+    guid?: string;
+    approxHeightMin?: number;
+    approxHeightMax?: number;
+    hairColor?: any;
+    eyeColor?: any;
+    approxAgeMin?: number;
+    approxAgeMax?: number;
+    knownNames?: string[];
+
+    constructor(data?: ICharateristicsDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+        if (!data) {
+            this.knownNames = [];
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.guid = data["guid"];
+            this.approxHeightMin = data["approxHeightMin"];
+            this.approxHeightMax = data["approxHeightMax"];
+            this.hairColor = data["hairColor"];
+            this.eyeColor = data["eyeColor"];
+            this.approxAgeMin = data["approxAgeMin"];
+            this.approxAgeMax = data["approxAgeMax"];
+            if (data["knownNames"] && data["knownNames"].constructor === Array) {
+                this.knownNames = [];
+                for (let item of data["knownNames"])
+                    this.knownNames.push(item);
+            }
+        }
+    }
+
+    static fromJS(data: any): CharateristicsDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CharateristicsDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["guid"] = this.guid;
+        data["approxHeightMin"] = this.approxHeightMin;
+        data["approxHeightMax"] = this.approxHeightMax;
+        data["hairColor"] = this.hairColor;
+        data["eyeColor"] = this.eyeColor;
+        data["approxAgeMin"] = this.approxAgeMin;
+        data["approxAgeMax"] = this.approxAgeMax;
+        if (this.knownNames && this.knownNames.constructor === Array) {
+            data["knownNames"] = [];
+            for (let item of this.knownNames)
+                data["knownNames"].push(item);
+        }
+        return data; 
+    }
+}
+
+export interface ICharateristicsDto {
+    guid?: string;
+    approxHeightMin?: number;
+    approxHeightMax?: number;
+    hairColor?: any;
+    eyeColor?: any;
+    approxAgeMin?: number;
+    approxAgeMax?: number;
+    knownNames?: string[];
+}
+
+export enum EyeColorDto {
+    Green = "green", 
+    Blue = "blue", 
+}
+
+export enum HairColorDto {
+    Brown = "brown", 
+    Blonde = "blonde", 
 }
 
 export class SwaggerException extends Error {

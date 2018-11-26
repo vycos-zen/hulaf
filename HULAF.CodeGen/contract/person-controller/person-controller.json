@@ -34,7 +34,8 @@
             "classStyle": "Poco",
             "generateDefaultValues": false,
             "generateDataAnnotations": true,
-            "excludedTypeNames": [],
+            "excludedTypeNames": [
+            ],
             "additionalNamespaceUsages": [
                 "Microsoft.AspNetCore.Mvc",
                 "System.Threading.Tasks"
@@ -42,9 +43,9 @@
             "handleReferences": true,
             "generateImmutableArrayProperties": false,
             "generateImmutableDictionaryProperties": false,
-            "generateClientClasses": true,
+            "generateClientClasses": false,
             "generateClientInterfaces": true,
-            "generateDtoTypes": true,
+            "generateDtoTypes": false,
             "output": "../../../HULAF.BackEnd/HULAF.WebApi/Controllers/PersonsController.cs"
         },
         "swaggerToTypeScriptClient": {
@@ -74,7 +75,8 @@
             "generateCloneMethod": false,
             "typeStyle": "Class",
             "generateDefaultValues": true,
-            "excludedTypeNames": [],
+            "excludedTypeNames": [
+            ],
             "handleReferences": false,
             "generateConstructorInterface": true,
             "convertConstructorInterfaceData": false,

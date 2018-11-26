@@ -61,13 +61,54 @@ components:
       properties:
         guid:
           type: string
+          fromat: uuid
         name:
           type: string
+        characteristics:
+          type:
+            $ref: '#/comonents/schemas/CharacteristicsDto'
     SeekerPersonDto:
       type: object
       properties:
         guid:
           type: string
+          fromat: uuid
         name:
           type: string
+    CharateristicsDto:
+      type: object
+      properties:
+        guid:
+          type: string
+          fromat: uuid
+        approxHeightMin:
+          type: integer
+          example: Height in cm
+        approxHeightMax:
+          type: integer
+          example: Height in cm
+        hairColor:
+          type:
+            $ref: '#/components/schemas/HairColorDto'
+        eyeColor:
+          type:
+            $ref: '#/components/schemas/EyeColorDto'
+        approxAgeMin:
+          type: integer
+        approxAgeMax:
+          type: integer
+        knownNames:
+          type: array
+          items:
+            type: string
+    EyeColorDto:
+      type: string
+      enum:
+        - green
+        - blue
+    HairColorDto:
+      type: string
+      enum:
+        - brown
+        - blonde
 

@@ -3,3 +3,9 @@ schemas:
     $ref: './schemas/missing-person-dto.yaml'
   SeekerPersonDto:  
     $ref: './schemas/seeker-person-dto.yaml'
+  CharateristicsDto:
+    $ref: './schemas/characteristics-dto.yaml'
+  EyeColorDto:
+    $ref: './schemas/eye-color-dto.yaml'
+  HairColorDto:
+    $ref: './schemas/hair-color-dto.yaml'

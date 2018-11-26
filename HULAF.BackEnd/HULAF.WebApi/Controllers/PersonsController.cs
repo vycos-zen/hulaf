@@ -12,7 +12,7 @@ namespace HULAF.WebApi.Controllers
     #pragma warning disable // Disable all warnings
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "12.0.0.0 (NJsonSchema v9.12.2.0 (Newtonsoft.Json v11.0.0.0))")]
-    public interface IPersonController
+    public interface IController
     {
         /// <summary>Gets a missing person by guid.</summary>
         /// <param name="personGuid">Guid of person</param>
@@ -30,12 +30,12 @@ namespace HULAF.WebApi.Controllers
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "12.0.0.0 (NJsonSchema v9.12.2.0 (Newtonsoft.Json v11.0.0.0))")]
-    [Microsoft.AspNetCore.Mvc.RoutePrefix("api")]
-    public partial class PersonController : ControllerBase
+    [System.Web.Http.RoutePrefix("api")]
+    public partial class Controller : System.Web.Http.ApiController
     {
-        private IPersonController _implementation;
+        private IController _implementation;
     
-        public PersonController(IPersonController implementation)
+        public Controller(IController implementation)
         {
             _implementation = implementation;
         }
@@ -43,7 +43,7 @@ namespace HULAF.WebApi.Controllers
         /// <summary>Gets a missing person by guid.</summary>
         /// <param name="personGuid">Guid of person</param>
         /// <returns>Returns a missing person</returns>
-        [Microsoft.AspNetCore.Mvc.HttpGet, Microsoft.AspNetCore.Mvc.Route("missingperson/{personGuid}")]
+        [System.Web.Http.HttpGet, System.Web.Http.Route("missingperson/{personGuid}")]
         public System.Threading.Tasks.Task<MissingPersonDto> GetMissingPerson(string personGuid)
         {
             return _implementation.GetMissingPersonAsync(personGuid);
@@ -51,7 +51,7 @@ namespace HULAF.WebApi.Controllers
     
         /// <summary>Lists missing persons</summary>
         /// <returns>Missing person list.</returns>
-        [Microsoft.AspNetCore.Mvc.HttpGet, Microsoft.AspNetCore.Mvc.Route("missingpersonlist")]
+        [System.Web.Http.HttpGet, System.Web.Http.Route("missingpersonlist")]
         public System.Threading.Tasks.Task<System.Collections.Generic.IList<MissingPersonDto>> GetMissingPersonList()
         {
             return _implementation.GetMissingPersonListAsync();
@@ -59,7 +59,7 @@ namespace HULAF.WebApi.Controllers
     
         /// <summary>A person seeks a missing person</summary>
         /// <returns>Get a person by guid</returns>
-        [Microsoft.AspNetCore.Mvc.HttpGet, Microsoft.AspNetCore.Mvc.Route("seekerperson")]
+        [System.Web.Http.HttpGet, System.Web.Http.Route("seekerperson")]
         public System.Threading.Tasks.Task<SeekerPersonDto> Seekerperson()
         {
             return _implementation.SeekerpersonAsync();
@@ -77,6 +77,9 @@ namespace HULAF.WebApi.Controllers
     
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("characteristics", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public object Characteristics { get; set; }
     
         public string ToJson() 
         {
@@ -108,6 +111,67 @@ namespace HULAF.WebApi.Controllers
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<SeekerPersonDto>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
         }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.12.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class CharateristicsDto 
+    {
+        [Newtonsoft.Json.JsonProperty("guid", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Guid { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("approxHeightMin", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int ApproxHeightMin { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("approxHeightMax", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int ApproxHeightMax { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("hairColor", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public object HairColor { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("eyeColor", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public object EyeColor { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("approxAgeMin", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int ApproxAgeMin { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("approxAgeMax", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int ApproxAgeMax { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("knownNames", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.IList<string> KnownNames { get; set; } = new System.Collections.Generic.IList<string>();
+    
+        public string ToJson() 
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+        }
+        
+        public static CharateristicsDto FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<CharateristicsDto>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
+        }
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.12.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum EyeColorDto
+    {
+        [System.Runtime.Serialization.EnumMember(Value = "green")]
+        Green = 0,
+    
+        [System.Runtime.Serialization.EnumMember(Value = "blue")]
+        Blue = 1,
+    
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.12.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum HairColorDto
+    {
+        [System.Runtime.Serialization.EnumMember(Value = "brown")]
+        Brown = 0,
+    
+        [System.Runtime.Serialization.EnumMember(Value = "blonde")]
+        Blonde = 1,
     
     }
 
