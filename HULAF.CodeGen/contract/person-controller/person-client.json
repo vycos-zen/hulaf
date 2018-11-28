@@ -1,0 +1,47 @@
+{
+    "runtime": "NetCore21",
+    "swaggerGenerator": {
+        "fromSwagger": {
+            "url": "./person-controller.yaml"
+        }
+    },
+    "codeGenerators": {
+        "swaggerToTypeScriptClient": {
+            "className": "Person{controller}Client",
+            "moduleName": "PersonModule",
+            "namespace": "HULAF.Domain.Person",
+            "serviceHost": "/api",
+            "typeScriptVersion": 3.1,
+            "template": "Fetch",
+            "promiseType": "Promise",
+            "httpClass": "Http",
+            "injectionTokenType": "OpaqueToken",
+            "dateTimeType": "Date",
+            "nullValue": "Undefined",
+            "generateClientClasses": true,
+            "generateClientInterfaces": true,
+            "generateOptionalParameters": false,
+            "wrapDtoExceptions": false,
+            "wrapResponses": false,
+            "generateResponseClasses": true,
+            "responseClass": "SwaggerResponse",
+            "useTransformOptionsMethod": false,
+            "useTransformResultMethod": false,
+            "generateDtoTypes": true,
+            "operationGenerationMode": "MultipleClientsFromPathSegments",
+            "markOptionalProperties": true,
+            "generateCloneMethod": false,
+            "typeStyle": "Class",
+            "generateDefaultValues": true,
+            "excludedTypeNames": [],
+            "handleReferences": false,
+            "generateConstructorInterface": true,
+            "convertConstructorInterfaceData": false,
+            "importRequiredTypes": true,
+            "useGetBaseUrlMethod": false,
+            "baseUrlTokenName": "http://localhost",
+            "queryNullValue": "",
+            "output": "../../../HULAF.FrontEnd/src/app/core/http/person-service/person-service.ts"
+        }
+    }
+}

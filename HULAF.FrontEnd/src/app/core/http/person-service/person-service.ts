@@ -15,12 +15,12 @@ export interface IPersonClient {
      * @param personGuid Guid of person
      * @return Returns a missing person
      */
-    getMissingPerson(personGuid: string): Promise<MissingPersonDto>;
+    missingperson(personGuid: string): Promise<MissingPersonDto>;
     /**
      * Lists missing persons
      * @return Missing person list.
      */
-    getMissingPersonList(): Promise<MissingPersonDto[]>;
+    missingpersonlist(): Promise<MissingPersonDto[]>;
     /**
      * A person seeks a missing person
      * @return Get a person by guid
@@ -43,7 +43,7 @@ export class PersonClient implements IPersonClient {
      * @param personGuid Guid of person
      * @return Returns a missing person
      */
-    getMissingPerson(personGuid: string): Promise<MissingPersonDto> {
+    missingperson(personGuid: string): Promise<MissingPersonDto> {
         let url_ = this.baseUrl + "/missingperson/{personGuid}";
         if (personGuid === undefined || personGuid === null)
             throw new Error("The parameter 'personGuid' must be defined.");
@@ -58,11 +58,11 @@ export class PersonClient implements IPersonClient {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processGetMissingPerson(_response);
+            return this.processMissingperson(_response);
         });
     }
 
-    protected processGetMissingPerson(response: Response): Promise<MissingPersonDto> {
+    protected processMissingperson(response: Response): Promise<MissingPersonDto> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {
@@ -84,7 +84,7 @@ export class PersonClient implements IPersonClient {
      * Lists missing persons
      * @return Missing person list.
      */
-    getMissingPersonList(): Promise<MissingPersonDto[]> {
+    missingpersonlist(): Promise<MissingPersonDto[]> {
         let url_ = this.baseUrl + "/missingpersonlist";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -96,11 +96,11 @@ export class PersonClient implements IPersonClient {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processGetMissingPersonList(_response);
+            return this.processMissingpersonlist(_response);
         });
     }
 
-    protected processGetMissingPersonList(response: Response): Promise<MissingPersonDto[]> {
+    protected processMissingpersonlist(response: Response): Promise<MissingPersonDto[]> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {

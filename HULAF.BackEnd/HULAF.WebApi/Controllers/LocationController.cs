@@ -12,32 +12,12 @@ namespace HULAF.WebApi.Controllers
     #pragma warning disable // Disable all warnings
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "12.0.0.0 (NJsonSchema v9.12.2.0 (Newtonsoft.Json v11.0.0.0))")]
-    public interface ILocationController
+    public abstract class LocationControllerBase : ControllerBase
     {
-        /// <summary>Lists countries</summary>
-        /// <returns>Country list.</returns>
-        System.Threading.Tasks.Task<System.Collections.Generic.IList<CountryDto>> GetCountryListAsync();
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NSwag", "12.0.0.0 (NJsonSchema v9.12.2.0 (Newtonsoft.Json v11.0.0.0))")]
-    [Microsoft.AspNetCore.Mvc.RoutePrefix("api")]
-    public partial class LocationController : ControllerBase
-    {
-        private ILocationController _implementation;
-    
-        public LocationController(ILocationController implementation)
-        {
-            _implementation = implementation;
-        }
-    
         /// <summary>Lists countries</summary>
         /// <returns>Country list.</returns>
         [Microsoft.AspNetCore.Mvc.HttpGet, Microsoft.AspNetCore.Mvc.Route("countrylist")]
-        public System.Threading.Tasks.Task<System.Collections.Generic.IList<CountryDto>> GetCountryList()
-        {
-            return _implementation.GetCountryListAsync();
-        }
+        public abstract System.Threading.Tasks.Task<System.Collections.Generic.List<CountryDto>> Countrylist();
     
     }
     

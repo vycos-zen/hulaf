@@ -14,7 +14,7 @@ export interface ILocationClient {
      * Lists countries
      * @return Country list.
      */
-    getCountryList(): Promise<CountryDto[]>;
+    countrylist(): Promise<CountryDto[]>;
 }
 
 export class LocationClient implements ILocationClient {
@@ -31,7 +31,7 @@ export class LocationClient implements ILocationClient {
      * Lists countries
      * @return Country list.
      */
-    getCountryList(): Promise<CountryDto[]> {
+    countrylist(): Promise<CountryDto[]> {
         let url_ = this.baseUrl + "/countrylist";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -43,11 +43,11 @@ export class LocationClient implements ILocationClient {
         };
 
         return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processGetCountryList(_response);
+            return this.processCountrylist(_response);
         });
     }
 
-    protected processGetCountryList(response: Response): Promise<CountryDto[]> {
+    protected processCountrylist(response: Response): Promise<CountryDto[]> {
         const status = response.status;
         let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
         if (status === 200) {

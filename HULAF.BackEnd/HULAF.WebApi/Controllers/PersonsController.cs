@@ -12,58 +12,23 @@ namespace HULAF.WebApi.Controllers
     #pragma warning disable // Disable all warnings
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "12.0.0.0 (NJsonSchema v9.12.2.0 (Newtonsoft.Json v11.0.0.0))")]
-    public interface IController
+    public abstract class PersonControllerBase : ControllerBase
     {
         /// <summary>Gets a missing person by guid.</summary>
         /// <param name="personGuid">Guid of person</param>
         /// <returns>Returns a missing person</returns>
-        System.Threading.Tasks.Task<MissingPersonDto> GetMissingPersonAsync(string personGuid);
+        [Microsoft.AspNetCore.Mvc.HttpGet, Microsoft.AspNetCore.Mvc.Route("missingperson/{personGuid}")]
+        public abstract System.Threading.Tasks.Task<MissingPersonDto> Missingperson(string personGuid);
     
         /// <summary>Lists missing persons</summary>
         /// <returns>Missing person list.</returns>
-        System.Threading.Tasks.Task<System.Collections.Generic.IList<MissingPersonDto>> GetMissingPersonListAsync();
+        [Microsoft.AspNetCore.Mvc.HttpGet, Microsoft.AspNetCore.Mvc.Route("missingpersonlist")]
+        public abstract System.Threading.Tasks.Task<System.Collections.Generic.List<MissingPersonDto>> Missingpersonlist();
     
         /// <summary>A person seeks a missing person</summary>
         /// <returns>Get a person by guid</returns>
-        System.Threading.Tasks.Task<SeekerPersonDto> SeekerpersonAsync();
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NSwag", "12.0.0.0 (NJsonSchema v9.12.2.0 (Newtonsoft.Json v11.0.0.0))")]
-    [System.Web.Http.RoutePrefix("api")]
-    public partial class Controller : System.Web.Http.ApiController
-    {
-        private IController _implementation;
-    
-        public Controller(IController implementation)
-        {
-            _implementation = implementation;
-        }
-    
-        /// <summary>Gets a missing person by guid.</summary>
-        /// <param name="personGuid">Guid of person</param>
-        /// <returns>Returns a missing person</returns>
-        [System.Web.Http.HttpGet, System.Web.Http.Route("missingperson/{personGuid}")]
-        public System.Threading.Tasks.Task<MissingPersonDto> GetMissingPerson(string personGuid)
-        {
-            return _implementation.GetMissingPersonAsync(personGuid);
-        }
-    
-        /// <summary>Lists missing persons</summary>
-        /// <returns>Missing person list.</returns>
-        [System.Web.Http.HttpGet, System.Web.Http.Route("missingpersonlist")]
-        public System.Threading.Tasks.Task<System.Collections.Generic.IList<MissingPersonDto>> GetMissingPersonList()
-        {
-            return _implementation.GetMissingPersonListAsync();
-        }
-    
-        /// <summary>A person seeks a missing person</summary>
-        /// <returns>Get a person by guid</returns>
-        [System.Web.Http.HttpGet, System.Web.Http.Route("seekerperson")]
-        public System.Threading.Tasks.Task<SeekerPersonDto> Seekerperson()
-        {
-            return _implementation.SeekerpersonAsync();
-        }
+        [Microsoft.AspNetCore.Mvc.HttpGet, Microsoft.AspNetCore.Mvc.Route("seekerperson")]
+        public abstract System.Threading.Tasks.Task<SeekerPersonDto> Seekerperson();
     
     }
     
@@ -139,7 +104,7 @@ namespace HULAF.WebApi.Controllers
         public int ApproxAgeMax { get; set; }
     
         [Newtonsoft.Json.JsonProperty("knownNames", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.IList<string> KnownNames { get; set; } = new System.Collections.Generic.IList<string>();
+        public System.Collections.Generic.List<string> KnownNames { get; set; } = new System.Collections.Generic.List<string>();
     
         public string ToJson() 
         {
