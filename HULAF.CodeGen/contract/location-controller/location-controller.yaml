@@ -4,7 +4,7 @@ info:
   description: Retrieves a location from database
   version: 0.0.0
 paths:
-  /countrylist:
+  /get-country-list:
     get:
       tags:
         - location

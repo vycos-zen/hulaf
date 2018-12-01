@@ -16,8 +16,8 @@ namespace HULAF.WebApi.Controllers
     {
         /// <summary>Lists countries</summary>
         /// <returns>Country list.</returns>
-        [Microsoft.AspNetCore.Mvc.HttpGet, Microsoft.AspNetCore.Mvc.Route("countrylist")]
-        public abstract System.Threading.Tasks.Task<System.Collections.Generic.List<CountryDto>> Countrylist();
+        [Microsoft.AspNetCore.Mvc.HttpGet, Microsoft.AspNetCore.Mvc.Route("get-country-list")]
+        public abstract System.Threading.Tasks.Task<System.Collections.Generic.List<CountryDto>> GetCountryList();
     
     }
     

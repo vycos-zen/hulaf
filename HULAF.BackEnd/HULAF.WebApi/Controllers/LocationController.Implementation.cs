@@ -9,7 +9,7 @@ namespace HULAF.WebApi.Controllers
     {
         public override Task<List<CountryDto>> GetCountryList()
         {
-           return Task.FromResult(new List<CountryDto>(){
+            return Task.FromResult(new List<CountryDto>(){
                new CountryDto{
                    Guid = Guid.NewGuid(),
                    Name = "Hungary"

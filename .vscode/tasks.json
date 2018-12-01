@@ -4,7 +4,7 @@
         {
             "label": "build-hulaf-controllers",
             "type": "npm",
-            "script": "build-hulaf-controllers",
+            "script": "superFly",
             "path": "HULAF.CodeGen/",
             "problemMatcher": []
         },

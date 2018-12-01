@@ -6,100 +6,94 @@
 //----------------------
 // ReSharper disable InconsistentNaming
 
-export module LocationModule {
-namespace HULAF.Domain.Location {
+import { mergeMap as _observableMergeMap, catchError as _observableCatch } from 'rxjs/operators';
+import { Observable, throwError as _observableThrow, of as _observableOf } from 'rxjs';
+import { Injectable, Inject, Optional, InjectionToken } from '@angular/core';
+import { Http, Headers, ResponseContentType, Response } from '@angular/http';
 
-export interface ILocationClient {
-    /**
-     * Lists countries
-     * @return Country list.
-     */
-    countrylist(): Promise<CountryDto[]>;
-}
+export const localhost = new InjectionToken<string>('localhost');
 
-export class LocationClient implements ILocationClient {
-    private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
+@Injectable({
+    providedIn: 'root'
+})
+export class LocationService {
+    private http: Http;
     private baseUrl: string;
     protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
-    constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
-        this.http = http ? http : <any>window;
-        this.baseUrl = baseUrl ? baseUrl : "/api";
+    constructor(@Inject(Http) http: Http, @Optional() @Inject(localhost) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ? baseUrl : "/api/v1";
     }
 
     /**
      * Lists countries
      * @return Country list.
      */
-    countrylist(): Promise<CountryDto[]> {
-        let url_ = this.baseUrl + "/countrylist";
+    getCountryList(): Observable<CountryDto[]> {
+        let url_ = this.baseUrl + "/get-country-list";
         url_ = url_.replace(/[?&]$/, "");
 
-        let options_ = <RequestInit>{
-            method: "GET",
-            headers: {
+        let options_ : any = {
+            method: "get",
+            headers: new Headers({
                 "Accept": "application/json"
-            }
+            })
         };
 
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processCountrylist(_response);
-        });
+        return this.http.request(url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetCountryList(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof Response) {
+                try {
+                    return this.processGetCountryList(<any>response_);
+                } catch (e) {
+                    return <Observable<CountryDto[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<CountryDto[]>><any>_observableThrow(response_);
+        }));
     }
 
-    protected processCountrylist(response: Response): Promise<CountryDto[]> {
+    protected processGetCountryList(response: Response): Observable<CountryDto[]> {
         const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+
+        let _headers: any = response.headers ? response.headers.toJSON() : {};
+        let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
-            return response.text().then((_responseText) => {
+            const _responseText = response.text();
             let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            let resultData200 = _responseText === "" ? null : jsonParse(_responseText, this.jsonParseReviver);
             if (resultData200 && resultData200.constructor === Array) {
                 result200 = [];
                 for (let item of resultData200)
-                    result200.push(CountryDto.fromJS(item));
+                    result200.push(CountryDto.fromJS(item, _mappings));
             }
-            return result200;
-            });
+            return _observableOf(result200);
         } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
+            const _responseText = response.text();
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
         }
-        return Promise.resolve<CountryDto[]>(<any>null);
+        return _observableOf<CountryDto[]>(<any>null);
     }
 }
 
-export class CityDto implements ICityDto {
+export class CityDto {
     guid?: string;
     name?: string;
     country?: CountryDto;
 
-    constructor(data?: ICityDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.country = new CountryDto();
-        }
-    }
-
-    init(data?: any) {
+    init(data?: any, _mappings?: any) {
         if (data) {
             this.guid = data["Guid"];
             this.name = data["Name"];
-            this.country = data["Country"] ? CountryDto.fromJS(data["Country"]) : new CountryDto();
+            this.country = data["Country"] ? CountryDto.fromJS(data["Country"], _mappings) : new CountryDto();
         }
     }
 
-    static fromJS(data: any): CityDto {
+    static fromJS(data: any, _mappings?: any): CityDto {
         data = typeof data === 'object' ? data : {};
-        let result = new CityDto();
-        result.init(data);
-        return result;
+        return createInstance<CityDto>(data, _mappings, CityDto);
     }
 
     toJSON(data?: any) {
@@ -111,37 +105,20 @@ export class CityDto implements ICityDto {
     }
 }
 
-export interface ICityDto {
-    guid?: string;
-    name?: string;
-    country?: CountryDto;
-}
-
-export class CountryDto implements ICountryDto {
+export class CountryDto {
     guid?: string;
     name?: string;
 
-    constructor(data?: ICountryDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(data?: any) {
+    init(data?: any, _mappings?: any) {
         if (data) {
             this.guid = data["Guid"];
             this.name = data["Name"];
         }
     }
 
-    static fromJS(data: any): CountryDto {
+    static fromJS(data: any, _mappings?: any): CountryDto {
         data = typeof data === 'object' ? data : {};
-        let result = new CountryDto();
-        result.init(data);
-        return result;
+        return createInstance<CountryDto>(data, _mappings, CountryDto);
     }
 
     toJSON(data?: any) {
@@ -152,9 +129,62 @@ export class CountryDto implements ICountryDto {
     }
 }
 
-export interface ICountryDto {
-    guid?: string;
-    name?: string;
+function jsonParse(json: any, reviver?: any) {
+    json = JSON.parse(json, reviver);
+
+    var byid: any = {};
+    var refs: any = [];
+    json = (function recurse(obj: any, prop?: any, parent?: any) {
+        if (typeof obj !== 'object' || !obj)
+            return obj;
+        
+        if ("$ref" in obj) {
+            let ref = obj.$ref;
+            if (ref in byid)
+                return byid[ref];
+            refs.push([parent, prop, ref]);
+            return undefined;
+        } else if ("$id" in obj) {
+            let id = obj.$id;
+            delete obj.$id;
+            if ("$values" in obj)
+                obj = obj.$values;
+            byid[id] = obj;
+        }
+        
+        if (Array.isArray(obj)) {
+            obj = obj.map((v, i) => recurse(v, i, obj));
+        } else {
+            for (var p in obj) {
+                if (obj.hasOwnProperty(p) && obj[p] && typeof obj[p] === 'object')
+                    obj[p] = recurse(obj[p], p, obj);
+            }
+        }
+
+        return obj;
+    })(json);
+
+    for (let i = 0; i < refs.length; i++) {
+        const ref = refs[i];
+        ref[0][ref[1]] = byid[ref[2]];
+    }
+
+    return json;
+}
+
+function createInstance<T>(data: any, mappings: any, type: any): T {
+    if (!mappings)
+        mappings = [];
+    else {
+        let mapping = mappings.filter((m: any) => m.source === data);
+        if (mapping.length === 1)
+            return <T>mapping[0].target;
+    }
+
+    let result: any = new type();
+    mappings.push({ source: data, target: result });
+    result.init(data, mappings);
+    return result;
 }
 
 export class SwaggerException extends Error {
@@ -181,12 +211,25 @@ export class SwaggerException extends Error {
     }
 }
 
-function throwException(message: string, status: number, response: string, headers: { [key: string]: any; }, result?: any): any {
+function throwException(message: string, status: number, response: string, headers: { [key: string]: any; }, result?: any): Observable<any> {
     if(result !== null && result !== undefined)
-        throw result;
+        return _observableThrow(result);
     else
-        throw new SwaggerException(message, status, response, headers, null);
+        return _observableThrow(new SwaggerException(message, status, response, headers, null));
 }
 
-}
+function blobToText(blob: any): Observable<string> {
+    return new Observable<string>((observer: any) => {
+        if (!blob) {
+            observer.next("");
+            observer.complete();
+        } else {
+            let reader = new FileReader(); 
+            reader.onload = event => { 
+                observer.next((<any>event.target).result);
+                observer.complete();
+            };
+            reader.readAsText(blob); 
+        }
+    });
 }
