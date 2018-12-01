@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { LocationModule } from '../core/http/location-service/location-service';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -14,6 +16,7 @@ import {SubmiterModule} from './submiter/submiter.module';
   ],
   imports: [
     BrowserModule,
+    LocationModule,
     AppRoutingModule,
     HomeModule,
     LocatorModule,
