@@ -5,3 +5,5 @@ properties:
     format: uuid
   Name: 
     type: string
+  DialingCode:
+    type: integer

@@ -1,8 +1,9 @@
 <span>
-  Countries:
+  {{'Countries' | translate}}
 </span>
 <ul>
   <li *ngFor="let country of countries">
-    {{country.name}}
+
+    {{country.name}}, {{'DialingCode' | translate}}: +{{country.dialingCode}}
   </li>
 </ul>

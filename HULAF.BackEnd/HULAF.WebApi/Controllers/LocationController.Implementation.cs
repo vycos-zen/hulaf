@@ -12,11 +12,14 @@ namespace HULAF.WebApi.Controllers
             return Task.FromResult(new List<CountryDto>(){
                new CountryDto{
                    Guid = Guid.NewGuid(),
-                   Name = "Hungary"
+                   Name = "Hungary",
+                   DialingCode = 36,
                },
                new CountryDto{
                    Guid = Guid.NewGuid(),
-                   Name = "Slovakia"
+                   Name = "Slovakia",
+                   DialingCode = 421,
+
                },
            });
         }

@@ -108,11 +108,13 @@ export class CityDto {
 export class CountryDto {
     guid?: string;
     name?: string;
+    dialingCode?: number;
 
     init(data?: any, _mappings?: any) {
         if (data) {
             this.guid = data["Guid"];
             this.name = data["Name"];
+            this.dialingCode = data["DialingCode"];
         }
     }
 
@@ -125,6 +127,7 @@ export class CountryDto {
         data = typeof data === 'object' ? data : {};
         data["Guid"] = this.guid;
         data["Name"] = this.name;
+        data["DialingCode"] = this.dialingCode;
         return data; 
     }
 }

@@ -1,0 +1,33 @@
+<div style="text-align:center">
+  <h1>
+    {{'Title' | translate}}
+    </h1>
+</div>
+
+<div>
+  <ul>
+    <li>
+      <button (click)="setLang('en')">EN</button>
+    </li>
+    <li>
+      <button (click)="setLang('hu')">HU</button>
+    </li>
+  </ul>
+</div>
+
+<h2>{{'SubTitle' | translate}}</h2>
+
+<h3>{{'MissionStatement' | translate}}</h3>
+<ul>
+  <li>
+    <h2><a routerLink="/" routerLinkActive="active">{{'Home' | translate}}</a></h2>
+  </li>
+  <li>
+    <h2><a routerLink="/listing" routerLinkActive="active">{{'Search' | translate}}</a></h2>
+  </li>
+  <li>
+    <h2><a routerLink="/seeker" routerLinkActive="active">{{'Report' | translate}}</a></h2>
+  </li>
+</ul>
+
+<router-outlet></router-outlet>

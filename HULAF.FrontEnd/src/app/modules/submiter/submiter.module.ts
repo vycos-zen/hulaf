@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { SeekerComponent } from './seeker/seeker.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    SharedModule,
   ],
   declarations: [SeekerComponent]
 })
