@@ -7,85 +7,13 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace HULAF.WebApi.Controllers
+namespace HULAF.WebApi.Dto
 {
     #pragma warning disable // Disable all warnings
 
-    [System.CodeDom.Compiler.GeneratedCode("NSwag", "12.0.0.0 (NJsonSchema v9.12.2.0 (Newtonsoft.Json v11.0.0.0))")]
-    public interface IHulafController
-    {
-        /// <summary>Gets a missing person by guid.</summary>
-        /// <param name="personGuid">Guid of person</param>
-        /// <returns>Returns a missing person</returns>
-        System.Threading.Tasks.Task<Response> GetMissingPersonAsync(System.Guid personGuid);
-    
-        /// <summary>Lists missing persons</summary>
-        /// <returns>Missing person list.</returns>
-        System.Threading.Tasks.Task<System.Collections.Generic.List<Anonymous>> GetMissingPersonListAsync();
-    
-        /// <summary>A person seeks a missing person</summary>
-        /// <param name="personGuid">Guid of person</param>
-        /// <returns>Get a person by guid</returns>
-        System.Threading.Tasks.Task<Response2> SeekerpersonAsync(System.Guid personGuid);
-    
-        /// <summary>Lists countries</summary>
-        /// <returns>Country list.</returns>
-        System.Threading.Tasks.Task<System.Collections.Generic.List<CountryDto>> GetCountryListAsync();
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NSwag", "12.0.0.0 (NJsonSchema v9.12.2.0 (Newtonsoft.Json v11.0.0.0))")]
-    public partial class HulafController : ControllerBase
-    {
-        private IHulafController _implementation;
-    
-        public HulafController(IHulafController implementation)
-        {
-            _implementation = implementation;
-        }
-    
-        /// <summary>Gets a missing person by guid.</summary>
-        /// <param name="personGuid">Guid of person</param>
-        /// <returns>Returns a missing person</returns>
-        [Microsoft.AspNetCore.Mvc.HttpGet, Microsoft.AspNetCore.Mvc.Route("person/missingperson/{personGuid}")]
-        public System.Threading.Tasks.Task<Response> GetMissingPerson(System.Guid personGuid)
-        {
-            return _implementation.GetMissingPersonAsync(personGuid);
-        }
-    
-        /// <summary>Lists missing persons</summary>
-        /// <returns>Missing person list.</returns>
-        [Microsoft.AspNetCore.Mvc.HttpGet, Microsoft.AspNetCore.Mvc.Route("person/missingpersonlist")]
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<Anonymous>> GetMissingPersonList()
-        {
-            return _implementation.GetMissingPersonListAsync();
-        }
-    
-        /// <summary>A person seeks a missing person</summary>
-        /// <param name="personGuid">Guid of person</param>
-        /// <returns>Get a person by guid</returns>
-        [Microsoft.AspNetCore.Mvc.HttpGet, Microsoft.AspNetCore.Mvc.Route("person/seekerperson/{personGuid}")]
-        public System.Threading.Tasks.Task<Response2> Seekerperson(System.Guid personGuid)
-        {
-            return _implementation.SeekerpersonAsync(personGuid);
-        }
-    
-        /// <summary>Lists countries</summary>
-        /// <returns>Country list.</returns>
-        [Microsoft.AspNetCore.Mvc.HttpGet, Microsoft.AspNetCore.Mvc.Route("location/countrylist")]
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<CountryDto>> GetCountryList()
-        {
-            return _implementation.GetCountryListAsync();
-        }
-    
-    }
-    
     
 
     [Newtonsoft.Json.JsonConverter(typeof(JsonInheritanceConverter), "personType")]
-    [JsonInheritanceAttribute("schema", typeof(Response))]
-    [JsonInheritanceAttribute("Anonymous", typeof(Anonymous))]
-    [JsonInheritanceAttribute("schema", typeof(Response2))]
     [JsonInheritanceAttribute("MissingPersonDto", typeof(MissingPersonDto))]
     [JsonInheritanceAttribute("SeekerPersonDto", typeof(SeekerPersonDto))]
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.12.2.0 (Newtonsoft.Json v11.0.0.0)")]
@@ -249,7 +177,7 @@ namespace HULAF.WebApi.Controllers
         public string Name { get; set; }
     
         [Newtonsoft.Json.JsonProperty("Country", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public CountryDto Country { get; set; } = new CountryDto();
+        public Country Country { get; set; } = new Country();
     
         public string ToJson() 
         {
@@ -332,59 +260,26 @@ namespace HULAF.WebApi.Controllers
     
     }
     
-    /// <summary>A missing person</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.12.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class Response : PersonDto
+    public partial class Country 
     {
-        [Newtonsoft.Json.JsonProperty("lastSeenLocations", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<object> LastSeenLocations { get; set; } = new System.Collections.Generic.List<object>();
+        [Newtonsoft.Json.JsonProperty("Guid", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid Guid { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("Name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Name { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("DialingCode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int DialingCode { get; set; }
     
         public string ToJson() 
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
         
-        public static Response FromJson(string data)
+        public static Country FromJson(string data)
         {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<Response>(data);
-        }
-    
-    }
-    
-    /// <summary>A missing person</summary>
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.12.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class Anonymous : PersonDto
-    {
-        [Newtonsoft.Json.JsonProperty("lastSeenLocations", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<object> LastSeenLocations { get; set; } = new System.Collections.Generic.List<object>();
-    
-        public string ToJson() 
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-        
-        public static Anonymous FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<Anonymous>(data);
-        }
-    
-    }
-    
-    /// <summary>A person looking form someone missing</summary>
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.12.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class Response2 : PersonDto
-    {
-        [Newtonsoft.Json.JsonProperty("locationsOfSearch", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<object> LocationsOfSearch { get; set; } = new System.Collections.Generic.List<object>();
-    
-        public string ToJson() 
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-        
-        public static Response2 FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<Response2>(data);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<Country>(data);
         }
     
     }

@@ -1,0 +1,32 @@
+/missingperson/{personGuid}:
+    get:
+      tags:
+        - person
+        - missing
+      description: Returns a missing person
+      summary: Gets a missing person by guid.
+      operationId: getMissingPerson
+      responses:
+        '200':
+          description: Returns a missing person
+          content:
+            application/json:
+              schema:
+                description: A missing person
+                allOf:
+                  - $ref: '../../hulaf-dto-library.yaml#/components/schemas/PersonDto'
+                  - type: object
+                    properties:
+                      lastSeenLocations:
+                        type: array
+                        items:
+                          type:
+                            $ref: '../../hulaf-dto-library.yaml#/components/schemas/LocationDto'
+      parameters:
+        - name: personGuid
+          in: path
+          description: Guid of person
+          required: true
+          schema:
+            type: string
+            format: uuid

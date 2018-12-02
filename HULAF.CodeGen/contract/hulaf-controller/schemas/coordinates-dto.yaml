@@ -1,0 +1,7 @@
+CoordinatesDto:
+  type: object
+  properties:
+    lat:
+      type: number
+    lng:
+      type: number

@@ -1,0 +1,31 @@
+/person/seekerperson/{personGuid}:
+    get:
+      tags:
+        - person
+        - seeking
+      description: Returns a person looking for a missing person
+      summary: A person seeks a missing person
+      responses:
+        '200':
+          description: Get a person by guid
+          content:
+            application/json:
+              schema:
+                description: A person looking form someone missing
+                allOf:
+                  - $ref: '#/components/schemas/PersonDto'
+                  - type: object
+                    properties:
+                      locationsOfSearch:
+                        type: array
+                        items:
+                          type:
+                            $ref: '#/components/schemas/LocationDto'
+      parameters:
+        - name: personGuid
+          in: path
+          description: Guid of person
+          required: true
+          schema:
+            type: string
+            format: uuid

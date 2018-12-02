@@ -1,0 +1,5 @@
+HairColorDto:
+  type: string
+  enum:
+    - brown
+    - blonde

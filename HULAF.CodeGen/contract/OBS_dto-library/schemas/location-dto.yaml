@@ -1,0 +1,9 @@
+LocationDto:
+  type: object
+  properties:
+    country:
+      $ref: '../../hulaf-dto-library.yaml#/components/schemas/CountryDto'
+    city:
+      $ref: '../../hulaf-dto-library.yaml#/components/schemas/CityDto'
+    coordinates:
+      $ref: '../../hulaf-dto-library.yaml#/components/schemas/CoordinatesDto'

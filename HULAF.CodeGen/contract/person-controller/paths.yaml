@@ -1,5 +1,0 @@
-
-paths:
-  $ref#missingPerson: './paths/missing-person.yaml'
-  $ref#missingPersonList: './paths/missing-person-list.yaml'
-  $ref#seekerPerson: './paths/seeker-person.yaml'

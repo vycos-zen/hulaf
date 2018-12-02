@@ -1,0 +1,19 @@
+PersonDto:
+  type: object
+  discriminator: 
+    propertyName: personType
+  properties:
+    guid:
+      type: string
+      format: uuid
+    characteristics:
+      type:
+        $ref: '../../hulaf-dto-library.yaml#/components/schemas/CharacteristicsDto'
+    contactInfo:
+      type:
+        $ref: '../../hulaf-dto-library.yaml#/components/schemas/ContactInfoDto'
+    personType:
+      type: string
+  required:
+    - guid
+    - personType

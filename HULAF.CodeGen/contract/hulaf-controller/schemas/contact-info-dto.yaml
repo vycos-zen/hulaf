@@ -1,0 +1,14 @@
+ContactInfoDto:
+  type: object
+  properties:
+    guid:
+      type: string
+      fromat: uuid
+    firstName:
+      type: string
+    lastName:
+      type: string
+    email:
+      type: string
+      fromat: email
+

@@ -1,0 +1,11 @@
+SeekerPersonDto:
+  description: A person looking form someone missing
+  allOf:
+    - $ref: '../../hulaf-dto-library.yaml#/components/schemas/PersonDto'
+    - type: object
+      properties:
+        locationsOfSearch:
+          type: array
+          items:
+            type: 
+              $ref: '../../hulaf-dto-library.yaml#/components/schemas/LocationDto'

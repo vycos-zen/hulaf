@@ -1,0 +1,11 @@
+MissingPersonDto:
+  description: A missing person
+  allOf:
+    - $ref: '../../hulaf-dto-library.yaml#/components/schemas/PersonDto'
+    - type: object
+      properties:
+        lastSeenLocations:
+          type: array
+          items:
+            type: 
+              $ref: '#/components/schemas/LocationDto'

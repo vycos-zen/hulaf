@@ -1,0 +1,9 @@
+openapi: '3.0.0'
+
+info:
+  title: HULAF Location controller
+  description: Retrieves a location from database
+  version: 0.0.0
+
+paths:
+  $ref#country-list: './paths/country-list.yaml'

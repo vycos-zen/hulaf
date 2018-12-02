@@ -1,0 +1,11 @@
+openapi: '3.0.0'
+
+info:
+  title: HULAF Persons controller
+  description: Retrieves persons from database
+  version: 0.0.0
+
+paths:
+  $ref#missingPerson: './paths/missing-person.yaml'
+  $ref#missingPersonList: './paths/missing-person-list.yaml'
+  $ref#seekerPerson: './paths/seeker-person.yaml'
