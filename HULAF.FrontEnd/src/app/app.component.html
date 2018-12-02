@@ -7,10 +7,10 @@
 <div>
   <ul>
     <li>
-      <button (click)="setLang('en')">EN</button>
+      <button (click)="setLang('en')">{{'Lang.En' | translate}}</button>
     </li>
     <li>
-      <button (click)="setLang('hu')">HU</button>
+      <button (click)="setLang('hu')">{{'Lang.Hu' | translate}}</button>
     </li>
   </ul>
 </div>
@@ -20,14 +20,15 @@
 <h3>{{'MissionStatement' | translate}}</h3>
 <ul>
   <li>
-    <h2><a routerLink="/" routerLinkActive="active">{{'Home' | translate}}</a></h2>
+    <h2><a routerLink="/" routerLinkActive="active">{{'Menu.Home' | translate}}</a></h2>
   </li>
   <li>
-    <h2><a routerLink="/listing" routerLinkActive="active">{{'Search' | translate}}</a></h2>
+    <h2><a routerLink="/listing" routerLinkActive="active">{{'Menu.Search' | translate}}</a></h2>
   </li>
   <li>
-    <h2><a routerLink="/seeker" routerLinkActive="active">{{'Report' | translate}}</a></h2>
+    <h2><a routerLink="/seeker" routerLinkActive="active">{{'Menu.Report' | translate}}</a></h2>
   </li>
 </ul>
 
 <router-outlet></router-outlet>
+<span>{{'TodaysDate'| translate}}: {{todaysDate | date}}</span>

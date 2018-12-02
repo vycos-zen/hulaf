@@ -1,0 +1,5 @@
+EyeColorDto:
+  type: string
+  enum:
+    - green
+    - blue

@@ -1,0 +1,7 @@
+components:
+  schemas:
+    #shared schemas
+    $ref#city-dto: '../shared/schemas/city-dto.yaml'
+    $ref#coordinates-dto: '../shared/schemas/coordinates-dto.yaml'
+    $ref#country-dto: '../shared/schemas/country-dto.yaml'
+    $ref#location-dto: '../shared/schemas/location-dto.yaml'

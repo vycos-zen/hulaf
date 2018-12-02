@@ -1,0 +1,10 @@
+CityDto:
+  type: object
+  properties:
+    Guid: 
+      type: string
+      format: uuid
+    Name: 
+      type: string
+    Country:
+      $ref: './country-dto.yaml#/CountryDto'

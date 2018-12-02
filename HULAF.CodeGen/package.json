@@ -2,17 +2,20 @@
     "name": "hulaf-codegen",
     "version": "0.0.0",
     "scripts": {
-        "concat-persons-controller": "cd contract/person-controller/model/ && multi-file-swagger -o yaml ./controller.yaml > ../person-controller.yaml",
-        "generate-persons-controller": "nswag run ./contract/person-controller/person-controller.json",
-        "generate-persons-client": "nswag run ./contract/person-controller/person-client.json",
-        "concat-location-controller": "cd contract/location-controller/model/ && multi-file-swagger -o yaml ./controller.yaml > ../location-controller.yaml",
-        "generate-location-controller": "nswag run ./contract/location-controller/location-controller.json",
-        "generate-location-client": "nswag run ./contract/location-controller/location-client.json",
+        "concat-persons-controller": "cd contract && swagger-merger --debug -i ./person-controller/controller.yaml -o ./person-controller.yaml",
+        "generate-persons-controller": "nswag run ./contract/person-controller.json",
+        "generate-persons-client": "nswag run ./contract/person-client.json",
+        "concat-location-controller": "cd contract && swagger-merger --debug -i ./location-controller/controller.yaml -o ./location-controller.yaml",
+        "generate-location-controller": "nswag run ./contract/location-controller.json",
+        "generate-location-client": "nswag run ./contract/location-client.json",
         "superFly": "./superFly.sh"
     },
     "dependencies": {
         "multi-file-swagger": "^2.2.0",
         "npm-run-all": "^4.1.5",
         "nswag": "^12.0.0"
+    },
+    "devDependencies": {
+        "swagger-merger": "^1.4.3"
     }
 }

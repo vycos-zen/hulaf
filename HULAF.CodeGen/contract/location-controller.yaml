@@ -32,7 +32,22 @@ components:
         Name:
           type: string
         Country:
-          $ref: '#/components/schemas/CountryDto'
+          type: object
+          properties:
+            Guid:
+              type: string
+              format: uuid
+            Name:
+              type: string
+            DialingCode:
+              type: integer
+    CoordinatesDto:
+      type: object
+      properties:
+        lat:
+          type: number
+        lng:
+          type: number
     CountryDto:
       type: object
       properties:
@@ -43,4 +58,12 @@ components:
           type: string
         DialingCode:
           type: integer
-
+    LocationDto:
+      type: object
+      properties:
+        country:
+          $ref: '#/components/schemas/CountryDto'
+        city:
+          $ref: '#/components/schemas/CityDto'
+        coordinates:
+          $ref: '#/components/schemas/CoordinatesDto'

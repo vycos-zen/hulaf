@@ -1,0 +1,9 @@
+LocationDto:
+  type: object
+  properties:
+    country:
+      $ref: '#/components/schemas/CountryDto'
+    city:
+      $ref: '#/components/schemas/CityDto'
+    coordinates:
+      $ref: '#/components/schemas/CoordinatesDto'

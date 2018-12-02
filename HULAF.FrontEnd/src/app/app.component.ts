@@ -9,7 +9,7 @@ import {TranslateService} from '@ngx-translate/core';
 })
 
 export class AppComponent {
-
+  todaysDate = Date.now();
   availableLanuages = [
     { lang: 'en', string: 'EN' },
     { lang: 'hu', string: 'HU' },

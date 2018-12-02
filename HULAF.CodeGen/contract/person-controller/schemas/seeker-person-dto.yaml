@@ -1,0 +1,11 @@
+SeekerPersonDto:
+  description: A person looking form someone missing
+  allOf:
+    - $ref: '#/components/schemas/PersonDto'
+    - type: object
+      properties:
+        locationsOfSearch:
+          type: array
+          items:
+            type: 
+              $ref: '#/components/schemas/LocationDto'

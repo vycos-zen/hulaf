@@ -1,7 +1,0 @@
-type: object
-properties:
-  guid:
-    type: string
-    fromat: uuid
-  name: 
-    type: string

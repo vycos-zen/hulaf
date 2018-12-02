@@ -6,36 +6,22 @@
 //----------------------
 // ReSharper disable InconsistentNaming
 
-export module PersonModule {
-namespace HULAF.Domain.Person {
+import { mergeMap as _observableMergeMap, catchError as _observableCatch } from 'rxjs/operators';
+import { Observable, throwError as _observableThrow, of as _observableOf } from 'rxjs';
+import { Injectable, Inject, Optional, InjectionToken } from '@angular/core';
+import { Http, Headers, ResponseContentType, Response } from '@angular/http';
 
-export interface IPersonClient {
-    /**
-     * Gets a missing person by guid.
-     * @param personGuid Guid of person
-     * @return Returns a missing person
-     */
-    missingperson(personGuid: string): Promise<MissingPersonDto>;
-    /**
-     * Lists missing persons
-     * @return Missing person list.
-     */
-    missingpersonlist(): Promise<MissingPersonDto[]>;
-    /**
-     * A person seeks a missing person
-     * @return Get a person by guid
-     */
-    seekerperson(): Promise<SeekerPersonDto>;
-}
+export const localhost = new InjectionToken<string>('localhost');
 
-export class PersonClient implements IPersonClient {
-    private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
+@Injectable()
+export class PersonService {
+    private http: Http;
     private baseUrl: string;
     protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
-    constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
-        this.http = http ? http : <any>window;
-        this.baseUrl = baseUrl ? baseUrl : "/api";
+    constructor(@Inject(Http) http: Http, @Optional() @Inject(localhost) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ? baseUrl : "/api/v1";
     }
 
     /**
@@ -43,68 +29,86 @@ export class PersonClient implements IPersonClient {
      * @param personGuid Guid of person
      * @return Returns a missing person
      */
-    missingperson(personGuid: string): Promise<MissingPersonDto> {
+    missingperson(personGuid: string): Observable<MissingPersonDto> {
         let url_ = this.baseUrl + "/missingperson/{personGuid}";
         if (personGuid === undefined || personGuid === null)
             throw new Error("The parameter 'personGuid' must be defined.");
         url_ = url_.replace("{personGuid}", encodeURIComponent("" + personGuid)); 
         url_ = url_.replace(/[?&]$/, "");
 
-        let options_ = <RequestInit>{
-            method: "GET",
-            headers: {
+        let options_ : any = {
+            method: "get",
+            headers: new Headers({
                 "Accept": "application/json"
-            }
+            })
         };
 
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processMissingperson(_response);
-        });
+        return this.http.request(url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processMissingperson(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof Response) {
+                try {
+                    return this.processMissingperson(<any>response_);
+                } catch (e) {
+                    return <Observable<MissingPersonDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MissingPersonDto>><any>_observableThrow(response_);
+        }));
     }
 
-    protected processMissingperson(response: Response): Promise<MissingPersonDto> {
+    protected processMissingperson(response: Response): Observable<MissingPersonDto> {
         const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+
+        let _headers: any = response.headers ? response.headers.toJSON() : {};
         if (status === 200) {
-            return response.text().then((_responseText) => {
+            const _responseText = response.text();
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = resultData200 ? MissingPersonDto.fromJS(resultData200) : new MissingPersonDto();
-            return result200;
-            });
+            return _observableOf(result200);
         } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
+            const _responseText = response.text();
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
         }
-        return Promise.resolve<MissingPersonDto>(<any>null);
+        return _observableOf<MissingPersonDto>(<any>null);
     }
 
     /**
      * Lists missing persons
      * @return Missing person list.
      */
-    missingpersonlist(): Promise<MissingPersonDto[]> {
+    missingpersonlist(): Observable<MissingPersonDto[]> {
         let url_ = this.baseUrl + "/missingpersonlist";
         url_ = url_.replace(/[?&]$/, "");
 
-        let options_ = <RequestInit>{
-            method: "GET",
-            headers: {
+        let options_ : any = {
+            method: "get",
+            headers: new Headers({
                 "Accept": "application/json"
-            }
+            })
         };
 
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processMissingpersonlist(_response);
-        });
+        return this.http.request(url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processMissingpersonlist(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof Response) {
+                try {
+                    return this.processMissingpersonlist(<any>response_);
+                } catch (e) {
+                    return <Observable<MissingPersonDto[]>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<MissingPersonDto[]>><any>_observableThrow(response_);
+        }));
     }
 
-    protected processMissingpersonlist(response: Response): Promise<MissingPersonDto[]> {
+    protected processMissingpersonlist(response: Response): Observable<MissingPersonDto[]> {
         const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+
+        let _headers: any = response.headers ? response.headers.toJSON() : {};
         if (status === 200) {
-            return response.text().then((_responseText) => {
+            const _responseText = response.text();
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             if (resultData200 && resultData200.constructor === Array) {
@@ -112,74 +116,127 @@ export class PersonClient implements IPersonClient {
                 for (let item of resultData200)
                     result200.push(MissingPersonDto.fromJS(item));
             }
-            return result200;
-            });
+            return _observableOf(result200);
         } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
+            const _responseText = response.text();
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
         }
-        return Promise.resolve<MissingPersonDto[]>(<any>null);
+        return _observableOf<MissingPersonDto[]>(<any>null);
     }
 
     /**
      * A person seeks a missing person
      * @return Get a person by guid
      */
-    seekerperson(): Promise<SeekerPersonDto> {
+    seekerperson(): Observable<SeekerPersonDto> {
         let url_ = this.baseUrl + "/seekerperson";
         url_ = url_.replace(/[?&]$/, "");
 
-        let options_ = <RequestInit>{
-            method: "GET",
-            headers: {
+        let options_ : any = {
+            method: "get",
+            headers: new Headers({
                 "Accept": "application/json"
-            }
+            })
         };
 
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processSeekerperson(_response);
-        });
+        return this.http.request(url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processSeekerperson(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof Response) {
+                try {
+                    return this.processSeekerperson(<any>response_);
+                } catch (e) {
+                    return <Observable<SeekerPersonDto>><any>_observableThrow(e);
+                }
+            } else
+                return <Observable<SeekerPersonDto>><any>_observableThrow(response_);
+        }));
     }
 
-    protected processSeekerperson(response: Response): Promise<SeekerPersonDto> {
+    protected processSeekerperson(response: Response): Observable<SeekerPersonDto> {
         const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+
+        let _headers: any = response.headers ? response.headers.toJSON() : {};
         if (status === 200) {
-            return response.text().then((_responseText) => {
+            const _responseText = response.text();
             let result200: any = null;
             let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
             result200 = resultData200 ? SeekerPersonDto.fromJS(resultData200) : new SeekerPersonDto();
-            return result200;
-            });
+            return _observableOf(result200);
         } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
+            const _responseText = response.text();
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
         }
-        return Promise.resolve<SeekerPersonDto>(<any>null);
+        return _observableOf<SeekerPersonDto>(<any>null);
     }
 }
 
-export class MissingPersonDto implements IMissingPersonDto {
-    guid?: string;
-    name?: string;
+export class PersonDto {
+    guid!: string;
     characteristics?: any;
+    contactInfo?: any;
 
-    constructor(data?: IMissingPersonDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
+    protected _discriminator: string;
+
+    constructor() {
+        this._discriminator = "PersonDto";
     }
 
     init(data?: any) {
         if (data) {
             this.guid = data["guid"];
-            this.name = data["name"];
             this.characteristics = data["characteristics"];
+            this.contactInfo = data["contactInfo"];
+        }
+    }
+
+    static fromJS(data: any): PersonDto {
+        data = typeof data === 'object' ? data : {};
+        if (data["personType"] === "MissingPersonDto") {
+            let result = new MissingPersonDto();
+            result.init(data);
+            return result;
+        }
+        if (data["personType"] === "SeekerPersonDto") {
+            let result = new SeekerPersonDto();
+            result.init(data);
+            return result;
+        }
+        let result = new PersonDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["personType"] = this._discriminator; 
+        data["guid"] = this.guid;
+        data["characteristics"] = this.characteristics;
+        data["contactInfo"] = this.contactInfo;
+        return data; 
+    }
+}
+
+/** A missing person */
+export class MissingPersonDto extends PersonDto {
+    lastSeenLocations?: any[];
+
+    constructor() {
+        super();
+        if (!data) {
+            this.lastSeenLocations = [];
+        }
+        this._discriminator = "MissingPersonDto";
+    }
+
+    init(data?: any) {
+        super.init(data);
+        if (data) {
+            if (data["lastSeenLocations"] && data["lastSeenLocations"].constructor === Array) {
+                this.lastSeenLocations = [];
+                for (let item of data["lastSeenLocations"])
+                    this.lastSeenLocations.push(item);
+            }
         }
     }
 
@@ -192,36 +249,36 @@ export class MissingPersonDto implements IMissingPersonDto {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["guid"] = this.guid;
-        data["name"] = this.name;
-        data["characteristics"] = this.characteristics;
+        if (this.lastSeenLocations && this.lastSeenLocations.constructor === Array) {
+            data["lastSeenLocations"] = [];
+            for (let item of this.lastSeenLocations)
+                data["lastSeenLocations"].push(item);
+        }
+        super.toJSON(data);
         return data; 
     }
 }
 
-export interface IMissingPersonDto {
-    guid?: string;
-    name?: string;
-    characteristics?: any;
-}
+/** A person looking form someone missing */
+export class SeekerPersonDto extends PersonDto {
+    locationsOfSearch?: any[];
 
-export class SeekerPersonDto implements ISeekerPersonDto {
-    guid?: string;
-    name?: string;
-
-    constructor(data?: ISeekerPersonDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
+    constructor() {
+        super();
+        if (!data) {
+            this.locationsOfSearch = [];
         }
+        this._discriminator = "SeekerPersonDto";
     }
 
     init(data?: any) {
+        super.init(data);
         if (data) {
-            this.guid = data["guid"];
-            this.name = data["name"];
+            if (data["locationsOfSearch"] && data["locationsOfSearch"].constructor === Array) {
+                this.locationsOfSearch = [];
+                for (let item of data["locationsOfSearch"])
+                    this.locationsOfSearch.push(item);
+            }
         }
     }
 
@@ -234,18 +291,17 @@ export class SeekerPersonDto implements ISeekerPersonDto {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["guid"] = this.guid;
-        data["name"] = this.name;
+        if (this.locationsOfSearch && this.locationsOfSearch.constructor === Array) {
+            data["locationsOfSearch"] = [];
+            for (let item of this.locationsOfSearch)
+                data["locationsOfSearch"].push(item);
+        }
+        super.toJSON(data);
         return data; 
     }
 }
 
-export interface ISeekerPersonDto {
-    guid?: string;
-    name?: string;
-}
-
-export class CharateristicsDto implements ICharateristicsDto {
+export class CharateristicsDto {
     guid?: string;
     approxHeightMin?: number;
     approxHeightMax?: number;
@@ -254,18 +310,6 @@ export class CharateristicsDto implements ICharateristicsDto {
     approxAgeMin?: number;
     approxAgeMax?: number;
     knownNames?: string[];
-
-    constructor(data?: ICharateristicsDto) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-        if (!data) {
-            this.knownNames = [];
-        }
-    }
 
     init(data?: any) {
         if (data) {
@@ -309,17 +353,6 @@ export class CharateristicsDto implements ICharateristicsDto {
     }
 }
 
-export interface ICharateristicsDto {
-    guid?: string;
-    approxHeightMin?: number;
-    approxHeightMax?: number;
-    hairColor?: any;
-    eyeColor?: any;
-    approxAgeMin?: number;
-    approxAgeMax?: number;
-    knownNames?: string[];
-}
-
 export enum EyeColorDto {
     Green = "green", 
     Blue = "blue", 
@@ -328,6 +361,180 @@ export enum EyeColorDto {
 export enum HairColorDto {
     Brown = "brown", 
     Blonde = "blonde", 
+}
+
+export class ContactInfoDto {
+    guid?: string;
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+
+    init(data?: any) {
+        if (data) {
+            this.guid = data["guid"];
+            this.firstName = data["firstName"];
+            this.lastName = data["lastName"];
+            this.email = data["email"];
+        }
+    }
+
+    static fromJS(data: any): ContactInfoDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new ContactInfoDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["guid"] = this.guid;
+        data["firstName"] = this.firstName;
+        data["lastName"] = this.lastName;
+        data["email"] = this.email;
+        return data; 
+    }
+}
+
+export class CityDto {
+    guid?: string;
+    name?: string;
+    country?: Country;
+
+    init(data?: any) {
+        if (data) {
+            this.guid = data["Guid"];
+            this.name = data["Name"];
+            this.country = data["Country"] ? Country.fromJS(data["Country"]) : new Country();
+        }
+    }
+
+    static fromJS(data: any): CityDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CityDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["Guid"] = this.guid;
+        data["Name"] = this.name;
+        data["Country"] = this.country ? this.country.toJSON() : <any>undefined;
+        return data; 
+    }
+}
+
+export class CoordinatesDto {
+    lat?: number;
+    lng?: number;
+
+    init(data?: any) {
+        if (data) {
+            this.lat = data["lat"];
+            this.lng = data["lng"];
+        }
+    }
+
+    static fromJS(data: any): CoordinatesDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CoordinatesDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["lat"] = this.lat;
+        data["lng"] = this.lng;
+        return data; 
+    }
+}
+
+export class CountryDto {
+    guid?: string;
+    name?: string;
+    dialingCode?: number;
+
+    init(data?: any) {
+        if (data) {
+            this.guid = data["Guid"];
+            this.name = data["Name"];
+            this.dialingCode = data["DialingCode"];
+        }
+    }
+
+    static fromJS(data: any): CountryDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new CountryDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["Guid"] = this.guid;
+        data["Name"] = this.name;
+        data["DialingCode"] = this.dialingCode;
+        return data; 
+    }
+}
+
+export class LocationDto {
+    country?: CountryDto;
+    city?: CityDto;
+    coordinates?: CoordinatesDto;
+
+    init(data?: any) {
+        if (data) {
+            this.country = data["country"] ? CountryDto.fromJS(data["country"]) : new CountryDto();
+            this.city = data["city"] ? CityDto.fromJS(data["city"]) : new CityDto();
+            this.coordinates = data["coordinates"] ? CoordinatesDto.fromJS(data["coordinates"]) : new CoordinatesDto();
+        }
+    }
+
+    static fromJS(data: any): LocationDto {
+        data = typeof data === 'object' ? data : {};
+        let result = new LocationDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["country"] = this.country ? this.country.toJSON() : <any>undefined;
+        data["city"] = this.city ? this.city.toJSON() : <any>undefined;
+        data["coordinates"] = this.coordinates ? this.coordinates.toJSON() : <any>undefined;
+        return data; 
+    }
+}
+
+export class Country {
+    guid?: string;
+    name?: string;
+    dialingCode?: number;
+
+    init(data?: any) {
+        if (data) {
+            this.guid = data["Guid"];
+            this.name = data["Name"];
+            this.dialingCode = data["DialingCode"];
+        }
+    }
+
+    static fromJS(data: any): Country {
+        data = typeof data === 'object' ? data : {};
+        let result = new Country();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["Guid"] = this.guid;
+        data["Name"] = this.name;
+        data["DialingCode"] = this.dialingCode;
+        return data; 
+    }
 }
 
 export class SwaggerException extends Error {
@@ -354,12 +561,25 @@ export class SwaggerException extends Error {
     }
 }
 
-function throwException(message: string, status: number, response: string, headers: { [key: string]: any; }, result?: any): any {
+function throwException(message: string, status: number, response: string, headers: { [key: string]: any; }, result?: any): Observable<any> {
     if(result !== null && result !== undefined)
-        throw result;
+        return _observableThrow(result);
     else
-        throw new SwaggerException(message, status, response, headers, null);
+        return _observableThrow(new SwaggerException(message, status, response, headers, null));
 }
 
-}
+function blobToText(blob: any): Observable<string> {
+    return new Observable<string>((observer: any) => {
+        if (!blob) {
+            observer.next("");
+            observer.complete();
+        } else {
+            let reader = new FileReader(); 
+            reader.onload = event => { 
+                observer.next((<any>event.target).result);
+                observer.complete();
+            };
+            reader.readAsText(blob); 
+        }
+    });
 }

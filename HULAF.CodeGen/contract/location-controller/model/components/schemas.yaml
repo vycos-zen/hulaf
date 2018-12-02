@@ -1,5 +1,0 @@
-schemas:
-  CityDto:
-    $ref: './schemas/city-dto.yaml'
-  CountryDto:  
-    $ref: './schemas/country-dto.yaml'

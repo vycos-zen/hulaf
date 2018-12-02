@@ -1,11 +1,17 @@
 {
+    "Lang": {
+       "Hu": "Magyar",
+       "En": "Angol"
+    },
     "Title": "HULAF -A talált emberek osztálya...",
     "SubTitle": "Találj meg elveszett embereket",
     "MissionStatement": "Az alkalmazás támogatja az elveszett emberek újraegyesülését",
-    "Home": "Főoldal",
-    "Search": "Keresek egy eltűnt személyt",
-    "Report": "Jelentek egy eltűnt személyt",
+    "Menu": {
+        "Home": "Főoldal",
+        "Search": "Keresek egy eltűnt személyt",
+        "Report": "Jelentek egy eltűnt személyt"
+    },
+    "TodaysDate": "Mai dátum",
     "Countries": "Országok",
     "DialingCode": "Előhívó szám"
-
 }

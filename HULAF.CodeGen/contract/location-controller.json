@@ -2,7 +2,7 @@
     "runtime": "NetCore21",
     "swaggerGenerator": {
         "fromSwagger": {
-            "url": "./person-controller.yaml"
+            "url": "./location-controller.yaml"
         }
     },
     "codeGenerators": {
@@ -11,12 +11,12 @@
             "useCancellationToken": false,
             "aspNetNamespace": "Microsoft.AspNetCore.Mvc",
             "ControllerBaseClass": "ControllerBase",
-            "className": "Person{controller}",
+            "className": "Location{controller}",
             "operationGenerationMode": "MultipleClientsFromPathSegments",
             "generateOptionalParameters": false,
             "generateJsonMethods": true,
-            "parameterArrayType": "System.Collections.IList",
-            "parameterDictionaryType": "System.Collections.IDictionary",
+            "parameterArrayType": "System.Collections.List",
+            "parameterDictionaryType": "System.Collections.Dictionary",
             "responseArrayType": "System.Collections.Generic.List",
             "responseDictionaryType": "System.Collections.Generic.Dictionary",
             "wrapResponses": false,
@@ -29,13 +29,12 @@
             "timeSpanType": "System.TimeSpan",
             "arrayType": "System.Collections.Generic.List",
             "dictionaryType": "System.Collections.Generic.Dictionary",
-            "arrayBaseType": "System.Collections.IList",
-            "dictionaryBaseType": "System.Collections.IDictionary",
+            "arrayBaseType": "System.Collections.List",
+            "dictionaryBaseType": "System.Collections.Dictionary",
             "classStyle": "Poco",
             "generateDefaultValues": false,
             "generateDataAnnotations": true,
-            "excludedTypeNames": [
-            ],
+            "excludedTypeNames": [],
             "additionalNamespaceUsages": [
                 "Microsoft.AspNetCore.Mvc",
                 "System.Threading.Tasks"
@@ -43,10 +42,10 @@
             "handleReferences": true,
             "generateImmutableArrayProperties": false,
             "generateImmutableDictionaryProperties": false,
-            "generateClientClasses": false,
+            "generateClientClasses": true,
             "generateClientInterfaces": true,
             "generateDtoTypes": false,
-            "output": "../../../HULAF.BackEnd/HULAF.WebApi/Controllers/PersonsController.cs"
+            "output": "../../HULAF.BackEnd/HULAF.WebApi/Controllers/LocationController.cs"
         }
     }
 }

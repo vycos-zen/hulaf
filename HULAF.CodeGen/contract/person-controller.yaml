@@ -57,24 +57,46 @@ paths:
 components:
   schemas:
     MissingPersonDto:
+      description: A missing person
+      allOf:
+        - $ref: '#/components/schemas/PersonDto'
+        - type: object
+          properties:
+            lastSeenLocations:
+              type: array
+              items:
+                type:
+                  $ref: '#/components/schemas/LocationDto'
+    PersonDto:
       type: object
+      discriminator:
+        propertyName: personType
       properties:
         guid:
           type: string
-          fromat: uuid
-        name:
-          type: string
+          format: uuid
         characteristics:
           type:
-            $ref: '#/comonents/schemas/CharacteristicsDto'
+            $ref: '#/components/schemas/CharacteristicsDto'
+        contactInfo:
+          type:
+            $ref: '#/components/schemas/ContactInfoDto'
+        personType:
+          type: string
+      required:
+        - guid
+        - personType
     SeekerPersonDto:
-      type: object
-      properties:
-        guid:
-          type: string
-          fromat: uuid
-        name:
-          type: string
+      description: A person looking form someone missing
+      allOf:
+        - $ref: '#/components/schemas/PersonDto'
+        - type: object
+          properties:
+            locationsOfSearch:
+              type: array
+              items:
+                type:
+                  $ref: '#/components/schemas/LocationDto'
     CharateristicsDto:
       type: object
       properties:
@@ -111,4 +133,60 @@ components:
       enum:
         - brown
         - blonde
-
+    ContactInfoDto:
+      type: object
+      properties:
+        guid:
+          type: string
+          fromat: uuid
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+          fromat: email
+    CityDto:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+        Name:
+          type: string
+        Country:
+          type: object
+          properties:
+            Guid:
+              type: string
+              format: uuid
+            Name:
+              type: string
+            DialingCode:
+              type: integer
+    CoordinatesDto:
+      type: object
+      properties:
+        lat:
+          type: number
+        lng:
+          type: number
+    CountryDto:
+      type: object
+      properties:
+        Guid:
+          type: string
+          format: uuid
+        Name:
+          type: string
+        DialingCode:
+          type: integer
+    LocationDto:
+      type: object
+      properties:
+        country:
+          $ref: '#/components/schemas/CountryDto'
+        city:
+          $ref: '#/components/schemas/CityDto'
+        coordinates:
+          $ref: '#/components/schemas/CoordinatesDto'
