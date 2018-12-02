@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace HULAF.WebApi.Controllers
+namespace HULAF.WebApi.Controllers.Location
 {
     public class LocationController : LocationControllerBase
     {

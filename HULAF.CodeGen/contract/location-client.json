@@ -7,6 +7,7 @@
     },
     "codeGenerators": {
         "swaggerToTypeScriptClient": {
+            "namespace": "",
             "className": "LocationService",
             "moduleName": "",
             "serviceHost": "/api/v1",
@@ -28,7 +29,7 @@
             "useTransformOptionsMethod": false,
             "useTransformResultMethod": false,
             "generateDtoTypes": true,
-            "operationGenerationMode": "MultipleClientsFromPathSegments",
+            "operationGenerationMode": "SingleClientFromOperationId",
             "markOptionalProperties": true,
             "generateCloneMethod": false,
             "typeStyle": "Class",

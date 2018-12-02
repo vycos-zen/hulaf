@@ -1,7 +1,7 @@
 import { NgModule, APP_INITIALIZER, } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { HulafServiceModule } from '../core/http/hulafServices.module';
+import { HulafHttpServiceModule } from './http/hulafHttpServices.module';
 import { HttpClientModule } from '@angular/common/http';
 // import { TranslateService } from './translate/translate.service';
 
@@ -24,7 +24,7 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     AppRoutingModule,
     HttpClientModule,
-    HulafServiceModule,
+    HulafHttpServiceModule,
     HomeModule,
     LocatorModule,
     SubmiterModule

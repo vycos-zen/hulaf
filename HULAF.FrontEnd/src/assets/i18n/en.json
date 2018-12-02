@@ -13,5 +13,11 @@
     },
     "TodaysDate": "Today's date",
     "Countries": "Countries",
-    "DialingCode": "Dialing Code"
+    "DialingCode": "Dialing Code",
+    "Locator":{
+        "MissingPerson": "Missing person",
+        "Listing":{
+            "KnownOtherNames": "Known other names"
+        }
+    }
 }

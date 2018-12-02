@@ -26,6 +26,7 @@ paths:
           required: true
           schema:
             type: string
+            format: uuid
   /missingpersonlist:
     get:
       tags:
@@ -43,8 +44,11 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/MissingPersonDto'
-  /seekerperson:
+  '/seekerperson/{personGuid}':
     get:
+      tags:
+        - person
+        - seeking
       description: Returns a person looking for a missing person
       summary: A person seeks a missing person
       responses:
@@ -54,6 +58,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SeekerPersonDto'
+      parameters:
+        - name: personGuid
+          in: path
+          description: Guid of person
+          required: true
+          schema:
+            type: string
+            format: uuid
 components:
   schemas:
     MissingPersonDto:

@@ -13,5 +13,11 @@
     },
     "TodaysDate": "Mai dátum",
     "Countries": "Országok",
-    "DialingCode": "Előhívó szám"
+    "DialingCode": "Előhívó szám",
+    "Locator":{
+        "MissingPerson": "Eltűnt személy",
+        "Listing":{
+            "KnownOtherNames": "Ismert egyéb nevek"
+        }
+    }
 }

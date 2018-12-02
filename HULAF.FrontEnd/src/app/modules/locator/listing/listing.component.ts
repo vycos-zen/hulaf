@@ -1,23 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { LocationService, CountryDto } from 'src/app/core/http/location-service/location-service';
-
-
+import { HulafHttpServiceModule } from '@httpServices/hulafHttpServices.module';
+import { MissingPersonDto } from '@httpServices/person-service/person-service';
+import { CountryDto } from '@httpServices/location-service/location-service';
 
 @Component({
   selector: 'app-listing',
   templateUrl: './listing.component.html',
   styleUrls: ['./listing.component.less'],
-  providers: []
+  providers: [HulafHttpServiceModule]
 })
 export class ListingComponent implements OnInit {
 
   public countries: CountryDto[];
+  public missingPersons: MissingPersonDto[];
 
+  constructor(hulafHttpService: HulafHttpServiceModule) {
+    hulafHttpService.PersonService.getMissingPersonList().subscribe(result => {
+      this.missingPersons = result;
+    });
 
-  // constructor(locationServie: LocationService, private translate: TranslateService) {
-    constructor(locationServie: LocationService) {
-    // translate.use(AppSettings.LANG);
-    locationServie.getCountryList().subscribe(result => {
+    hulafHttpService.LocationService.getCountryList().subscribe(result => {
       this.countries = result;
     });
 

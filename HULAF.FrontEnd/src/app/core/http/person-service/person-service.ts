@@ -29,7 +29,7 @@ export class PersonService {
      * @param personGuid Guid of person
      * @return Returns a missing person
      */
-    missingperson(personGuid: string): Observable<MissingPersonDto> {
+    getMissingPerson(personGuid: string): Observable<MissingPersonDto> {
         let url_ = this.baseUrl + "/missingperson/{personGuid}";
         if (personGuid === undefined || personGuid === null)
             throw new Error("The parameter 'personGuid' must be defined.");
@@ -44,11 +44,11 @@ export class PersonService {
         };
 
         return this.http.request(url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processMissingperson(response_);
+            return this.processGetMissingPerson(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof Response) {
                 try {
-                    return this.processMissingperson(<any>response_);
+                    return this.processGetMissingPerson(<any>response_);
                 } catch (e) {
                     return <Observable<MissingPersonDto>><any>_observableThrow(e);
                 }
@@ -57,15 +57,15 @@ export class PersonService {
         }));
     }
 
-    protected processMissingperson(response: Response): Observable<MissingPersonDto> {
+    protected processGetMissingPerson(response: Response): Observable<MissingPersonDto> {
         const status = response.status;
 
         let _headers: any = response.headers ? response.headers.toJSON() : {};
+        let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             const _responseText = response.text();
             let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = resultData200 ? MissingPersonDto.fromJS(resultData200) : new MissingPersonDto();
+            result200 = _responseText === "" ? null : <MissingPersonDto>jsonParse(_responseText, this.jsonParseReviver);
             return _observableOf(result200);
         } else if (status !== 200 && status !== 204) {
             const _responseText = response.text();
@@ -78,7 +78,7 @@ export class PersonService {
      * Lists missing persons
      * @return Missing person list.
      */
-    missingpersonlist(): Observable<MissingPersonDto[]> {
+    getMissingPersonList(): Observable<MissingPersonDto[]> {
         let url_ = this.baseUrl + "/missingpersonlist";
         url_ = url_.replace(/[?&]$/, "");
 
@@ -90,11 +90,11 @@ export class PersonService {
         };
 
         return this.http.request(url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processMissingpersonlist(response_);
+            return this.processGetMissingPersonList(response_);
         })).pipe(_observableCatch((response_: any) => {
             if (response_ instanceof Response) {
                 try {
-                    return this.processMissingpersonlist(<any>response_);
+                    return this.processGetMissingPersonList(<any>response_);
                 } catch (e) {
                     return <Observable<MissingPersonDto[]>><any>_observableThrow(e);
                 }
@@ -103,19 +103,15 @@ export class PersonService {
         }));
     }
 
-    protected processMissingpersonlist(response: Response): Observable<MissingPersonDto[]> {
+    protected processGetMissingPersonList(response: Response): Observable<MissingPersonDto[]> {
         const status = response.status;
 
         let _headers: any = response.headers ? response.headers.toJSON() : {};
+        let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             const _responseText = response.text();
             let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            if (resultData200 && resultData200.constructor === Array) {
-                result200 = [];
-                for (let item of resultData200)
-                    result200.push(MissingPersonDto.fromJS(item));
-            }
+            result200 = _responseText === "" ? null : <MissingPersonDto[]>jsonParse(_responseText, this.jsonParseReviver);
             return _observableOf(result200);
         } else if (status !== 200 && status !== 204) {
             const _responseText = response.text();
@@ -126,10 +122,14 @@ export class PersonService {
 
     /**
      * A person seeks a missing person
+     * @param personGuid Guid of person
      * @return Get a person by guid
      */
-    seekerperson(): Observable<SeekerPersonDto> {
-        let url_ = this.baseUrl + "/seekerperson";
+    seekerperson(personGuid: string): Observable<SeekerPersonDto> {
+        let url_ = this.baseUrl + "/seekerperson/{personGuid}";
+        if (personGuid === undefined || personGuid === null)
+            throw new Error("The parameter 'personGuid' must be defined.");
+        url_ = url_.replace("{personGuid}", encodeURIComponent("" + personGuid)); 
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ : any = {
@@ -157,11 +157,11 @@ export class PersonService {
         const status = response.status;
 
         let _headers: any = response.headers ? response.headers.toJSON() : {};
+        let _mappings: { source: any, target: any }[] = [];
         if (status === 200) {
             const _responseText = response.text();
             let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = resultData200 ? SeekerPersonDto.fromJS(resultData200) : new SeekerPersonDto();
+            result200 = _responseText === "" ? null : <SeekerPersonDto>jsonParse(_responseText, this.jsonParseReviver);
             return _observableOf(result200);
         } else if (status !== 200 && status !== 204) {
             const _responseText = response.text();
@@ -171,137 +171,23 @@ export class PersonService {
     }
 }
 
-export class PersonDto {
-    guid!: string;
+export interface PersonDto {
+    guid: string;
     characteristics?: any;
     contactInfo?: any;
-
-    protected _discriminator: string;
-
-    constructor() {
-        this._discriminator = "PersonDto";
-    }
-
-    init(data?: any) {
-        if (data) {
-            this.guid = data["guid"];
-            this.characteristics = data["characteristics"];
-            this.contactInfo = data["contactInfo"];
-        }
-    }
-
-    static fromJS(data: any): PersonDto {
-        data = typeof data === 'object' ? data : {};
-        if (data["personType"] === "MissingPersonDto") {
-            let result = new MissingPersonDto();
-            result.init(data);
-            return result;
-        }
-        if (data["personType"] === "SeekerPersonDto") {
-            let result = new SeekerPersonDto();
-            result.init(data);
-            return result;
-        }
-        let result = new PersonDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["personType"] = this._discriminator; 
-        data["guid"] = this.guid;
-        data["characteristics"] = this.characteristics;
-        data["contactInfo"] = this.contactInfo;
-        return data; 
-    }
 }
 
 /** A missing person */
-export class MissingPersonDto extends PersonDto {
+export interface MissingPersonDto extends PersonDto {
     lastSeenLocations?: any[];
-
-    constructor() {
-        super();
-        if (!data) {
-            this.lastSeenLocations = [];
-        }
-        this._discriminator = "MissingPersonDto";
-    }
-
-    init(data?: any) {
-        super.init(data);
-        if (data) {
-            if (data["lastSeenLocations"] && data["lastSeenLocations"].constructor === Array) {
-                this.lastSeenLocations = [];
-                for (let item of data["lastSeenLocations"])
-                    this.lastSeenLocations.push(item);
-            }
-        }
-    }
-
-    static fromJS(data: any): MissingPersonDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new MissingPersonDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (this.lastSeenLocations && this.lastSeenLocations.constructor === Array) {
-            data["lastSeenLocations"] = [];
-            for (let item of this.lastSeenLocations)
-                data["lastSeenLocations"].push(item);
-        }
-        super.toJSON(data);
-        return data; 
-    }
 }
 
 /** A person looking form someone missing */
-export class SeekerPersonDto extends PersonDto {
+export interface SeekerPersonDto extends PersonDto {
     locationsOfSearch?: any[];
-
-    constructor() {
-        super();
-        if (!data) {
-            this.locationsOfSearch = [];
-        }
-        this._discriminator = "SeekerPersonDto";
-    }
-
-    init(data?: any) {
-        super.init(data);
-        if (data) {
-            if (data["locationsOfSearch"] && data["locationsOfSearch"].constructor === Array) {
-                this.locationsOfSearch = [];
-                for (let item of data["locationsOfSearch"])
-                    this.locationsOfSearch.push(item);
-            }
-        }
-    }
-
-    static fromJS(data: any): SeekerPersonDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new SeekerPersonDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        if (this.locationsOfSearch && this.locationsOfSearch.constructor === Array) {
-            data["locationsOfSearch"] = [];
-            for (let item of this.locationsOfSearch)
-                data["locationsOfSearch"].push(item);
-        }
-        super.toJSON(data);
-        return data; 
-    }
 }
 
-export class CharateristicsDto {
+export interface CharateristicsDto {
     guid?: string;
     approxHeightMin?: number;
     approxHeightMax?: number;
@@ -310,47 +196,6 @@ export class CharateristicsDto {
     approxAgeMin?: number;
     approxAgeMax?: number;
     knownNames?: string[];
-
-    init(data?: any) {
-        if (data) {
-            this.guid = data["guid"];
-            this.approxHeightMin = data["approxHeightMin"];
-            this.approxHeightMax = data["approxHeightMax"];
-            this.hairColor = data["hairColor"];
-            this.eyeColor = data["eyeColor"];
-            this.approxAgeMin = data["approxAgeMin"];
-            this.approxAgeMax = data["approxAgeMax"];
-            if (data["knownNames"] && data["knownNames"].constructor === Array) {
-                this.knownNames = [];
-                for (let item of data["knownNames"])
-                    this.knownNames.push(item);
-            }
-        }
-    }
-
-    static fromJS(data: any): CharateristicsDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CharateristicsDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["guid"] = this.guid;
-        data["approxHeightMin"] = this.approxHeightMin;
-        data["approxHeightMax"] = this.approxHeightMax;
-        data["hairColor"] = this.hairColor;
-        data["eyeColor"] = this.eyeColor;
-        data["approxAgeMin"] = this.approxAgeMin;
-        data["approxAgeMax"] = this.approxAgeMax;
-        if (this.knownNames && this.knownNames.constructor === Array) {
-            data["knownNames"] = [];
-            for (let item of this.knownNames)
-                data["knownNames"].push(item);
-        }
-        return data; 
-    }
 }
 
 export enum EyeColorDto {
@@ -363,178 +208,98 @@ export enum HairColorDto {
     Blonde = "blonde", 
 }
 
-export class ContactInfoDto {
+export interface ContactInfoDto {
     guid?: string;
     firstName?: string;
     lastName?: string;
     email?: string;
-
-    init(data?: any) {
-        if (data) {
-            this.guid = data["guid"];
-            this.firstName = data["firstName"];
-            this.lastName = data["lastName"];
-            this.email = data["email"];
-        }
-    }
-
-    static fromJS(data: any): ContactInfoDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new ContactInfoDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["guid"] = this.guid;
-        data["firstName"] = this.firstName;
-        data["lastName"] = this.lastName;
-        data["email"] = this.email;
-        return data; 
-    }
 }
 
-export class CityDto {
-    guid?: string;
-    name?: string;
-    country?: Country;
-
-    init(data?: any) {
-        if (data) {
-            this.guid = data["Guid"];
-            this.name = data["Name"];
-            this.country = data["Country"] ? Country.fromJS(data["Country"]) : new Country();
-        }
-    }
-
-    static fromJS(data: any): CityDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CityDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["Guid"] = this.guid;
-        data["Name"] = this.name;
-        data["Country"] = this.country ? this.country.toJSON() : <any>undefined;
-        return data; 
-    }
+export interface CityDto {
+    Guid?: string;
+    Name?: string;
+    Country?: Country;
 }
 
-export class CoordinatesDto {
+export interface CoordinatesDto {
     lat?: number;
     lng?: number;
-
-    init(data?: any) {
-        if (data) {
-            this.lat = data["lat"];
-            this.lng = data["lng"];
-        }
-    }
-
-    static fromJS(data: any): CoordinatesDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CoordinatesDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["lat"] = this.lat;
-        data["lng"] = this.lng;
-        return data; 
-    }
 }
 
-export class CountryDto {
-    guid?: string;
-    name?: string;
-    dialingCode?: number;
-
-    init(data?: any) {
-        if (data) {
-            this.guid = data["Guid"];
-            this.name = data["Name"];
-            this.dialingCode = data["DialingCode"];
-        }
-    }
-
-    static fromJS(data: any): CountryDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new CountryDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["Guid"] = this.guid;
-        data["Name"] = this.name;
-        data["DialingCode"] = this.dialingCode;
-        return data; 
-    }
+export interface CountryDto {
+    Guid?: string;
+    Name?: string;
+    DialingCode?: number;
 }
 
-export class LocationDto {
+export interface LocationDto {
     country?: CountryDto;
     city?: CityDto;
     coordinates?: CoordinatesDto;
-
-    init(data?: any) {
-        if (data) {
-            this.country = data["country"] ? CountryDto.fromJS(data["country"]) : new CountryDto();
-            this.city = data["city"] ? CityDto.fromJS(data["city"]) : new CityDto();
-            this.coordinates = data["coordinates"] ? CoordinatesDto.fromJS(data["coordinates"]) : new CoordinatesDto();
-        }
-    }
-
-    static fromJS(data: any): LocationDto {
-        data = typeof data === 'object' ? data : {};
-        let result = new LocationDto();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["country"] = this.country ? this.country.toJSON() : <any>undefined;
-        data["city"] = this.city ? this.city.toJSON() : <any>undefined;
-        data["coordinates"] = this.coordinates ? this.coordinates.toJSON() : <any>undefined;
-        return data; 
-    }
 }
 
-export class Country {
-    guid?: string;
-    name?: string;
-    dialingCode?: number;
+export interface Country {
+    Guid?: string;
+    Name?: string;
+    DialingCode?: number;
+}
 
-    init(data?: any) {
-        if (data) {
-            this.guid = data["Guid"];
-            this.name = data["Name"];
-            this.dialingCode = data["DialingCode"];
+function jsonParse(json: any, reviver?: any) {
+    json = JSON.parse(json, reviver);
+
+    var byid: any = {};
+    var refs: any = [];
+    json = (function recurse(obj: any, prop?: any, parent?: any) {
+        if (typeof obj !== 'object' || !obj)
+            return obj;
+        
+        if ("$ref" in obj) {
+            let ref = obj.$ref;
+            if (ref in byid)
+                return byid[ref];
+            refs.push([parent, prop, ref]);
+            return undefined;
+        } else if ("$id" in obj) {
+            let id = obj.$id;
+            delete obj.$id;
+            if ("$values" in obj)
+                obj = obj.$values;
+            byid[id] = obj;
         }
+        
+        if (Array.isArray(obj)) {
+            obj = obj.map((v, i) => recurse(v, i, obj));
+        } else {
+            for (var p in obj) {
+                if (obj.hasOwnProperty(p) && obj[p] && typeof obj[p] === 'object')
+                    obj[p] = recurse(obj[p], p, obj);
+            }
+        }
+
+        return obj;
+    })(json);
+
+    for (let i = 0; i < refs.length; i++) {
+        const ref = refs[i];
+        ref[0][ref[1]] = byid[ref[2]];
     }
 
-    static fromJS(data: any): Country {
-        data = typeof data === 'object' ? data : {};
-        let result = new Country();
-        result.init(data);
-        return result;
+    return json;
+}
+
+function createInstance<T>(data: any, mappings: any, type: any): T {
+    if (!mappings)
+        mappings = [];
+    else {
+        let mapping = mappings.filter((m: any) => m.source === data);
+        if (mapping.length === 1)
+            return <T>mapping[0].target;
     }
 
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        data["Guid"] = this.guid;
-        data["Name"] = this.name;
-        data["DialingCode"] = this.dialingCode;
-        return data; 
-    }
+    let result: any = new type();
+    mappings.push({ source: data, target: result });
+    result.init(data, mappings);
+    return result;
 }
 
 export class SwaggerException extends Error {

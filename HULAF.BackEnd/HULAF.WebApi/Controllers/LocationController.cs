@@ -7,7 +7,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace HULAF.WebApi.Controllers
+namespace HULAF.WebApi.Controllers.Location
 {
     #pragma warning disable // Disable all warnings
 
