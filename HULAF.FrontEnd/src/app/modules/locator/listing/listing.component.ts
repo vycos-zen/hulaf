@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HulafHttpServiceModule } from '@httpServices/hulafHttpServices.module';
-import { MissingPersonDto } from '@httpServices/person-service/person-service';
-import { CountryDto } from '@httpServices/location-service/location-service';
+import { MissingPersonDto , CountryDto} from '@httpServices/hulaf-api/hulaf-api-service';
 
 @Component({
   selector: 'app-listing',
@@ -14,12 +13,13 @@ export class ListingComponent implements OnInit {
   public countries: CountryDto[];
   public missingPersons: MissingPersonDto[];
 
-  constructor(hulafHttpService: HulafHttpServiceModule) {
-    hulafHttpService.PersonService.getMissingPersonList().subscribe(result => {
+  constructor(hulafHttpServiceModule: HulafHttpServiceModule) {
+
+    hulafHttpServiceModule.HulafApiService.getMissingPersonList().subscribe(result => {
       this.missingPersons = result;
     });
 
-    hulafHttpService.LocationService.getCountryList().subscribe(result => {
+    hulafHttpServiceModule.HulafApiService.getCountryList().subscribe(result => {
       this.countries = result;
     });
 

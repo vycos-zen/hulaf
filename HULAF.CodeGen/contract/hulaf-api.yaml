@@ -12,22 +12,6 @@ paths:
       description: Returns a missing person
       summary: Gets a missing person by guid.
       operationId: getMissingPerson
-      responses:
-        '200':
-          description: Returns a missing person
-          content:
-            application/json:
-              schema:
-                description: A missing person
-                allOf:
-                  - $ref: '#/components/schemas/PersonDto'
-                  - type: object
-                    properties:
-                      lastSeenLocations:
-                        type: array
-                        items:
-                          type:
-                            $ref: '#/components/schemas/LocationDto'
       parameters:
         - name: personGuid
           in: path
@@ -36,6 +20,14 @@ paths:
           schema:
             type: string
             format: uuid
+      responses:
+        '200':
+          description: Returns a missing person
+          content:
+            application/json:
+              schema:
+                description: A missing person
+                $ref: '#/components/schemas/MissingPersonDto'
   /person/missingpersonlist:
     get:
       tags:
@@ -53,15 +45,7 @@ paths:
                 type: array
                 items:
                   description: A missing person
-                  allOf:
-                    - $ref: '#/components/schemas/PersonDto'
-                    - type: object
-                      properties:
-                        lastSeenLocations:
-                          type: array
-                          items:
-                            type:
-                              $ref: '#/components/schemas/LocationDto'
+                  $ref: '#/components/schemas/MissingPersonDto'
   '/person/seekerperson/{personGuid}':
     get:
       tags:
@@ -69,22 +53,7 @@ paths:
         - seeking
       description: Returns a person looking for a missing person
       summary: A person seeks a missing person
-      responses:
-        '200':
-          description: Get a person by guid
-          content:
-            application/json:
-              schema:
-                description: A person looking form someone missing
-                allOf:
-                  - $ref: '#/components/schemas/PersonDto'
-                  - type: object
-                    properties:
-                      locationsOfSearch:
-                        type: array
-                        items:
-                          type:
-                            $ref: '#/components/schemas/LocationDto'
+      operationId: getSeekerPerson
       parameters:
         - name: personGuid
           in: path
@@ -93,6 +62,14 @@ paths:
           schema:
             type: string
             format: uuid
+      responses:
+        '200':
+          description: Get a person by guid
+          content:
+            application/json:
+              schema:
+                description: A person looking form someone missing
+                $ref: '#/components/schemas/SeekerPersonDto'
   /location/countrylist:
     get:
       tags:
@@ -223,12 +200,12 @@ components:
     CountryDto:
       type: object
       properties:
-        Guid:
+        guid:
           type: string
           format: uuid
-        Name:
+        name:
           type: string
-        DialingCode:
+        dialingCode:
           type: integer
     LocationDto:
       type: object

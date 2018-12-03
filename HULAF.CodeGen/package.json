@@ -4,6 +4,7 @@
     "scripts": {
         "concat-hulaf-api": "cd contract && swagger-merger -i ./hulaf-controller/controller.yaml -o ./hulaf-api.yaml",
         "generate-hulaf-api": "nswag run ./contract/hulaf-api-config.json",
+        "generate-hulaf-api-client": "nswag run ./contract/hulaf-api-client-config.json",
 
         "concat-dto-library": "cd contract && swagger-merger -i ./dto-library/schemas.yaml -o ./hulaf-dto-library.yaml",
         "generate-dto-library": "nswag run ./contract/hulaf-dto-library-config.json",

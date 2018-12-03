@@ -1,10 +1,10 @@
 CountryDto:
   type: object
   properties:
-    Guid: 
+    guid: 
       type: string
       format: uuid
-    Name: 
+    name: 
       type: string
-    DialingCode:
+    dialingCode:
       type: integer

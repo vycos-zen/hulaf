@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { LocationService } from '@httpServices/location-service/location-service';
-import { PersonService, } from '@httpServices/person-service/person-service';
+import { HulafApiService } from '@httpServices/hulaf-api/hulaf-api-service';
 
 
 @NgModule({
@@ -9,20 +8,17 @@ import { PersonService, } from '@httpServices/person-service/person-service';
         HttpModule,
     ],
     providers: [
-        PersonService,
-        LocationService
+        HulafApiService,
     ],
     exports: [
     ]
 })
 export class HulafHttpServiceModule {
 
-    public PersonService: PersonService;
+    public HulafApiService: HulafApiService;
 
-    public LocationService: LocationService;
 
-    constructor(personService: PersonService, locationService: LocationService) {
-        this.PersonService = personService;
-        this.LocationService = locationService;
+    constructor(hulafApiService: HulafApiService) {
+        this.HulafApiService = hulafApiService;
     }
 }

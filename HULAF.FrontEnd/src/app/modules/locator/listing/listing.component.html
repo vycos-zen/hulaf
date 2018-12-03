@@ -2,17 +2,19 @@
   {{'Countries' | translate}}
 </span>
 
-<ul>
-  <li *ngFor="let country of countries">
+<span *ngFor="let country of countries">{{country.name}}, </span>
 
+<!-- <ul>
+  <li *ngFor="let country of countries">
+    
     {{country.name}}, {{'DialingCode' | translate}}: +{{country.dialingCode}}
   </li>
-</ul>
+</ul> -->
 
 <ul>
   <li *ngFor="let person of missingPersons">
-    <h3>{{'MissingPerson' | translate}}</h3>
-    <p>{{'KnownOtherNames' | translate}}</p>
+    <h3>{{'Locator.MissingPerson' | translate}}</h3>
+    <p>{{'Locator.Listing.KnownOtherNames' | translate}}</p>
     <ul>
       <li *ngFor="let name of person.characteristics.knownNames">{{name}}</li>
     </ul>

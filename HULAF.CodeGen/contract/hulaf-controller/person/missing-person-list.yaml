@@ -15,12 +15,5 @@
                 type: array
                 items:
                   description: A missing person
-                  allOf:
-                    - $ref: '#/components/schemas/PersonDto'
-                    - type: object
-                      properties:
-                        lastSeenLocations:
-                          type: array
-                          items:
-                            type:
-                              $ref: '#/components/schemas/LocationDto'
+                  $ref: '#/components/schemas/MissingPersonDto'
+        

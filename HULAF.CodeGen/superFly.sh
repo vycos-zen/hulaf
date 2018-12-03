@@ -4,8 +4,10 @@ set -o errexit
 
 echo "Building Hulaf controller/client"
 npm run concat-hulaf-api
-echo "Generating Hulaf controller/client"
+echo "Generating Hulaf controller"
 npm run generate-hulaf-api
+echo "Generating Hulaf client"
+npm run generate-hulaf-api-client
 
 
 # echo "Building DTO library"

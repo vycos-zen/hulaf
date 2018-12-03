@@ -7,7 +7,7 @@
     },
     "codeGenerators": {
         "swaggerToCSharpController": {
-            "controllerStyle": "partial",
+            "controllerStyle": "abstract",
             "useCancellationToken": false,
             "aspNetNamespace": "Microsoft.AspNetCore.Mvc",
             "ControllerBaseClass": "ControllerBase",
@@ -47,43 +47,5 @@
             "generateDtoTypes": false,
             "output": "../../HULAF.BackEnd/HULAF.WebApi/Controllers/HulafController.cs"
         }
-    },
-    "swaggerToTypeScriptClient": {
-        "namespace": "",
-        "className": "HulafApiService",
-        "moduleName": "",
-        "serviceHost": "/api/v1",
-        "typeScriptVersion": 3.1,
-        "template": "Angular",
-        "useSingletonProvider": true,
-        "promiseType": "Promise",
-        "httpClass": "Http",
-        "injectionTokenType": "InjectionToken",
-        "dateTimeType": "Date",
-        "nullValue": "Undefined",
-        "generateClientClasses": true,
-        "generateClientInterfaces": false,
-        "generateOptionalParameters": false,
-        "wrapDtoExceptions": false,
-        "wrapResponses": false,
-        "generateResponseClasses": false,
-        "responseClass": "SwaggerResponse",
-        "useTransformOptionsMethod": false,
-        "useTransformResultMethod": false,
-        "generateDtoTypes": true,
-        "operationGenerationMode": "SingleClientFromOperationId",
-        "markOptionalProperties": true,
-        "generateCloneMethod": false,
-        "typeStyle": "Interface",
-        "generateDefaultValues": true,
-        "excludedTypeNames": [],
-        "handleReferences": true,
-        "generateConstructorInterface": false,
-        "convertConstructorInterfaceData": false,
-        "importRequiredTypes": true,
-        "useGetBaseUrlMethod": false,
-        "baseUrlTokenName": "localhost",
-        "queryNullValue": "",
-        "output": "../../HULAF.FrontEnd/src/app/core/http/hulaf-api/hulaf-api-service.ts"
     }
 }
