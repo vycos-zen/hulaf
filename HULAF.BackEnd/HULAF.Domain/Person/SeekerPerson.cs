@@ -9,7 +9,7 @@ namespace HULAF.Domain.Person
 
     public class SeekerPerson
     {
-        public Guid Id { get; set; }
+        public Guid Guid { get; set; }
 
         public Characteristics SeekedCharacteristics { get; set; }
     }
