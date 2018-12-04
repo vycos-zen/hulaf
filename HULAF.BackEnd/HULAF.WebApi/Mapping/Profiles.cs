@@ -10,7 +10,8 @@ namespace HULAF.WebApi.Mapping
     {
         public PersonProfile()
         {
-            CreateMap<MissingPerson, MissingPersonDto>();
+            CreateMap<MissingPerson, MissingPersonDto>()
+            .ReverseMap();
 
         }
 

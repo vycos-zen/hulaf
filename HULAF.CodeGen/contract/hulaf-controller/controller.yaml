@@ -15,4 +15,4 @@ paths:
   $ref#country-list: './location/country-list.yaml'
 
 components:
-  $ref#shemas: './schemas.yaml'
+  $ref#schemas: './schemas.yaml'

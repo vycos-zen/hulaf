@@ -32,19 +32,20 @@
             "arrayBaseType": "System.Collections.List",
             "dictionaryBaseType": "System.Collections.IDictionary",
             "classStyle": "Poco",
-            "generateDefaultValues": false,
+            "generateDefaultValues": true,
             "generateDataAnnotations": true,
             "excludedTypeNames": [],
             "additionalNamespaceUsages": [
                 "Microsoft.AspNetCore.Mvc",
+                "System",
                 "System.Threading.Tasks"
             ],
-            "handleReferences": false,
+            "handleReferences": true,
             "generateImmutableArrayProperties": false,
             "generateImmutableDictionaryProperties": false,
             "generateClientClasses": false,
             "generateClientInterfaces": false,
-            "generateDtoTypes": false,
+            "generateDtoTypes": true,
             "output": "../../HULAF.BackEnd/HULAF.WebApi/Controllers/HulafController.cs"
         }
     }

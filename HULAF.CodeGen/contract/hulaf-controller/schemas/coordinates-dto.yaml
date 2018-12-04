@@ -5,3 +5,6 @@ CoordinatesDto:
       type: number
     lng:
       type: number
+  required:
+    - lat
+    - lng

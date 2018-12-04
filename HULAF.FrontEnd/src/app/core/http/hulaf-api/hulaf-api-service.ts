@@ -235,7 +235,7 @@ export interface SeekerPersonDto extends PersonDto {
     locationsOfSearch?: any[];
 }
 
-export interface CharateristicsDto {
+export interface CharacteristicsDto {
     guid?: string;
     approxHeightMin?: number;
     approxHeightMax?: number;
@@ -264,14 +264,13 @@ export interface ContactInfoDto {
 }
 
 export interface CityDto {
-    Guid?: string;
-    Name?: string;
-    Country?: CountryDto;
+    guid?: string;
+    name?: string;
 }
 
 export interface CoordinatesDto {
-    lat?: number;
-    lng?: number;
+    lat: number;
+    lng: number;
 }
 
 export interface CountryDto {

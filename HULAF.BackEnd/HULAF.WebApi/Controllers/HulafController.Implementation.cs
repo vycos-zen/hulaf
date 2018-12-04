@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace HULAF.WebApi.Controllers.Location
+namespace HULAF.WebApi.Controllers
 {
     public class HulafController : HulafControllerBase
     {
@@ -33,7 +33,7 @@ namespace HULAF.WebApi.Controllers.Location
         {
             return Task.FromResult(new List<MissingPersonDto>{
             new MissingPersonDto{
-                Characteristics = new CharateristicsDto{
+                Characteristics = new CharacteristicsDto{
                     KnownNames = new List<string>{
                         "Géza",
                         "Józsi"
@@ -41,7 +41,7 @@ namespace HULAF.WebApi.Controllers.Location
                 }
             },
             new MissingPersonDto{
-                Characteristics = new CharateristicsDto{
+                Characteristics = new CharacteristicsDto{
                     KnownNames = new List<string>{
                         "Villi",
                         "Pumukli"

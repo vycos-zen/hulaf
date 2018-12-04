@@ -1,4 +1,4 @@
-CharateristicsDto:
+CharacteristicsDto:
   type: object
   properties:
     guid: 

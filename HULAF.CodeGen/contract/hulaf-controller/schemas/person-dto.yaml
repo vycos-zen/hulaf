@@ -2,18 +2,21 @@ PersonDto:
   type: object
   discriminator: 
     propertyName: personType
+    mapping:
+      missing: MissingPersonDto
+      seeking: SeekingPersonDto
+  required:
+    - guid
+    - personType
   properties:
     guid:
       type: string
       format: uuid
+    personType:
+      type: string
     characteristics:
       type:
         $ref: '#/components/schemas/CharacteristicsDto'
     contactInfo:
       type:
         $ref: '#/components/schemas/ContactInfoDto'
-    personType:
-      type: string
-  required:
-    - guid
-    - personType

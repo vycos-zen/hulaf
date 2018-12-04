@@ -104,21 +104,24 @@ components:
       type: object
       discriminator:
         propertyName: personType
+        mapping:
+          missing: MissingPersonDto
+          seeking: SeekingPersonDto
+      required:
+        - guid
+        - personType
       properties:
         guid:
           type: string
           format: uuid
+        personType:
+          type: string
         characteristics:
           type:
             $ref: '#/components/schemas/CharacteristicsDto'
         contactInfo:
           type:
             $ref: '#/components/schemas/ContactInfoDto'
-        personType:
-          type: string
-      required:
-        - guid
-        - personType
     SeekerPersonDto:
       description: A person looking form someone missing
       allOf:
@@ -130,7 +133,7 @@ components:
               items:
                 type:
                   $ref: '#/components/schemas/LocationDto'
-    CharateristicsDto:
+    CharacteristicsDto:
       type: object
       properties:
         guid:
@@ -181,15 +184,12 @@ components:
           fromat: email
     CityDto:
       type: object
-      name: CityDto
       properties:
-        Guid:
+        guid:
           type: string
           format: uuid
-        Name:
+        name:
           type: string
-        Country:
-          $ref: '#/components/schemas/CountryDto'
     CoordinatesDto:
       type: object
       properties:
@@ -197,6 +197,9 @@ components:
           type: number
         lng:
           type: number
+      required:
+        - lat
+        - lng
     CountryDto:
       type: object
       properties:

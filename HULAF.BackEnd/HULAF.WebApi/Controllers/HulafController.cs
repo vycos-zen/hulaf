@@ -5,6 +5,7 @@
 //----------------------
 
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace HULAF.WebApi.Controllers
@@ -58,12 +59,12 @@ namespace HULAF.WebApi.Controllers
     
         public string ToJson() 
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
         }
         
         public static PersonDto FromJson(string data)
         {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<PersonDto>(data);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<PersonDto>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
         }
     
     }
@@ -77,12 +78,12 @@ namespace HULAF.WebApi.Controllers
     
         public string ToJson() 
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
         }
         
         public static MissingPersonDto FromJson(string data)
         {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<MissingPersonDto>(data);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<MissingPersonDto>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
         }
     
     }
@@ -96,18 +97,18 @@ namespace HULAF.WebApi.Controllers
     
         public string ToJson() 
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
         }
         
         public static SeekerPersonDto FromJson(string data)
         {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<SeekerPersonDto>(data);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<SeekerPersonDto>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
         }
     
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.12.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class CharateristicsDto 
+    public partial class CharacteristicsDto 
     {
         [Newtonsoft.Json.JsonProperty("guid", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Guid { get; set; }
@@ -135,12 +136,12 @@ namespace HULAF.WebApi.Controllers
     
         public string ToJson() 
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
         }
         
-        public static CharateristicsDto FromJson(string data)
+        public static CharacteristicsDto FromJson(string data)
         {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<CharateristicsDto>(data);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<CharacteristicsDto>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
         }
     
     }
@@ -184,12 +185,12 @@ namespace HULAF.WebApi.Controllers
     
         public string ToJson() 
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
         }
         
         public static ContactInfoDto FromJson(string data)
         {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<ContactInfoDto>(data);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<ContactInfoDto>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
         }
     
     }
@@ -197,23 +198,20 @@ namespace HULAF.WebApi.Controllers
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.12.2.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class CityDto 
     {
-        [Newtonsoft.Json.JsonProperty("Guid", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("guid", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid Guid { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("Name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("Country", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public CountryDto Country { get; set; } = new CountryDto();
     
         public string ToJson() 
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
         }
         
         public static CityDto FromJson(string data)
         {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<CityDto>(data);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<CityDto>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
         }
     
     }
@@ -221,20 +219,20 @@ namespace HULAF.WebApi.Controllers
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.12.2.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class CoordinatesDto 
     {
-        [Newtonsoft.Json.JsonProperty("lat", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("lat", Required = Newtonsoft.Json.Required.Always)]
         public double Lat { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("lng", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("lng", Required = Newtonsoft.Json.Required.Always)]
         public double Lng { get; set; }
     
         public string ToJson() 
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
         }
         
         public static CoordinatesDto FromJson(string data)
         {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<CoordinatesDto>(data);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<CoordinatesDto>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
         }
     
     }
@@ -253,12 +251,12 @@ namespace HULAF.WebApi.Controllers
     
         public string ToJson() 
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
         }
         
         public static CountryDto FromJson(string data)
         {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<CountryDto>(data);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<CountryDto>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
         }
     
     }
@@ -277,12 +275,12 @@ namespace HULAF.WebApi.Controllers
     
         public string ToJson() 
         {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
         }
         
         public static LocationDto FromJson(string data)
         {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<LocationDto>(data);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<LocationDto>(data, new Newtonsoft.Json.JsonSerializerSettings { PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All });
         }
     
     }

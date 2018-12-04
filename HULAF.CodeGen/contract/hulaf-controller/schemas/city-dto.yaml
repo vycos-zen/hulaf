@@ -1,11 +1,8 @@
 CityDto:
   type: object
-  name: CityDto
   properties:
-    Guid: 
+    guid: 
       type: string
       format: uuid
-    Name: 
+    name: 
       type: string
-    Country:
-      $ref: '#/components/schemas/CountryDto'
