@@ -6,10 +6,11 @@ using HULAF.WebApi.Controllers;
 namespace HULAF.WebApi.Mapping
 {
 
-    public class PersonProfile : Profile
+    public class HulafControllerProfile : Profile
     {
-        public PersonProfile()
+        public HulafControllerProfile()
         {
+            
             CreateMap<MissingPerson, MissingPersonDto>()
             .ReverseMap();
 
