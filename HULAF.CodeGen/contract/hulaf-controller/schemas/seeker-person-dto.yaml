@@ -7,5 +7,4 @@ SeekerPersonDto:
         locationsOfSearch:
           type: array
           items:
-            type: 
-              $ref: '#/components/schemas/LocationDto'
+            $ref: '#/components/schemas/LocationDto'

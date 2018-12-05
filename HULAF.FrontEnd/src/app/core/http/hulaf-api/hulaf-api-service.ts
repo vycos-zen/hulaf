@@ -221,26 +221,26 @@ export class HulafApiService {
 
 export interface PersonDto {
     guid: string;
-    characteristics?: any;
-    contactInfo?: any;
+    characteristics?: CharacteristicsDto;
+    contactInfo?: ContactInfoDto;
 }
 
 /** A missing person */
 export interface MissingPersonDto extends PersonDto {
-    lastSeenLocations?: any[];
+    lastSeenLocations?: LocationDto[];
 }
 
 /** A person looking form someone missing */
 export interface SeekerPersonDto extends PersonDto {
-    locationsOfSearch?: any[];
+    locationsOfSearch?: LocationDto[];
 }
 
 export interface CharacteristicsDto {
     guid?: string;
     approxHeightMin?: number;
     approxHeightMax?: number;
-    hairColor?: any;
-    eyeColor?: any;
+    hairColor?: HairColorDto;
+    eyeColor?: EyeColorDto;
     approxAgeMin?: number;
     approxAgeMax?: number;
     knownNames?: string[];

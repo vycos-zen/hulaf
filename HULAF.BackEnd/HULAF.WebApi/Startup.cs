@@ -13,7 +13,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using HULAF.DataAccess.Context;
+using HULAF.WebApi.Mapping;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 namespace HULAF.WebApi
 {
@@ -31,6 +33,8 @@ namespace HULAF.WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
+            var mappingConfig = new MappingConfiguration();
+            services.AddAutoMapper();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<HULAFContext>(options => options.UseNpgsql(hulafContextConnectionString));
         }

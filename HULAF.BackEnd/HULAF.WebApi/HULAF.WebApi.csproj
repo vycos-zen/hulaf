@@ -4,15 +4,16 @@
     <UserSecretsId>e2f0e958-bff5-4593-8557-28bc359cd555</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="wwwroot\"/>
+    <Folder Include="wwwroot\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App"/>
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All"/>
-    <PackageReference Include="AutoMapper" Version="8.0.0"/>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HULAF.DataAccess\HULAF.DataAccess.csproj"/>
-    <ProjectReference Include="..\HULAF.Domain\HULAF.Domain.csproj"/>
+    <ProjectReference Include="..\HULAF.DataAccess\HULAF.DataAccess.csproj" />
+    <ProjectReference Include="..\HULAF.Domain\HULAF.Domain.csproj" />
   </ItemGroup>
 </Project>

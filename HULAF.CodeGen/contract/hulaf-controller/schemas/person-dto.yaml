@@ -2,9 +2,9 @@ PersonDto:
   type: object
   discriminator: 
     propertyName: personType
-    mapping:
-      missing: MissingPersonDto
-      seeking: SeekingPersonDto
+    # mapping:
+    #   missing: MissingPersonDto
+    #   seeking: SeekingPersonDto
   required:
     - guid
     - personType
@@ -15,8 +15,6 @@ PersonDto:
     personType:
       type: string
     characteristics:
-      type:
-        $ref: '#/components/schemas/CharacteristicsDto'
+      $ref: '#/components/schemas/CharacteristicsDto'
     contactInfo:
-      type:
-        $ref: '#/components/schemas/ContactInfoDto'
+      $ref: '#/components/schemas/ContactInfoDto'

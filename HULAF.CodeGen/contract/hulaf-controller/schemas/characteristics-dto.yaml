@@ -11,11 +11,9 @@ CharacteristicsDto:
       type: integer
       example: Height in cm
     hairColor:
-      type:
-        $ref: '#/components/schemas/HairColorDto'
+      $ref: '#/components/schemas/HairColorDto'
     eyeColor:
-      type:
-        $ref: '#/components/schemas/EyeColorDto'
+      $ref: '#/components/schemas/EyeColorDto'
     approxAgeMin:
       type: integer
     approxAgeMax:

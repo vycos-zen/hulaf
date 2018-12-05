@@ -52,10 +52,10 @@ namespace HULAF.WebApi.Controllers
         public System.Guid Guid { get; set; }
     
         [Newtonsoft.Json.JsonProperty("characteristics", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public object Characteristics { get; set; }
+        public CharacteristicsDto Characteristics { get; set; } = new CharacteristicsDto();
     
         [Newtonsoft.Json.JsonProperty("contactInfo", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public object ContactInfo { get; set; }
+        public ContactInfoDto ContactInfo { get; set; } = new ContactInfoDto();
     
         public string ToJson() 
         {
@@ -74,7 +74,7 @@ namespace HULAF.WebApi.Controllers
     public partial class MissingPersonDto : PersonDto
     {
         [Newtonsoft.Json.JsonProperty("lastSeenLocations", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<object> LastSeenLocations { get; set; } = new System.Collections.Generic.List<object>();
+        public System.Collections.Generic.List<LocationDto> LastSeenLocations { get; set; } = new System.Collections.Generic.List<LocationDto>();
     
         public string ToJson() 
         {
@@ -93,7 +93,7 @@ namespace HULAF.WebApi.Controllers
     public partial class SeekerPersonDto : PersonDto
     {
         [Newtonsoft.Json.JsonProperty("locationsOfSearch", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.List<object> LocationsOfSearch { get; set; } = new System.Collections.Generic.List<object>();
+        public System.Collections.Generic.List<LocationDto> LocationsOfSearch { get; set; } = new System.Collections.Generic.List<LocationDto>();
     
         public string ToJson() 
         {
@@ -120,10 +120,12 @@ namespace HULAF.WebApi.Controllers
         public int ApproxHeightMax { get; set; }
     
         [Newtonsoft.Json.JsonProperty("hairColor", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public object HairColor { get; set; }
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public HairColorDto HairColor { get; set; }
     
         [Newtonsoft.Json.JsonProperty("eyeColor", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public object EyeColor { get; set; }
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public EyeColorDto EyeColor { get; set; }
     
         [Newtonsoft.Json.JsonProperty("approxAgeMin", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int ApproxAgeMin { get; set; }
