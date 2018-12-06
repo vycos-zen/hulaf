@@ -26,15 +26,13 @@ namespace HULAF.WebApi
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-
         }
 
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var mapperConfig = new HulafMappingConfig();
-            services.AddAutoMapper();
+            services.AddAutoMapper(HulafMapperConfiguration.GetConfiguration);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<HULAFContext>(options => options.UseNpgsql(hulafContextConnectionString));
         }

@@ -11,22 +11,15 @@ namespace HULAF.UnitTests
 {
     public class MappingTests
     {
-        private readonly IMapper mapper;
-
         [SetUp]
         public void Setup()
         {
-            
-          var service = new ServiceCollection();
-          var provider = service.AddAutoMapper();
         }
 
         [Test]
         public void MappingCnfiguration_IsValid()
         {
-var config = mapper. //.Configure();
-
-config.AssertConfigurationIsValid();
+            Mapper.Configuration.AssertConfigurationIsValid();
         }
 
         [Test]
@@ -43,15 +36,15 @@ config.AssertConfigurationIsValid();
                     ApproxHeightMin = 170
                 }
             };
-            var missingPerson = mapper.Map<MissingPerson>(missingPersonDto);
+            var missingPerson = Mapper.Map<MissingPerson>(missingPersonDto);
 
             missingPerson.Characteristics.ApproxAgeMax.ShouldBe(30);
         }
 
 
-        public MappingTests(IMapper mapper)
+        public MappingTests()
         {
-            this.mapper = mapper;
+            Mapper.Initialize(HulafMapperConfiguration.GetConfiguration);
         }
     }
 }
