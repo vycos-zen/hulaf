@@ -1,13 +1,12 @@
-
-
-print "Building Hulaf controller/client"
+#!/bin/bash
+# cd "${0%/*}"
+echo "Building Hulaf controller/client"
+cd "$(dirname "$0")" 
 npm run concat-hulaf-api
-print "Generating Hulaf controller"
+echo "Generating Hulaf controller"
 npm run generate-hulaf-api
-print "Generating Hulaf client"
+echo "Generating Hulaf client"
 npm run generate-hulaf-api-client
-
-
 
 
 # echo "Building DTO library"

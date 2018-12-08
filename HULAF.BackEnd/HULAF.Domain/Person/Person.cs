@@ -1,5 +1,6 @@
 ﻿using HULAF.Domain.Person.Characteristic;
 using HULAF.Domain.Locator;
+using HULAF.Domain.Person.Contact;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,5 +18,7 @@ namespace HULAF.Domain.Person
         public Characteristics Characteristics { get; set; }
 
         public Characteristics SeekedCharacteristics { get; set; }
+
+        public ContactInfo ContactInfo { get; set; }
     }
 }

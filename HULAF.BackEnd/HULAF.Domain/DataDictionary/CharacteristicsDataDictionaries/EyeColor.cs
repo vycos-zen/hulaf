@@ -1,6 +1,6 @@
 using System;
 
-namespace HULAF.Domain.Person.Characteristic
+namespace HULAF.Domain.DataDictionary.Schema.CharacteristicsDataDictionaries
 {
     public enum EyeColor
     {

@@ -5,12 +5,13 @@
     "concat-hulaf-api": "cd contract && swagger-merger -i ./hulaf-controller/controller.yaml -o ./hulaf-api.yaml",
     "generate-hulaf-api": "nswag run ./contract/hulaf-api-config.json",
     "generate-hulaf-api-client": "nswag run ./contract/hulaf-api-client-config.json",
-    "superFly": "superFly.py"
+    "superFly": "bash ./superFly.sh"
   },
     "dependencies": {
         "multi-file-swagger": "^2.2.0",
         "npm-run-all": "^4.1.5",
-        "nswag": "^12.0.0"
+        "nswag": "^12.0.0",
+        "python-shell": "^1.0.6"
     },
     "devDependencies": {
         "swagger-merger": "^1.4.3"
