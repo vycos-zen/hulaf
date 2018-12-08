@@ -3,7 +3,7 @@ using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace HULAF.Domain.PersonCharacteristic
+namespace HULAF.Domain.Person.Characteristic
 {
     public class Characteristics
     {

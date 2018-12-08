@@ -1,21 +1,12 @@
 {
     "name": "hulaf-codegen",
     "version": "0.0.0",
-    "scripts": {
-        "concat-hulaf-api": "cd contract && swagger-merger -i ./hulaf-controller/controller.yaml -o ./hulaf-api.yaml",
-        "generate-hulaf-api": "nswag run ./contract/hulaf-api-config.json",
-        "generate-hulaf-api-client": "nswag run ./contract/hulaf-api-client-config.json",
-
-        "concat-dto-library": "cd contract && swagger-merger -i ./dto-library/schemas.yaml -o ./hulaf-dto-library.yaml",
-        "generate-dto-library": "nswag run ./contract/hulaf-dto-library-config.json",
-        "concat-persons-controller": "cd contract && swagger-merger -i ./person-controller/controller.yaml -o ./person-controller.yaml",
-        "generate-persons-controller": "nswag run ./contract/person-controller-config.json",
-        "generate-persons-client": "nswag run ./contract/person-client-config.json",
-        "concat-location-controller": "cd contract && swagger-merger -i ./location-controller/controller.yaml -o ./location-controller.yaml",
-        "generate-location-controller": "nswag run ./contract/location-controller-config.json",
-        "generate-location-client": "nswag run ./contract/location-client-config.json",
-        "superFly": "./superFly.sh"
-    },
+  "scripts": {
+    "concat-hulaf-api": "cd contract && swagger-merger -i ./hulaf-controller/controller.yaml -o ./hulaf-api.yaml",
+    "generate-hulaf-api": "nswag run ./contract/hulaf-api-config.json",
+    "generate-hulaf-api-client": "nswag run ./contract/hulaf-api-client-config.json",
+    "superFly": "superFly.py"
+  },
     "dependencies": {
         "multi-file-swagger": "^2.2.0",
         "npm-run-all": "^4.1.5",

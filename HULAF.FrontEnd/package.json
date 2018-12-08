@@ -2,11 +2,10 @@
   "name": "hulaf-fe",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "serve": "ng serve",
-    "serve-dev": "ng serve --source-map=false --proxy-config proxy.config.json",
     "build": "ng build",
     "test": "ng test",
+    "serve": "ng serve",
+    "serve-dev": "ng serve --source-map=false --proxy-config proxy.config.json",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

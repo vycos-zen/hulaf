@@ -1,6 +1,6 @@
 using System;
 
-namespace HULAF.Domain.PersonCharacteristic
+namespace HULAF.Domain.Person.Characteristic
 {
 
     public enum HairColor

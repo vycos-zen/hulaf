@@ -1,13 +1,13 @@
-#!/bin/bash
 
-set -o errexit
 
-echo "Building Hulaf controller/client"
+print "Building Hulaf controller/client"
 npm run concat-hulaf-api
-echo "Generating Hulaf controller"
+print "Generating Hulaf controller"
 npm run generate-hulaf-api
-echo "Generating Hulaf client"
+print "Generating Hulaf client"
 npm run generate-hulaf-api-client
+
+
 
 
 # echo "Building DTO library"

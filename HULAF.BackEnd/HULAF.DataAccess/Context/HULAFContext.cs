@@ -7,7 +7,7 @@ namespace HULAF.DataAccess.Context
     public class HULAFContext : DbContext
     {
         private readonly string connnectionString;
-        public DbSet<MissingPerson> MissingPerson { get; set; }
+        public DbSet<Person> Person { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

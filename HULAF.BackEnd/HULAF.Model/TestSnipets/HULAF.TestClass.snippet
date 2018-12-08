@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>HULAF Test Class</Title>
+      <Author>Peter Koller</Author>
+      <Description>Adds a test class specific to the HULAF project</Description>
+      <Shortcut>hulafTestClass</Shortcut>
+    </Header>
+    <Snippet>
+      <Imports>
+        <Import>
+          <Namespace>System</Namespace>
+        </Import>
+        <Import>
+          <Namespace>NUnit.Framework</Namespace>
+        </Import>
+        <Import>
+          <Namespace>AutoMapper</Namespace>
+        </Import>
+        <Import>
+          <Namespace>Shouldly</Namespace>
+        </Import>
+      </Imports>
+      <Code Language="csharp">
+        <![CDATA[
+
+namespace HULAF.UnitTests
+{
+    [TestFixture]
+    public class TestClass
+    {
+        [SetUp]
+        public void Setup()
+        {
+        }
+
+        [Test]
+        public void Test1()
+        {
+        
+        }
+
+        public TestClass()
+        {
+        
+        }
+    }
+}
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

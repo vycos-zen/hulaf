@@ -11,7 +11,7 @@ namespace HULAF.WebApi.Mapping
         public HulafControllerProfile()
         {
             
-            CreateMap<MissingPerson, MissingPersonDto>()
+            CreateMap<PersonDto, MissingPersonDto>()
             .ReverseMap();
 
         }

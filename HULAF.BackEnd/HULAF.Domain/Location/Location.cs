@@ -3,11 +3,11 @@ using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Location
+namespace HULAF.Domain.Locator
 {
-    public class SeenLocation
+    public class Location
     {
-        public Guid Id { get; set; }
+        public Guid Guid { get; set; }
 
         public string City { get; set; }
     }
