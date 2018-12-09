@@ -14,7 +14,7 @@ paths:
       operationId: getMissingPerson
       parameters:
         - name: personGuid
-          in: path
+          in: body
           description: Guid of person
           required: true
           schema:
@@ -27,7 +27,25 @@ paths:
             application/json:
               schema:
                 description: A missing person
-                $ref: '#/components/schemas/MissingPersonDto'
+                nullable: true
+                oneOf:
+                  - $ref: '#/components/schemas/MissingPersonDto'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                nullable: true
+                oneOf:
+                  - $ref: '#/components/schemas/ProblemDetails'
+        default:
+          description: ''
+          content:
+            application/json:
+              schema:
+                nullable: true
+                oneOf:
+                  - $ref: '#/components/schemas/ProblemDetails'
   /person/missingpersonlist:
     get:
       tags:
@@ -56,7 +74,7 @@ paths:
       operationId: getSeekerPerson
       parameters:
         - name: personGuid
-          in: path
+          in: body
           description: Guid of person
           required: true
           schema:
@@ -210,3 +228,24 @@ components:
           $ref: '#/components/schemas/CityDto'
         coordinates:
           $ref: '#/components/schemas/CoordinatesDto'
+    ProblemDetails:
+      type: object
+      additionalProperties:
+        nullable: true
+      properties:
+        type:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true

@@ -8,7 +8,7 @@
       operationId: getMissingPerson
       parameters:
         - name: personGuid
-          in: path
+          in: body
           description: Guid of person
           required: true
           schema:
@@ -21,4 +21,22 @@
             application/json:
               schema:
                 description: A missing person
-                $ref: '#/components/schemas/MissingPersonDto'
+                nullable: true
+                oneOf:
+                - "$ref": "#/components/schemas/MissingPersonDto"
+        '404':
+          description: 'Not found'
+          content:
+            application/json:
+              schema:
+                nullable: true
+                oneOf:
+                - "$ref": "#/components/schemas/ProblemDetails"
+        default:
+          description: ''
+          content:
+            application/json:
+              schema:
+                nullable: true
+                oneOf:
+                - "$ref": "#/components/schemas/ProblemDetails"                

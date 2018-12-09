@@ -1,11 +1,9 @@
 ﻿using HULAF.Domain.DataDictionary.Schema;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HULAF.Domain.DataDictionary.CharacteristicsDictionaryItems
 {
-    public class HairColor : IDataDictionaryItem
+    public class EyeColorDictionaryItem : IDataDictionaryItem
     {
         public Guid Guild { get; set; }
         public int SequenceId { get; set; }

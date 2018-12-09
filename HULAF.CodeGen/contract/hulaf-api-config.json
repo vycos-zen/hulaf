@@ -1,5 +1,6 @@
 {
     "runtime": "NetCore21",
+    "defaultVariables": null,
     "swaggerGenerator": {
         "fromSwagger": {
             "url": "./hulaf-api.yaml"
@@ -7,19 +8,20 @@
     },
     "codeGenerators": {
         "swaggerToCSharpController": {
+            "controllerBaseClass": "Microsoft.AspNetCore.Mvc.ControllerBase",
             "controllerStyle": "abstract",
             "useCancellationToken": false,
             "aspNetNamespace": "Microsoft.AspNetCore.Mvc",
             "ControllerBaseClass": "ControllerBase",
             "className": "Hulaf{controller}",
-            "operationGenerationMode": "SingleClientFromOperationId",
-            "generateOptionalParameters": false,
+            "operationGenerationMode": "MultipleClientsFromOperationId",
+            "generateOptionalParameters": true,
             "generateJsonMethods": true,
             "parameterArrayType": "System.Collections.List",
             "parameterDictionaryType": "System.Collections.Dictionary",
             "responseArrayType": "System.Collections.Generic.List",
             "responseDictionaryType": "System.Collections.Generic.Dictionary",
-            "wrapResponses": false,
+            "wrapResponses": true,
             "generateResponseClasses": false,
             "namespace": "HULAF.WebApi.Controllers",
             "requiredPropertiesMustBeDefined": true,

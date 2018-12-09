@@ -4,8 +4,8 @@ using System.Text;
 
 namespace HULAF.Domain.DataDictionary.Schema
 {
-    public interface IDataDictionary
+    public interface IDataDictionary<T> where T : IDataDictionaryItem
     {
-        List<IDataDictionaryItem> DictionaryItems { get; set; }
+        List<T> DictionaryItems { get; set; }
     }
 }

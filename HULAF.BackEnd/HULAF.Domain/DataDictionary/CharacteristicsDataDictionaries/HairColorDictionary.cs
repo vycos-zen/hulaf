@@ -6,8 +6,8 @@ using System.Collections.Generic;
 namespace HULAF.Domain.DataDictionary.CharacteristicsDataDictionaries
 {
 
-    public class HairColors : IDataDictionary
+    public class HairColorDictionary : IDataDictionary<HairColorDictionaryItem>
     {
-        public List<HairColor> DictionaryItems { get; set; }
+        public List<HairColorDictionaryItem> DictionaryItems { get; set; }
     }
 }

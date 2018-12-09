@@ -1,0 +1,67 @@
+﻿{
+  "runtime": "NetCore22",
+  "defaultVariables": null,
+  "swaggerGenerator": {
+    "fromSwagger": {
+      "json": "openapi: 3.0.0\ninfo:\n  title: HULAF Persons controller\n  description: Retrieves persons from database\n  version: 0.0.0\npaths:\n  '/person/missingperson/{personGuid}':\n    get:\n      tags:\n        - person\n        - missing\n      description: Returns a missing person\n      summary: Gets a missing person by guid.\n      operationId: getMissingPerson\n      parameters:\n        - name: personGuid\n          in: path\n          description: Guid of person\n          required: true\n          schema:\n            type: string\n            format: uuid\n      responses:\n        '200':\n          description: Returns a missing person\n          content:\n            application/json:\n              schema:\n                description: A missing person\n                nullable: true\n                oneOf:\n                  - $ref: '#/components/schemas/MissingPersonDto'\n        '404':\n          description: Not found\n          content:\n            application/json:\n              schema:\n                nullable: true\n                oneOf:\n                  - $ref: '#/components/schemas/ProblemDetails'\n        default:\n          description: ''\n          content:\n            application/json:\n              schema:\n                nullable: true\n                oneOf:\n                  - $ref: '#/components/schemas/ProblemDetails'\n  /person/missingpersonlist:\n    get:\n      tags:\n        - person\n        - missing\n      description: Returns a missing person list\n      summary: Lists missing persons\n      operationId: getMissingPersonList\n      responses:\n        '200':\n          description: Missing person list.\n          content:\n            '*/*':\n              schema:\n                type: array\n                items:\n                  description: A missing person\n                  $ref: '#/components/schemas/MissingPersonDto'\n  '/person/seekerperson/{personGuid}':\n    get:\n      tags:\n        - person\n        - seeking\n      description: Returns a person looking for a missing person\n      summary: A person seeks a missing person\n      operationId: getSeekerPerson\n      parameters:\n        - name: personGuid\n          in: path\n          description: Guid of person\n          required: true\n          schema:\n            type: string\n            format: uuid\n      responses:\n        '200':\n          description: Get a person by guid\n          content:\n            application/json:\n              schema:\n                description: A person looking form someone missing\n                $ref: '#/components/schemas/SeekerPersonDto'\n  /location/countrylist:\n    get:\n      tags:\n        - location\n        - list\n      description: Returns a list of countries\n      summary: Lists countries\n      operationId: getCountryList\n      responses:\n        '200':\n          description: Country list.\n          content:\n            '*/*':\n              schema:\n                type: array\n                items:\n                  $ref: '#/components/schemas/CountryDto'\ncomponents:\n  schemas:\n    MissingPersonDto:\n      description: A missing person\n      allOf:\n        - $ref: '#/components/schemas/PersonDto'\n        - type: object\n          properties:\n            lastSeenLocations:\n              type: array\n              items:\n                $ref: '#/components/schemas/LocationDto'\n    PersonDto:\n      type: object\n      discriminator:\n        propertyName: personType\n      required:\n        - guid\n        - personType\n      properties:\n        guid:\n          type: string\n          format: uuid\n        personType:\n          type: string\n        characteristics:\n          $ref: '#/components/schemas/CharacteristicsDto'\n        contactInfo:\n          $ref: '#/components/schemas/ContactInfoDto'\n    SeekerPersonDto:\n      description: A person looking form someone missing\n      allOf:\n        - $ref: '#/components/schemas/PersonDto'\n        - type: object\n          properties:\n            locationsOfSearch:\n              type: array\n              items:\n                $ref: '#/components/schemas/LocationDto'\n    CharacteristicsDto:\n      type: object\n      properties:\n        guid:\n          type: string\n          fromat: uuid\n        approxHeightMin:\n          type: integer\n          example: Height in cm\n        approxHeightMax:\n          type: integer\n          example: Height in cm\n        hairColor:\n          $ref: '#/components/schemas/HairColorDto'\n        eyeColor:\n          $ref: '#/components/schemas/EyeColorDto'\n        approxAgeMin:\n          type: integer\n        approxAgeMax:\n          type: integer\n        knownNames:\n          type: array\n          items:\n            type: string\n    EyeColorDto:\n      type: string\n      enum:\n        - green\n        - blue\n    HairColorDto:\n      type: string\n      enum:\n        - brown\n        - blonde\n    ContactInfoDto:\n      type: object\n      properties:\n        guid:\n          type: string\n          fromat: uuid\n        firstName:\n          type: string\n        lastName:\n          type: string\n        email:\n          type: string\n          fromat: email\n    CityDto:\n      type: object\n      properties:\n        guid:\n          type: string\n          format: uuid\n        name:\n          type: string\n    CoordinatesDto:\n      type: object\n      properties:\n        lat:\n          type: number\n        lng:\n          type: number\n      required:\n        - lat\n        - lng\n    CountryDto:\n      type: object\n      properties:\n        guid:\n          type: string\n          format: uuid\n        name:\n          type: string\n        dialingCode:\n          type: integer\n    LocationDto:\n      type: object\n      properties:\n        country:\n          $ref: '#/components/schemas/CountryDto'\n        city:\n          $ref: '#/components/schemas/CityDto'\n        coordinates:\n          $ref: '#/components/schemas/CoordinatesDto'\n    ProblemDetails:\n      type: object\n      additionalProperties:\n        nullable: true\n      properties:\n        type:\n          type: string\n          nullable: true\n        title:\n          type: string\n          nullable: true\n        status:\n          type: integer\n          format: int32\n          nullable: true\n        detail:\n          type: string\n          nullable: true\n        instance:\n          type: string\n          nullable: true\n",
+      "url": "hulaf-api.yaml",
+      "output": null
+    }
+  },
+  "codeGenerators": {
+    "swaggerToCSharpController": {
+      "controllerBaseClass": "ControllerBase",
+      "controllerStyle": "Abstract",
+      "useCancellationToken": false,
+      "aspNetNamespace": "Microsoft.AspNetCore.Mvc",
+      "routeNamingStrategy": "OperationId",
+      "className": "Hulaf{controller}",
+      "operationGenerationMode": "MultipleClientsFromOperationId",
+      "additionalNamespaceUsages": [
+        "Microsoft.AspNetCore.Mvc",
+        "System",
+        "System.Threading.Tasks"
+      ],
+      "additionalContractNamespaceUsages": [],
+      "generateOptionalParameters": false,
+      "generateJsonMethods": true,
+      "enforceFlagEnums": false,
+      "parameterArrayType": "System.Collections.List",
+      "parameterDictionaryType": "System.Collections.Dictionary",
+      "responseArrayType": "System.Collections.Generic.List",
+      "responseDictionaryType": "System.Collections.Generic.Dictionary",
+      "wrapResponses": true,
+      "wrapResponseMethods": [],
+      "generateResponseClasses": true,
+      "responseClass": "IActionResult",
+      "namespace": "HULAF.WebApi.Controllers",
+      "requiredPropertiesMustBeDefined": true,
+      "dateType": "System.DateTime",
+      "jsonConverters": null,
+      "dateTimeType": "System.DateTime",
+      "timeType": "System.TimeSpan",
+      "timeSpanType": "System.TimeSpan",
+      "arrayType": "System.Collections.Generic.List",
+      "arrayInstanceType": "System.Collections.ObjectModel.Collection",
+      "dictionaryType": "System.Collections.Generic.Dictionary",
+      "dictionaryInstanceType": "System.Collections.Generic.Dictionary",
+      "arrayBaseType": "System.Collections.List",
+      "dictionaryBaseType": "System.Collections.IDictionary",
+      "classStyle": "Poco",
+      "generateDefaultValues": true,
+      "generateDataAnnotations": true,
+      "excludedTypeNames": [],
+      "handleReferences": true,
+      "generateImmutableArrayProperties": false,
+      "generateImmutableDictionaryProperties": false,
+      "jsonSerializerSettingsTransformationMethod": null,
+      "templateDirectory": null,
+      "typeNameGeneratorType": null,
+      "propertyNameGeneratorType": null,
+      "enumNameGeneratorType": null,
+      "serviceHost": null,
+      "serviceSchemes": null,
+      "output": "../../HULAF.BackEnd/HULAF.WebApi/Controllers/HulafController.cs"
+    }
+  }
+}

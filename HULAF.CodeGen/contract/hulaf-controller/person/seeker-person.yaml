@@ -8,7 +8,7 @@
       operationId: getSeekerPerson
       parameters:
         - name: personGuid
-          in: path
+          in: body
           description: Guid of person
           required: true
           schema:

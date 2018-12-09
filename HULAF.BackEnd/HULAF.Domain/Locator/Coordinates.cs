@@ -9,5 +9,7 @@ namespace HULAF.Domain.Locator
         public float Lat { get; set; }
 
         public float Lng { get; set; }
+
+        public float Accuracy { get; set; }
     }
 }

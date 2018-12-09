@@ -29,6 +29,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "HULAF.FrontEnd", "HULAF.Fro
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "8339"
+		SlnRelativePath = "HULAF.FrontEnd\"
 	EndProjectSection
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "HULAF.Model", "HULAF.BackEnd\HULAF.Model\", "{4FF55C0E-67A0-48DC-8644-E2536F3B47FB}"
@@ -49,6 +50,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "HULAF.Model", "HULAF.BackEn
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "8712"
+		SlnRelativePath = "HULAF.BackEnd\HULAF.Model\"
 	EndProjectSection
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "HULAF.CodeGen", "HULAF.CodeGen\", "{1C0E09C6-EBE1-4226-92A5-75DADBD1F870}"
@@ -69,6 +71,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "HULAF.CodeGen", "HULAF.Code
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "9458"
+		SlnRelativePath = "HULAF.CodeGen\"
 	EndProjectSection
 EndProject
 Global
@@ -130,7 +133,6 @@ Global
 		{895C5502-18D6-4D6B-AF0F-09BCB8211D30}.Release|x86.ActiveCfg = Release|Any CPU
 		{895C5502-18D6-4D6B-AF0F-09BCB8211D30}.Release|x86.Build.0 = Release|Any CPU
 		{4B9B76EB-B5FE-4056-9C8C-A8252BE7C7E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4B9B76EB-B5FE-4056-9C8C-A8252BE7C7E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B9B76EB-B5FE-4056-9C8C-A8252BE7C7E8}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{4B9B76EB-B5FE-4056-9C8C-A8252BE7C7E8}.Debug|x64.Build.0 = Debug|Any CPU
 		{4B9B76EB-B5FE-4056-9C8C-A8252BE7C7E8}.Debug|x86.ActiveCfg = Debug|Any CPU
@@ -154,7 +156,6 @@ Global
 		{4FF55C0E-67A0-48DC-8644-E2536F3B47FB}.Release|x86.ActiveCfg = Debug|Any CPU
 		{4FF55C0E-67A0-48DC-8644-E2536F3B47FB}.Release|x86.Build.0 = Debug|Any CPU
 		{1C0E09C6-EBE1-4226-92A5-75DADBD1F870}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1C0E09C6-EBE1-4226-92A5-75DADBD1F870}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C0E09C6-EBE1-4226-92A5-75DADBD1F870}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{1C0E09C6-EBE1-4226-92A5-75DADBD1F870}.Debug|x64.Build.0 = Debug|Any CPU
 		{1C0E09C6-EBE1-4226-92A5-75DADBD1F870}.Debug|x86.ActiveCfg = Debug|Any CPU

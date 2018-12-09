@@ -4,43 +4,67 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace HULAF.WebApi.Controllers
 {
-    [Route("[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        public List<string> Values { get; set; }
         // GET api/values
-        [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        [HttpGet, Route("values")]
+        public async Task<ActionResult<List<string>>> GetValues()
         {
-            return new string[] { "value1", "value2" };
+            await Task.Delay(0);
+            return this.Values;
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        [HttpGet, Route("values/get")]
+        public async Task<ActionResult<string>> GetValueById([FromBody] int id)
         {
-            return "value";
+            await Task.Delay(0);
+
+            if (id > Values.Count)
+            {
+                ModelState.AddModelError("wrongNumber", "Entered a wrong value");
+                return BadRequest();
+            }
+            return Values[id];
         }
 
         // POST api/values
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost, Route("values/createvalues")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesDefaultResponseType]
+        public async Task<ActionResult> PostValue([FromBody] string value)
         {
+            this.Values.Add("value" + this.Values.Count.ToString());
+            return Ok();
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("values/put")]
+        public async Task<ActionResult> PutValue(int id, [FromBody] string value)
         {
+            return Ok();
+
         }
 
         // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("values/delete/{id}")]
+        public async Task<ActionResult> DeleteValue(int id)
         {
+            return Ok();
+        }
+
+        public ValuesController()
+        {
+            this.Values = new List<string>
+            {
+
+            };
         }
     }
 }

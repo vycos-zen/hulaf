@@ -10,3 +10,4 @@ schemas:
   $ref#coordinates-dto: './schemas/coordinates-dto.yaml'
   $ref#country-dto: './schemas/country-dto.yaml'
   $ref#location-dto: './schemas/location-dto.yaml'
+  $ref#problem-details: './schemas/problem-details.yaml'

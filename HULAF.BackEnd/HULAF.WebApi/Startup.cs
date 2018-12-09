@@ -33,8 +33,18 @@ namespace HULAF.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(HulafMapperConfiguration.GetConfiguration);
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<HULAFContext>(options => options.UseNpgsql(hulafContextConnectionString));
+
+            services.AddOpenApiDocument(c =>
+            {
+                c.DocumentName = "v1";
+                c.Title = "HULAF API";
+                c.Version = "OpenAPI 3.0";
+                c.Description = "The application aids the reunion of people who have been separated";
+            });
+
+            services.AddHealthChecks();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -49,8 +59,17 @@ namespace HULAF.WebApi
                 app.UseHsts();
             }
 
-            // app.UseHttpsRedirection();
+            //TODO: add to kubernetes config ass well
+            app.UseHealthChecks("/ready");
+
             app.UseMvc();
+            app.UseSwagger(c =>
+            {
+                c.Path = "/swagger/v1/swagger.json";
+            });
+            app.UseSwaggerUi3();
+
+            // app.UseHttpsRedirection();
         }
     }
 }

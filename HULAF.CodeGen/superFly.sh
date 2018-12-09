@@ -1,7 +1,6 @@
 #!/bin/bash
 # cd "${0%/*}"
 echo "Building Hulaf controller/client"
-cd "$(dirname "$0")" 
 npm run concat-hulaf-api
 echo "Generating Hulaf controller"
 npm run generate-hulaf-api
