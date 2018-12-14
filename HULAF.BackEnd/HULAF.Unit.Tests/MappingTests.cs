@@ -4,7 +4,9 @@ using AutoMapper;
 using Shouldly;
 using HULAF.WebApi.Controllers;
 using HULAF.Domain.Person;
-using HULAF.WebApi.Mapping;
+//using HULAF.WebApi.Mapping;
+using HULAF.Domain.Person.Contact;
+using HULAF.Application.Mapping;
 
 namespace HULAF.UnitTests
 {
@@ -23,7 +25,7 @@ namespace HULAF.UnitTests
         }
 
         [Test]
-        public void MissingPerson_Mapping()
+        public void MissingPerson_Mapping_Tests()
         {
             var missingPersonDto = new MissingPersonDto
             {
@@ -39,6 +41,28 @@ namespace HULAF.UnitTests
             var missingPerson = Mapper.Map<Person>(missingPersonDto);
 
             missingPerson.Characteristics.ApproxAgeMax.ShouldBe(30);
+        }
+
+        [Test]
+        public void MissingPersonDto_Mapping()
+        {
+            var missingPerson = new Person
+            {
+                ContactInfo = new ContactInfo
+                {
+                    FirstName = "Géza"
+                }
+            };
+
+            var mapps = Mapper.Configuration;
+
+
+            var missingPersonDto = Mapper.Map<MissingPersonDto>(missingPerson);
+
+            missingPersonDto.ShouldNotBeNull();
+            missingPersonDto.ContactInfo.FirstName.ShouldBe("Géza");
+
+
         }
 
 

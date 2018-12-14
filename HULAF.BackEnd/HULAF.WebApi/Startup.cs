@@ -13,9 +13,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using HULAF.DataAccess.Context;
-using HULAF.WebApi.Mapping;
+//using HULAF.WebApi.Mapping;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using HULAF.Application.Mapping;
 
 namespace HULAF.WebApi
 {

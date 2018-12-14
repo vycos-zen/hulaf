@@ -1,21 +1,21 @@
-using System;
-using AutoMapper;
-using HULAF.Domain.Person;
-using HULAF.WebApi.Controllers;
+//using System;
+//using AutoMapper;
+//using HULAF.Domain.Person;
+//using HULAF.WebApi.Controllers;
 
-namespace HULAF.WebApi.Mapping
-{
+//namespace HULAF.WebApi.Mapping
+//{
 
-    public class HulafControllerProfile : Profile
-    {
-        public HulafControllerProfile()
-        {
+//    public class HulafControllerProfile : Profile
+//    {
+//        public HulafControllerProfile()
+//        {
             
-            CreateMap<PersonDto, MissingPersonDto>()
-            .ReverseMap();
+//            CreateMap<PersonDto, MissingPersonDto>()
+//            .ReverseMap();
 
-        }
+//        }
 
 
-    }
-}
+//    }
+//}
