@@ -2,11 +2,12 @@ using System;
 using NUnit.Framework;
 using AutoMapper;
 using Shouldly;
-using HULAF.WebApi.Controllers;
-using HULAF.Domain.Person;
-//using HULAF.WebApi.Mapping;
-using HULAF.Domain.Person.Contact;
+using HULAF.Domain.Personal;
+using HULAF.Domain.Personal.Contact;
 using HULAF.Application.Mapping;
+using HULAF.Application.Dto.Personal;
+using HULAF.Domain.Locator;
+using System.Collections.Generic;
 
 namespace HULAF.UnitTests
 {
@@ -16,6 +17,8 @@ namespace HULAF.UnitTests
         [SetUp]
         public void Setup()
         {
+            Mapper.Initialize(HulafMapperConfiguration.Configuration);
+            Mapper.Configuration.CompileMappings();
         }
 
         [Test]
@@ -24,24 +27,24 @@ namespace HULAF.UnitTests
             Mapper.Configuration.AssertConfigurationIsValid();
         }
 
-        [Test]
-        public void MissingPerson_Mapping_Tests()
-        {
-            var missingPersonDto = new MissingPersonDto
-            {
-                Guid = Guid.NewGuid(),
-                Characteristics = new CharacteristicsDto
-                {
-                    ApproxAgeMax = 30,
-                    ApproxAgeMin = 20,
-                    ApproxHeightMax = 180,
-                    ApproxHeightMin = 170
-                }
-            };
-            var missingPerson = Mapper.Map<Person>(missingPersonDto);
+        //[Test]
+        //public void MissingPerson_Mapping_Tests()
+        //{
+        //    var missingPersonDto = new MissingPersonDto
+        //    {
+        //        Guid = Guid.NewGuid(),
+        //        Characteristics = new CharacteristicsDto
+        //        {
+        //            ApproxAgeMax = 30,
+        //            ApproxAgeMin = 20,
+        //            ApproxHeightMax = 180,
+        //            ApproxHeightMin = 170
+        //        }
+        //    };
+        //    var missingPerson = Mapper.Map<Person>(missingPersonDto);
 
-            missingPerson.Characteristics.ApproxAgeMax.ShouldBe(30);
-        }
+        //    missingPerson.Characteristics.ApproxAgeMax.ShouldBe(30);
+        //}
 
         [Test]
         public void MissingPersonDto_Mapping()
@@ -51,16 +54,26 @@ namespace HULAF.UnitTests
                 ContactInfo = new ContactInfo
                 {
                     FirstName = "Géza"
+                },
+                LastSeenLocations = new List<Location>
+                {
+                    new Location
+                    {
+                        Coordinates = new Coordinates
+                        {
+                            Lat = 12.34m,
+                        }
+                    }
                 }
+                
             };
-
-            var mapps = Mapper.Configuration;
 
 
             var missingPersonDto = Mapper.Map<MissingPersonDto>(missingPerson);
 
             missingPersonDto.ShouldNotBeNull();
-            missingPersonDto.ContactInfo.FirstName.ShouldBe("Géza");
+            missingPersonDto.FirstName.ShouldBe("Géza");
+            missingPersonDto.LastSeenLocations[0].Lat.ShouldBe(12.34m);
 
 
         }
@@ -68,7 +81,7 @@ namespace HULAF.UnitTests
 
         public MappingTests()
         {
-            Mapper.Initialize(HulafMapperConfiguration.GetConfiguration);
+
         }
     }
 }

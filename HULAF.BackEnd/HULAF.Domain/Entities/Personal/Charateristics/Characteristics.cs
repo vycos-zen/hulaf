@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using HULAF.Domain.DataDictionary.CharacteristicsDictionaryItems;
 
-namespace HULAF.Domain.Person.Characteristic
+namespace HULAF.Domain.Personal.Characteristic
 {
     public class Characteristics
     {

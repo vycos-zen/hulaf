@@ -2,10 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HULAF.Domain.Locator
+namespace HULAF.Application.Dto.Location
 {
-    public class Coordinates
+    public class LocationDto
     {
+        public Guid Guid { get; set; }
+
+        public string City { get; set; }
+
+        public string Country { get; set; }
+
         public decimal Lat { get; set; }
 
         public decimal Lng { get; set; }
@@ -13,6 +19,5 @@ namespace HULAF.Domain.Locator
         public decimal Accuracy { get; set; }
 
         public DateTime TimeStampUtc { get; set; }
-
     }
 }

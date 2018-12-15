@@ -1,11 +1,11 @@
-﻿using HULAF.Domain.Person.Characteristic;
+﻿using HULAF.Domain.Personal.Characteristic;
 using HULAF.Domain.Locator;
-using HULAF.Domain.Person.Contact;
+using HULAF.Domain.Personal.Contact;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HULAF.Domain.Person
+namespace HULAF.Domain.Personal
 {
     public class Person
     {
@@ -13,7 +13,7 @@ namespace HULAF.Domain.Person
 
         public Location CurrentLocation { get; set; }
 
-        public Location LastSeenLocation { get; set; }
+        public List<Location> LastSeenLocations { get; set; }
 
         public Characteristics Characteristics { get; set; }
 

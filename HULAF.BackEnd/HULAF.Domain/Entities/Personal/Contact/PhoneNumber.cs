@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HULAF.Domain.Person.Contact
+namespace HULAF.Domain.Personal.Contact
 {
     public class PhoneContact
     {

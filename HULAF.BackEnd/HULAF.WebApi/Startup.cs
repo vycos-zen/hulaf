@@ -33,7 +33,7 @@ namespace HULAF.WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAutoMapper(HulafMapperConfiguration.GetConfiguration);
+            services.AddAutoMapper(HulafMapperConfiguration.Configuration);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<HULAFContext>(options => options.UseNpgsql(hulafContextConnectionString));
 

@@ -12,7 +12,9 @@ namespace HULAF.Application.Mapping
             expression.AddProfiles(new[]
                 {
                     typeof(PersonProfile),
+                    typeof(LocationProfile),
                 });
+
 
             return expression;
         }
@@ -26,7 +28,7 @@ namespace HULAF.Application.Mapping
             }
         }
 
-        public static void GetConfiguration(IMapperConfigurationExpression configuration)
+        public static void Configuration(IMapperConfigurationExpression configuration)
         {
             configuration = MapperConfiguration;
         }

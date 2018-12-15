@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using HULAF.Domain.Person;
+using HULAF.Domain.Personal;
 
 namespace HULAF.DataAccess.Context
 {

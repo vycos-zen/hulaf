@@ -1,10 +1,10 @@
-﻿using HULAF.Application.Person.Models;
+﻿using HULAF.Application.Dto.Personal;
 using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HULAF.Application.Person.Queries
+namespace HULAF.Application.Personal.Queries
 {
     public class GetMissingPersonQuery : IRequest<MissingPersonDto>
     {
