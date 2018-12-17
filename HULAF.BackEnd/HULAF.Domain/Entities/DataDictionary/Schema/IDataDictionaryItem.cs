@@ -4,7 +4,7 @@ namespace HULAF.Domain.DataDictionary.Schema
 {
     public interface IDataDictionaryItem
     {
-        Guid Guild { get; set; }
+        Guid Guid { get; set; }
 
         int SequenceId { get; set; }
 

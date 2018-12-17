@@ -22,11 +22,14 @@ namespace HULAF.Domain.Personal.Characteristic
 
         public int ApproxAgeMax { get; set; }
 
+        public Guid HairColorGuid { get; set; }
+
         public HairColorDictionaryItem HairColor { get; set; }
+
+        public Guid EyeColorGuid { get; set; }
 
         public EyeColorDictionaryItem EyeColor { get; set; }
 
-        public List<string> KnownNames { get; set; }
     }
 }
 

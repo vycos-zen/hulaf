@@ -6,6 +6,8 @@ namespace HULAF.Domain.Locator
 {
     public class Coordinates
     {
+        public Guid Guid { get; set; }
+
         public decimal Lat { get; set; }
 
         public decimal Lng { get; set; }

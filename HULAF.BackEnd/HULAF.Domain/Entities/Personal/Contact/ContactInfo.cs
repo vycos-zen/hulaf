@@ -15,6 +15,8 @@ namespace HULAF.Domain.Personal.Contact
 
         public string LastName { get; set; }
 
+        public string[] OtherKnownNames { get; set; }
+
         public string Email { get; set; }
 
         public List<PhoneContact> ContactNumbers { get; set; }

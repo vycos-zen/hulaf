@@ -9,6 +9,12 @@ namespace HULAF.DataAccess.Context
         private readonly string connnectionString;
         public DbSet<Person> Person { get; set; }
 
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(HULAFContext).Assembly);
+        } 
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -16,6 +22,8 @@ namespace HULAF.DataAccess.Context
                 optionsBuilder.UseNpgsql(connnectionString);
             }
         }
+
+
 
         public HULAFContext(string connnectionString) : base()
         {
