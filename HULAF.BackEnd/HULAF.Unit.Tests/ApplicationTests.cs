@@ -1,6 +1,4 @@
-﻿
-
-using AutoMapper;
+﻿using AutoMapper;
 using HULAF.Application.Personal.Queries;
 using HULAF.DataAccess.Context;
 using NUnit.Framework;
@@ -27,12 +25,12 @@ namespace HULAF.UnitTests
         {
             var personHandler = new GetMissingPersonQueryHandler(this.context);
             var personQuery = new GetMissingPersonQuery();
-            personQuery.Guid = Guid.Parse("D596BF2C-6DDB-4CCB-A71B-54F18ABE5EF5");
+            personQuery.Guid = Guid.Parse("{ddf3e819-3caa-46bd-95d8-0a20a1929600}");
 
             var personDto = await personHandler.Handle(personQuery, CancellationToken.None);
 
             personDto.ShouldNotBeNull();
-            personDto.Guid.ShouldBe(Guid.Parse("D596BF2C-6DDB-4CCB-A71B-54F18ABE5EF5"));
+            personDto.Guid.ShouldBe(Guid.Parse("{ddf3e819-3caa-46bd-95d8-0a20a1929600}"));
         }
 
         public ApplicationTests()

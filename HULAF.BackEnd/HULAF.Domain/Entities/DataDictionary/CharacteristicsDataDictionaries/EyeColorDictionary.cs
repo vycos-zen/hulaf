@@ -6,6 +6,8 @@ namespace HULAF.Domain.DataDictionary.Schema.CharacteristicsDataDictionaries
 {
     public class EyeColorDictionary : IDataDictionary<EyeColorDictionaryItem>
     {
-       public List<EyeColorDictionaryItem> DictionaryItems { get; set; }
+        public Guid EyeColorDictionaryGuid { get; set; }
+
+        public List<EyeColorDictionaryItem> DictionaryItems { get; set; }
 }
 }

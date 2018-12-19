@@ -9,7 +9,7 @@ namespace HULAF.Domain.Personal
 {
     public class Person
     {
-        public Guid Guid { get; set; }
+        public Guid PersonGuid { get; set; }
 
         public Location CurrentLocation { get; set; }
 

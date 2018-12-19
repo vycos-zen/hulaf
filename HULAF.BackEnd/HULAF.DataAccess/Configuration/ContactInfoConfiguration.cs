@@ -11,6 +11,8 @@ namespace HULAF.DataAccess.Configuration
     {
         public void Configure(EntityTypeBuilder<ContactInfo> builder)
         {
+            builder.HasKey(x => x.ContactInfoGuid);
+
             builder.Property(e => e.OtherKnownNames)
                 .HasConversion(
                 v => string.Join(";", v),

@@ -22,7 +22,7 @@ namespace HULAF.UnitTests
 
             context.Person.AddRange(new[]
             {
-                new Person {Guid = new Guid("D596BF2C-6DDB-4CCB-A71B-54F18ABE5EF5"), ContactInfo = new ContactInfo{ Guid = new Guid("BCAA02BC-2523-449D-BA5D-8F91DB1CBB0"), FirstName = "Béla" } }
+                new Person {PersonGuid = Guid.Parse("{ddf3e819-3caa-46bd-95d8-0a20a1929600}"), ContactInfo = new ContactInfo{ ContactInfoGuid = Guid.Parse("{b8296c3e-fd11-421d-961e-1a8de7b4c3b0}"), FirstName = "Béla" } }
 
             });
 

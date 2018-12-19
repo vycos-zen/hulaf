@@ -8,7 +8,7 @@ namespace HULAF.Domain.Personal.Characteristic
 {
     public class Characteristics
     {
-        public Guid Guid { get; set; }
+        public Guid CharacteristicsGuid { get; set; }
 
         public int ApproxHeightMin { get; set; }
 

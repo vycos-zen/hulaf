@@ -14,7 +14,7 @@ namespace HULAF.Application.Mapping
         {
 
             CreateMap<Person, MissingPersonDto>()
-                .ForMember(dest => dest.Guid, opt => opt.MapFrom(src => src.Guid))
+                .ForMember(dest => dest.Guid, opt => opt.MapFrom(src => src.PersonGuid))
                 .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.ContactInfo.FirstName))
                 .ForMember(dest => dest.MiddleName, opt => opt.MapFrom(src => src.ContactInfo.MiddleName))
                 .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.ContactInfo.LastName))

@@ -7,9 +7,9 @@ using System.Text;
 
 namespace HULAF.Application.Mapping
 {
-    public class LocationProfile : Profile
+    public class LocationConfig : Profile
     {
-        public LocationProfile()
+        public LocationConfig()
         {
             CreateMap<Location, LocationDto>()
                 .ForMember(dest => dest.Lat, opt => opt.MapFrom(x => x.Coordinates.Lat));

@@ -7,7 +7,7 @@ namespace HULAF.Domain.Personal.Contact
 {
     public class ContactInfo
     {
-        public Guid Guid { get; set; }
+        public Guid ContactInfoGuid { get; set; }
 
         public string FirstName { get; set; }
 

@@ -1,4 +1,4 @@
-﻿using HULAF.Domain.Locator;
+﻿using HULAF.Domain.Personal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -7,12 +7,11 @@ using System.Text;
 
 namespace HULAF.DataAccess.Configuration
 {
-    public class LocationConfiguration : IEntityTypeConfiguration<Location>
+    class PersonConfiguration : IEntityTypeConfiguration<Person>
     {
-        public void Configure(EntityTypeBuilder<Location> builder)
+        public void Configure(EntityTypeBuilder<Person> builder)
         {
-            builder.HasKey(p => p.LocationGuid);
+            builder.HasKey(x => x.PersonGuid);
         }
     }
-
 }

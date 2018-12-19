@@ -10,19 +10,19 @@ namespace HULAF.DataAccess.Configuration
     {
         public void Configure(EntityTypeBuilder<Characteristics> builder)
         {
-            builder.HasKey(p => p.Guid);
+            builder.HasKey(p => p.CharacteristicsGuid);
 
-            builder.Property(p => p.EyeColor)
-                .ValueGeneratedNever();
+            //builder.Property(p => p.EyeColor)
+            //    .ValueGeneratedNever();
 
-            builder.Property(p => p.HairColor)
-                .ValueGeneratedNever();
+            //builder.Property(p => p.HairColor)
+            //    .ValueGeneratedNever();
 
             builder.HasOne(p => p.EyeColor)
                 .WithMany()
                 .HasForeignKey(nameof(Characteristics.EyeColorGuid));
 
-            builder.HasOne(p => p.EyeColor)
+            builder.HasOne(p => p.HairColor)
                 .WithMany()
                 .HasForeignKey(nameof(Characteristics.HairColorGuid));
         }

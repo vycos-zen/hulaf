@@ -18,14 +18,17 @@ namespace HULAF.Application.Personal.Queries
     {
         private readonly HULAFContext context;
 
+        private readonly IMapper mapper;
+
         public GetMissingPersonQueryHandler(HULAFContext context)
         {
             this.context = context;
+            this.mapper = HulafMapperConfig.HulafMapper;
         }
 
         public async Task<MissingPersonDto> Handle(GetMissingPersonQuery request, CancellationToken cancellationToken)
         {
-            Person person = this.context.Person.Where(p => p.Guid == request.Guid).SingleOrDefault();
+            Person person = this.context.Person.Where(p => p.PersonGuid == request.Guid).SingleOrDefault();
 
             if (person == null)
             {
@@ -35,7 +38,7 @@ namespace HULAF.Application.Personal.Queries
             ////TODO: Move to proper layer
             //Mapper.Initialize(HulafMapperConfiguration.GetConfiguration);
 
-            return Mapper.Map<Person, MissingPersonDto>(person);
+            return mapper.Map<Person, MissingPersonDto>(person);
         }
     }
 }

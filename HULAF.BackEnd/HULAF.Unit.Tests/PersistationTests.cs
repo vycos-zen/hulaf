@@ -1,6 +1,4 @@
-﻿
-
-using AutoMapper;
+﻿using AutoMapper;
 using NUnit.Framework;
 using Shouldly;
 using System;
@@ -8,7 +6,7 @@ using System;
 namespace HULAF.UnitTests
 {
     [TestFixture]
-    public class TestClass
+    public class PersistationTests
     {
         [SetUp]
         public void Setup()
@@ -21,7 +19,7 @@ namespace HULAF.UnitTests
 
         }
 
-        public TestClass()
+        public PersistationTests()
         {
 
         }

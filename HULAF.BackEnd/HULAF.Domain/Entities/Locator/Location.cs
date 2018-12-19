@@ -7,7 +7,7 @@ namespace HULAF.Domain.Locator
 {
     public class Location
     {
-        public Guid Guid { get; set; }
+        public Guid LocationGuid { get; set; }
 
         public string City { get; set; }
 

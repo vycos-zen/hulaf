@@ -14,7 +14,7 @@ namespace HULAF.UnitTests
     [TestFixture]
     public class MappingTests
     {
-        private readonly IMapper PersonMapper;
+        private readonly IMapper mapper;
 
         [SetUp]
         public void Setup()
@@ -23,11 +23,7 @@ namespace HULAF.UnitTests
             //Mapper.Configuration.CompileMappings();
         }
 
-        [Test]
-        public void MappingCnfiguration_IsValid()
-        {
-            Mapper.Configuration.AssertConfigurationIsValid();
-        }
+
 
         //[Test]
         //public void MissingPerson_Mapping_Tests()
@@ -71,7 +67,7 @@ namespace HULAF.UnitTests
             };
 
 
-            var missingPersonDto = Mapper.Map<Person, MissingPersonDto>(missingPerson);
+            var missingPersonDto = mapper.Map<Person, MissingPersonDto>(missingPerson);
 
             missingPersonDto.ShouldNotBeNull();
             missingPersonDto.FirstName.ShouldBe("Géza");
@@ -83,8 +79,7 @@ namespace HULAF.UnitTests
 
         public MappingTests()
         {
-
-            this.PersonMapper = HulafMapperConfiguration.HulafMapper;
+            this.mapper = HulafMapperConfig.HulafMapper;
         }
     }
 }

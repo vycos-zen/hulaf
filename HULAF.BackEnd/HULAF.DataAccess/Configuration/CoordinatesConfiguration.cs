@@ -11,7 +11,7 @@ namespace HULAF.DataAccess.Configuration
     {
         public void Configure(EntityTypeBuilder<Coordinates> builder)
         {
-            builder.HasKey(p => p.Guid);
+            builder.HasKey(p => p.CoordinatesGuid);
         }
     }
 }

@@ -4,18 +4,20 @@ using AutoMapper.Configuration;
 
 namespace HULAF.Application.Mapping
 {
-    public class HulafMapperConfiguration
+    public class HulafMapperConfig
     {
-        static HulafMapperConfiguration()
+        static HulafMapperConfig()
         {
-            Mapper.Initialize(cfg =>
+            Mapper.Initialize(MapperConfiguration);
+        }
+
+        public static IMapperConfigurationExpression MapperConfiguration() => 
+        {
+            return 
+            cfg.AddProfiles(new[]
             {
-                cfg.AddProfiles(new[]
-                {
                     typeof(PersonProfile),
-                    typeof(LocationProfile),
-                });
-            });
+                    typeof(LocationConfig),
         }
 
         //static IMapperConfigurationExpression HulafMapperConfig()
@@ -28,19 +30,19 @@ namespace HULAF.Application.Mapping
         //        });
 
 
-        //    return expression;
-        //}
+            //    return expression;
+            //}
 
 
 
-        //private static IMapperConfigurationExpression MapperConfiguration
-        //{
-        //    get
-        //    {
-        //        var lazyConf = new Lazy<IMapperConfigurationExpression>(HulafMapperConfig);
-        //        return lazyConf.Value;
-        //    }
-        //}
+            //private static IMapperConfigurationExpression MapperConfiguration
+            //{
+            //    get
+            //    {
+            //        var lazyConf = new Lazy<IMapperConfigurationExpression>(HulafMapperConfig);
+            //        return lazyConf.Value;
+            //    }
+            //}
 
         public static IMapper HulafMapper
         {

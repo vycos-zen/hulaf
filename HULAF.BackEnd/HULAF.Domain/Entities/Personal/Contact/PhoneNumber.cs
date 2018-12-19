@@ -6,7 +6,7 @@ namespace HULAF.Domain.Personal.Contact
 {
     public class PhoneContact
     {
-        public Guid Guid { get; set; }
+        public Guid PhoneContactGuid { get; set; }
 
         public string PhoneNumber { get; set; }
 
