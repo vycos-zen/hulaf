@@ -1,24 +1,24 @@
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
-import { HulafApiService } from '@httpServices/hulaf-api/hulaf-api-service';
+import { HttpClientModule } from '@angular/common/http';
+// import { HulafApiService } from '@httpServices/hulaf-api/hulaf-api-service';
 
 
 @NgModule({
     imports: [
-        HttpModule,
+        HttpClientModule,
     ],
     providers: [
-        HulafApiService,
+        // HulafApiService,
     ],
     exports: [
     ]
 })
 export class HulafHttpServiceModule {
 
-    public HulafApiService: HulafApiService;
+    // public HulafApiService: HulafApiService;
 
 
-    constructor(hulafApiService: HulafApiService) {
+   /*  constructor(hulafApiService: HulafApiService) {
         this.HulafApiService = hulafApiService;
-    }
+    } */
 }

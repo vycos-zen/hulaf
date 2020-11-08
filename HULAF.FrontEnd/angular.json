@@ -135,5 +135,8 @@
       }
     }
   },
-  "defaultProject": "hulafFE"
+  "defaultProject": "hulafFE",
+  "cli": {
+    "analytics": "33bb1d5a-b4d3-4f22-b22c-c420e0712b83"
+  }
 }
